@@ -1,34 +1,37 @@
-/* ==========================================================
-   SITE CONFIGURATION — edit company details here.
-   Every phone number, email, address, link and WhatsApp
-   button on the site reads from this one file.
-   Values marked VERIFY are supplied by the company but
-   should be confirmed before going live.
-   ========================================================== */
+/* ==========================================================================
+   SITE SETTINGS — edit this file to update contact details across ALL pages.
+   Every phone number, email, address, WhatsApp link, map and social link
+   on the website is filled in from the values below.
+   ========================================================================== */
 window.SITE = {
-  name: "Platinum Properties",
-  fullName: "Platinum Properties Estates & Constructions",
+  // Names
+  brandName: "Platinum Properties, Estates & Constructions", // name shown in the logo / page titles
+  legalName: "Classic Properties and Constructions Company Limited", // registered company name (footer & About page)
 
-  phone: "+233599762750",            // VERIFY
-  phoneDisplay: "+233 59 976 2750",
-  whatsapp: "233599762750",          // digits only, country code first, no "+"
-  email: "info@platinumestatesconstructions.com", // VERIFY
-  address: "EX72 Bissau St, Ofinso, Ashanti, Ghana",
+  // Phone
+  phoneDisplay: "+233 59 976 2750", // how the number is shown on screen
+  phoneTel: "+233599762750",        // used for tap-to-call links (digits with country code)
 
-  // Google Maps embed. Replace with the exact embed URL from
-  // Google Maps > Share > Embed a map > copy the src="..." value.
-  // Until then the map is a search for the address above.
+  // WhatsApp: country code + number, digits only (no + or spaces)
+  whatsappNumber: "233599762750",
+  whatsappMessage: "Hello, I would like to make an enquiry.",
+
+  // Email (the enquiry form opens the visitor's email app addressed to this)
+  email: "info@platinumestatesconstructions.com",
+
+  // Office address (one array item per line)
+  addressLines: ["EX72 Bissau St", "Ofinso, Ashanti", "Ghana"],
+
+  // Text used to find the office on Google Maps.
+  // Tip: replace with a more precise query, the Ghana Post GPS code, or exact place name once verified.
   mapQuery: "EX72 Bissau St, Ofinso, Ashanti, Ghana",
-  mapEmbedUrl: "",
 
-  // Social links. Leave "" until real accounts exist; empty ones are hidden.
+  // Social media — leave "" until real accounts exist. Only non-empty links are shown.
   social: {
-    facebook: "",
-    instagram: "",
-    linkedin: "",
-    x: "",
-    tiktok: ""
-  },
-
-  hours: "Opening hours to be confirmed"   // PLACEHOLDER
+    Facebook: "",
+    Instagram: "",
+    LinkedIn: "",
+    X: "",
+    TikTok: ""
+  }
 };
