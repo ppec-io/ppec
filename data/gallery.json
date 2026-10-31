@@ -1,0 +1,101 @@
+[
+  {
+    "id": "gallery-001",
+    "status": "published",
+    "category": "property",
+    "title": "Modern residence at sunset",
+    "src": "assets/images/samples/residential.jpg",
+    "alt": "Illustrative image of a two-storey house at sunset",
+    "placeholder": true,
+    "related": "property-002"
+  },
+  {
+    "id": "gallery-002",
+    "status": "published",
+    "category": "property",
+    "title": "Residence with swimming pool",
+    "src": "assets/images/samples/villa-pool.jpg",
+    "alt": "Illustrative image of a modern house with a swimming pool at dusk",
+    "placeholder": true,
+    "related": "property-001"
+  },
+  {
+    "id": "gallery-003",
+    "status": "published",
+    "category": "property",
+    "title": "Apartment block",
+    "src": "assets/images/samples/apartments.jpg",
+    "alt": "Illustrative image of a modern apartment building with balconies",
+    "placeholder": true,
+    "related": "property-004"
+  },
+  {
+    "id": "gallery-004",
+    "status": "published",
+    "category": "estate",
+    "title": "Gated estate community",
+    "src": "assets/images/samples/estate-community.jpg",
+    "alt": "Illustrative aerial image of a gated residential estate",
+    "placeholder": true,
+    "related": "property-006"
+  },
+  {
+    "id": "gallery-005",
+    "status": "published",
+    "category": "estate",
+    "title": "Surveyed plots layout",
+    "src": "assets/images/samples/land-sales.jpg",
+    "alt": "Illustrative aerial image of a surveyed layout of plots",
+    "placeholder": true,
+    "related": "property-003"
+  },
+  {
+    "id": "gallery-006",
+    "status": "published",
+    "category": "construction",
+    "title": "Building under construction",
+    "src": "assets/images/samples/construction.jpg",
+    "alt": "Illustrative image of a multi-storey building under construction with a tower crane",
+    "placeholder": true,
+    "related": "project-001"
+  },
+  {
+    "id": "gallery-007",
+    "status": "published",
+    "category": "construction",
+    "title": "Development site at sunset",
+    "src": "assets/images/samples/development-site.jpg",
+    "alt": "Illustrative aerial image of a development site at sunset",
+    "placeholder": true,
+    "related": "project-002"
+  },
+  {
+    "id": "gallery-008",
+    "status": "published",
+    "category": "completed",
+    "title": "Completed apartment block",
+    "src": "assets/images/samples/completed-block.jpg",
+    "alt": "Illustrative image of a completed apartment block at dusk",
+    "placeholder": true,
+    "related": "project-004"
+  },
+  {
+    "id": "gallery-009",
+    "status": "published",
+    "category": "render",
+    "title": "Open plot beside a road",
+    "src": "assets/images/samples/plots.jpg",
+    "alt": "Illustrative image of an open plot of land beside a road",
+    "placeholder": true,
+    "related": "property-003"
+  },
+  {
+    "id": "gallery-010",
+    "status": "published",
+    "category": "render",
+    "title": "Residence with pool at dusk",
+    "src": "assets/images/samples/villa-pool.jpg",
+    "alt": "Illustrative image of a modern house with a swimming pool at dusk",
+    "placeholder": true
+  }
+]

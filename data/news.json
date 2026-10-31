@@ -1,0 +1,52 @@
+[
+  {
+    "id": "news-001",
+    "status": "published",
+    "placeholder": true,
+    "title": "[Sample article] Company news headline",
+    "date": "2026-10-31",
+    "category": "Company News",
+    "cover": {
+      "src": "assets/images/samples/estate-community.jpg",
+      "alt": "Illustrative aerial image of a gated residential estate"
+    },
+    "summary": "This is a sample news article. Replace it with real company news before publication.",
+    "content": [
+      "This is a sample article. It shows how news appears on the website. Replace this text with real company news.",
+      "## Sample heading",
+      "Use a line starting with two hash signs and a space for a heading, and a plain line for a paragraph. Each item in the content list is one paragraph or heading."
+    ]
+  },
+  {
+    "id": "news-002",
+    "status": "published",
+    "placeholder": true,
+    "title": "[Sample article] Property insight headline",
+    "date": "2026-10-30",
+    "category": "Property Insights",
+    "cover": {
+      "src": "assets/images/samples/plots.jpg",
+      "alt": "Illustrative image of an open plot of land beside a road"
+    },
+    "summary": "A second sample article, showing how insight articles are listed.",
+    "content": [
+      "This is a second sample article. Replace it with real content written or approved by the company."
+    ]
+  },
+  {
+    "id": "news-003",
+    "status": "draft",
+    "placeholder": true,
+    "title": "Draft article example (not shown on the website)",
+    "date": "2026-10-29",
+    "category": "Company News",
+    "cover": {
+      "src": "assets/images/samples/residential.jpg",
+      "alt": "Illustrative image of a house"
+    },
+    "summary": "Draft articles are hidden from the website.",
+    "content": [
+      "This record has status \"draft\", so the website does not display it."
+    ]
+  }
+]

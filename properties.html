@@ -3,13 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Properties &amp; Projects | Platinum Properties, Estates &amp; Constructions</title>
-  <meta name="description" content="Browse available properties, ongoing developments and completed projects from Platinum Properties, Estates &amp; Constructions in Ghana.">
+  <title>Properties | Platinum Properties, Estates &amp; Constructions</title>
+  <meta name="description" content="Browse properties from Platinum Properties, Estates &amp; Constructions in Ghana: houses, apartments, land and plots, commercial, luxury and estate properties.">
   <meta name="theme-color" content="#111317">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Properties &amp; Projects | Platinum Properties, Estates &amp; Constructions">
-  <meta property="og:description" content="Browse available properties, ongoing developments and completed projects from Platinum Properties, Estates &amp; Constructions in Ghana.">
+  <meta property="og:title" content="Properties | Platinum Properties, Estates &amp; Constructions">
+  <meta property="og:description" content="Browse properties from Platinum Properties, Estates &amp; Constructions in Ghana: houses, apartments, land and plots, commercial, luxury and estate properties.">
   <meta property="og:locale" content="en_GH">
+  <link rel="canonical" href="https://ppec-io.github.io/ppec/properties.html">
+  <meta property="og:url" content="https://ppec-io.github.io/ppec/properties.html">
+  <meta property="og:site_name" content="Platinum Properties, Estates &amp; Constructions">
+  <meta property="og:image" content="https://ppec-io.github.io/ppec/assets/images/hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/icons/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
@@ -33,7 +38,11 @@
         <ul class="nav__list">
           <li><a class="nav__link" href="index.html">Home</a></li>
           <li><a class="nav__link" href="about.html">About Us</a></li>
-          <li><a class="nav__link" href="properties.html" aria-current="page">Properties &amp; Projects</a></li>
+          <li><a class="nav__link" href="properties.html" aria-current="page">Properties</a></li>
+          <li><a class="nav__link" href="projects.html">Projects</a></li>
+          <li><a class="nav__link" href="services.html">Services</a></li>
+          <li><a class="nav__link" href="gallery.html">Gallery</a></li>
+          <li><a class="nav__link" href="news.html">News</a></li>
           <li><a class="nav__link" href="contact.html">Contact Us</a></li>
         </ul>
         <a class="btn btn--gold btn--sm" href="contact.html#enquiry">Make an Enquiry</a>
@@ -43,42 +52,30 @@
 
     <section class="page-hero">
       <div class="container page-hero__inner">
-        <span class="eyebrow">Portfolio</span>
-        <h1>Properties &amp; Projects</h1>
-        <p>Available properties, ongoing developments and completed projects.</p>
+        <span class="eyebrow">Properties</span>
+        <h1>Properties</h1>
+        <p>Search and filter our property listings. Prices and details are shown only where the company has confirmed them.</p>
       </div>
     </section>
 
-  <main id="main">
-    <section class="section" aria-label="Properties and projects">
+  <main id="main" data-catalogue="properties">
+    <section class="section" aria-label="Properties catalogue">
       <div class="container">
-        <nav class="subnav subnav--light" aria-label="Jump to section" style="margin-bottom:34px">
-          <a href="#available">Available Properties</a>
-          <a href="#ongoing">Ongoing Projects</a>
-          <a href="#completed">Completed Projects</a>
-        </nav>
-        <p class="notice" id="sample-notice" hidden><strong>Sample content.</strong> The listings below are placeholders. Property names, locations, descriptions and photographs will be replaced with the company's verified information.</p>
-
-        <section class="prop-section" id="available" aria-labelledby="available-title">
-          <div class="prop-section__head"><h2 id="available-title">Available Properties</h2><span>Properties currently on offer</span></div>
-          <div class="grid grid--3" data-projects="available" data-card-style="light"></div>
-        </section>
-
-        <section class="prop-section" id="ongoing" aria-labelledby="ongoing-title">
-          <div class="prop-section__head"><h2 id="ongoing-title">Ongoing Projects</h2><span>Developments under way</span></div>
-          <div class="grid grid--3" data-projects="ongoing" data-card-style="light"></div>
-        </section>
-
-        <section class="prop-section" id="completed" aria-labelledby="completed-title">
-          <div class="prop-section__head"><h2 id="completed-title">Completed Projects</h2><span>Work we have delivered</span></div>
-          <div class="grid grid--3" data-projects="completed" data-card-style="light"></div>
-        </section>
+        <p class="notice" id="sample-notice" hidden><strong>Sample content.</strong> The listings below are placeholders. Names, locations, details and photographs will be replaced with the company's verified information.</p>
+        <div class="featured-block" id="catalogue-featured-wrap" hidden>
+          <h2>Featured properties</h2>
+          <div class="grid grid--3" id="catalogue-featured"></div>
+        </div>
+        <h2 class="visually-hidden">All properties</h2>
+        <div id="catalogue-tools"></div>
+        <div id="catalogue-results"></div>
+        <noscript><p class="noscript-note">This page needs JavaScript to load its listings. Please enable JavaScript, or <a href="contact.html">contact us</a> and we will gladly help.</p></noscript>
       </div>
     </section>
 
     <section class="section cta" aria-labelledby="cta-title">
       <div class="container reveal">
-        <h2 id="cta-title">Interested in a property or project?</h2>
+        <h2 id="cta-title">Interested in a property?</h2>
         <p>Send us an enquiry and we will get back to you with the details.</p>
         <div class="btn-row">
           <a class="btn btn--dark" href="contact.html#enquiry">Make an Enquiry</a>
@@ -94,26 +91,32 @@
       <div class="footer__brand">
         <img src="assets/images/logo-horizontal.png" width="210" height="62" alt="Platinum Properties, Estates &amp; Constructions" loading="lazy">
         <p>Real estate and construction services in Ghana: land and property sales, residential development, investment and building.</p>
-        <div class="social" data-social aria-label="Social media"></div>
+        <div class="social" data-social role="group" aria-label="Social media"></div>
       </div>
       <div>
         <h2 class="footer__title">Quick Links</h2>
         <ul class="footer__list">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
-            <li><a href="properties.html">Properties &amp; Projects</a></li>
+            <li><a href="properties.html">Properties</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="news.html">News &amp; Insights</a></li>
+            <li><a href="faq.html">FAQ</a></li>
             <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
         </ul>
       </div>
       <div>
         <h2 class="footer__title">Our Services</h2>
         <ul class="footer__list">
-            <li>Residential Real Estate Development</li>
-            <li>Land and Property Sales</li>
-            <li>Property Investment</li>
-            <li>Building and Construction</li>
-            <li>Property Development and Management</li>
-            <li>Real Estate Consultancy</li>
+            <li><a href="services.html#residential-development">Residential Real Estate Development</a></li>
+            <li><a href="services.html#land-property-sales">Land and Property Sales</a></li>
+            <li><a href="services.html#property-investment">Property Investment</a></li>
+            <li><a href="services.html#building-construction">Building and Construction</a></li>
+            <li><a href="services.html#development-management">Property Development and Management</a></li>
+            <li><a href="services.html#consultancy">Real Estate Consultancy</a></li>
         </ul>
       </div>
       <div>
@@ -138,7 +141,9 @@ Ghana</span></a></li>
   </a>
 
   <script src="js/config.js"></script>
-  <script src="js/projects-data.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/ui.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/catalogue.js"></script>
 </body>
 </html>

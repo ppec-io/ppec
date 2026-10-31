@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ppec-io.github.io/ppec/sitemap.xml

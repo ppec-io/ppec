@@ -10,6 +10,11 @@
   <meta property="og:title" content="Contact Us | Platinum Properties, Estates &amp; Constructions">
   <meta property="og:description" content="Contact Platinum Properties, Estates &amp; Constructions in Ofinso, Ashanti Region, Ghana by phone, WhatsApp or email to make an enquiry.">
   <meta property="og:locale" content="en_GH">
+  <link rel="canonical" href="https://ppec-io.github.io/ppec/contact.html">
+  <meta property="og:url" content="https://ppec-io.github.io/ppec/contact.html">
+  <meta property="og:site_name" content="Platinum Properties, Estates &amp; Constructions">
+  <meta property="og:image" content="https://ppec-io.github.io/ppec/assets/images/hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/icons/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
@@ -18,7 +23,7 @@
   <link rel="stylesheet" href="css/style.css">
   <script>document.documentElement.className = "js";</script>
 </head>
-<body>
+<body data-schema="organization">
   <a class="skip-link" href="#main">Skip to main content</a>
 
   <header class="site-header">
@@ -33,7 +38,11 @@
         <ul class="nav__list">
           <li><a class="nav__link" href="index.html">Home</a></li>
           <li><a class="nav__link" href="about.html">About Us</a></li>
-          <li><a class="nav__link" href="properties.html">Properties &amp; Projects</a></li>
+          <li><a class="nav__link" href="properties.html">Properties</a></li>
+          <li><a class="nav__link" href="projects.html">Projects</a></li>
+          <li><a class="nav__link" href="services.html">Services</a></li>
+          <li><a class="nav__link" href="gallery.html">Gallery</a></li>
+          <li><a class="nav__link" href="news.html">News</a></li>
           <li><a class="nav__link" href="contact.html" aria-current="page">Contact Us</a></li>
         </ul>
         <a class="btn btn--gold btn--sm" href="contact.html#enquiry">Make an Enquiry</a>
@@ -91,7 +100,7 @@ Ghana</p></div></div>
               <label for="f-interest">I am interested in</label>
               <select id="f-interest" name="interest">
                 <option value="">General enquiry</option>
-                <optgroup label="Services">
+                <optgroup label="Services" id="interest-services">
               <option value="service:1">Residential Real Estate Development</option>
               <option value="service:2">Land and Property Sales</option>
               <option value="service:3">Property Investment</option>
@@ -99,7 +108,8 @@ Ghana</p></div></div>
               <option value="service:5">Property Development and Management</option>
               <option value="service:6">Real Estate Consultancy</option>
                 </optgroup>
-                <optgroup label="Properties &amp; projects" id="interest-projects"></optgroup>
+                <optgroup label="Properties" id="interest-properties"></optgroup>
+                <optgroup label="Projects" id="interest-projects"></optgroup>
               </select>
             </div>
             <div class="field">
@@ -130,26 +140,32 @@ Ghana</p></div></div>
       <div class="footer__brand">
         <img src="assets/images/logo-horizontal.png" width="210" height="62" alt="Platinum Properties, Estates &amp; Constructions" loading="lazy">
         <p>Real estate and construction services in Ghana: land and property sales, residential development, investment and building.</p>
-        <div class="social" data-social aria-label="Social media"></div>
+        <div class="social" data-social role="group" aria-label="Social media"></div>
       </div>
       <div>
         <h2 class="footer__title">Quick Links</h2>
         <ul class="footer__list">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
-            <li><a href="properties.html">Properties &amp; Projects</a></li>
+            <li><a href="properties.html">Properties</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="news.html">News &amp; Insights</a></li>
+            <li><a href="faq.html">FAQ</a></li>
             <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
         </ul>
       </div>
       <div>
         <h2 class="footer__title">Our Services</h2>
         <ul class="footer__list">
-            <li>Residential Real Estate Development</li>
-            <li>Land and Property Sales</li>
-            <li>Property Investment</li>
-            <li>Building and Construction</li>
-            <li>Property Development and Management</li>
-            <li>Real Estate Consultancy</li>
+            <li><a href="services.html#residential-development">Residential Real Estate Development</a></li>
+            <li><a href="services.html#land-property-sales">Land and Property Sales</a></li>
+            <li><a href="services.html#property-investment">Property Investment</a></li>
+            <li><a href="services.html#building-construction">Building and Construction</a></li>
+            <li><a href="services.html#development-management">Property Development and Management</a></li>
+            <li><a href="services.html#consultancy">Real Estate Consultancy</a></li>
         </ul>
       </div>
       <div>
@@ -174,7 +190,7 @@ Ghana</span></a></li>
   </a>
 
   <script src="js/config.js"></script>
-  <script src="js/projects-data.js"></script>
+  <script src="js/core.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

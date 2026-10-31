@@ -1,39 +1,13 @@
 /* ==========================================================================
-   Site behaviour — no dependencies.
-   Contact details come from js/config.js, properties from js/projects-data.js.
+   main.js — behaviour shared by every page (no dependencies).
+   Contact details come from js/config.js; catalogue content from data/*.json
+   (see core.js, catalogue.js, detail.js, gallery.js, content.js).
    ========================================================================== */
 (function () {
   "use strict";
 
-  var S = window.SITE || {};
-  var PROJECTS = window.PROJECTS || [];
-
-  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
-  function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
-  function make(tag, cls, text) {
-    var e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (text != null) e.textContent = text;
-    return e;
-  }
+  var PP = window.PP, S = PP.S, $ = PP.$, $$ = PP.$$, make = PP.el;
   function isHttp(url) { return /^https?:\/\//i.test(url || ""); }
-
-  var LABELS = { available: "Available", ongoing: "Ongoing", completed: "Completed" };
-  var EMPTY = {
-    available: "No properties are listed at the moment. Please contact us for current availability.",
-    ongoing: "No ongoing projects are listed at the moment.",
-    completed: "Completed projects will be listed here.",
-    featured: "Featured properties and projects will appear here."
-  };
-
-  /* ---------- Links built from config ---------- */
-  function waLink(message) {
-    return "https://wa.me/" + encodeURIComponent(S.whatsappNumber || "") +
-      "?text=" + encodeURIComponent(message || S.whatsappMessage || "");
-  }
-  function mapsLink() {
-    return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(S.mapQuery || "");
-  }
 
   /* ---------- Fill contact details from config ---------- */
   function fillSiteDetails() {
@@ -51,10 +25,10 @@
     });
 
     var hrefs = {
-      tel: S.phoneTel ? "tel:" + S.phoneTel : "",
+      tel: PP.telLink(),
       mail: S.email ? "mailto:" + S.email : "",
-      wa: S.whatsappNumber ? waLink() : "",
-      map: S.mapQuery ? mapsLink() : ""
+      wa: S.whatsappNumber ? PP.waLink() : "",
+      map: S.mapQuery ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(S.mapQuery) : ""
     };
     $$("[data-site-href]").forEach(function (el) {
       var v = hrefs[el.getAttribute("data-site-href")];
@@ -81,6 +55,29 @@
     });
   }
 
+  /* ---------- Organisation structured data (built from config; only supplied details) ---------- */
+  function addOrganisationSchema() {
+    if (!$("[data-schema='organization']")) return;
+    var data = {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": S.brandName,
+      "url": S.siteUrl
+    };
+    if (S.legalName) data.legalName = S.legalName;
+    if (S.phoneTel) data.telephone = S.phoneTel;
+    if (S.email) data.email = S.email;
+    data.logo = PP.abs("assets/images/logo-horizontal.png");
+    var lines = S.addressLines || [];
+    if (lines.length) {
+      data.address = { "@type": "PostalAddress", "streetAddress": lines[0], "addressLocality": (lines[1] || "").split(",")[0].trim(), "addressRegion": ((lines[1] || "").split(",")[1] || "").trim(), "addressCountry": "GH" };
+    }
+    var sameAs = Object.keys(S.social || {}).map(function (k) { return S.social[k]; }).filter(isHttp);
+    if (sameAs.length) data.sameAs = sameAs;
+    var tag = make("script", "", JSON.stringify(data), { type: "application/ld+json" });
+    document.head.appendChild(tag);
+  }
+
   /* ---------- Mobile navigation ---------- */
   function initNav() {
     var btn = $(".nav-toggle");
@@ -103,66 +100,9 @@
       if (nav.classList.contains("is-open") && !nav.contains(e.target) && !btn.contains(e.target)) setOpen(false);
     });
     $$("a", nav).forEach(function (a) { a.addEventListener("click", function () { setOpen(false); }); });
-    var mq = window.matchMedia("(min-width: 921px)");
+    var mq = window.matchMedia("(min-width: 1101px)");
     var onChange = function () { if (mq.matches) setOpen(false); };
     if (mq.addEventListener) mq.addEventListener("change", onChange); else mq.addListener(onChange);
-  }
-
-  /* ---------- Property / project cards ---------- */
-  function buildCard(p, light) {
-    var card = make("article", "card" + (light ? " card--light" : ""));
-
-    var media = make("div", "card__media");
-    var img = make("img");
-    img.src = p.image; img.alt = p.imageAlt || p.title;
-    img.width = 800; img.height = 600; img.loading = "lazy"; img.decoding = "async";
-    media.appendChild(img);
-    media.appendChild(make("span", "badge", LABELS[p.category] || p.category));
-    if (p.placeholder) media.appendChild(make("span", "badge badge--sample", "Sample"));
-    card.appendChild(media);
-
-    var body = make("div", "card__body");
-    body.appendChild(make("h3", "card__title", p.title));
-    var loc = make("p", "card__loc");
-    loc.appendChild(make("span", "icon icon-pin"));
-    loc.lastChild.setAttribute("aria-hidden", "true");
-    loc.appendChild(make("span", "", p.location));
-    body.appendChild(loc);
-    body.appendChild(make("p", "card__desc", p.description));
-    if (p.statusNote) body.appendChild(make("p", "card__note", p.statusNote));
-
-    var actions = make("div", "card__actions");
-    var enq = make("a", "btn btn--sm " + (light ? "btn--dark" : "btn--gold"), "Enquire");
-    enq.href = "contact.html?enquiry=" + encodeURIComponent(p.id);
-    enq.setAttribute("aria-label", "Make an enquiry about " + p.title);
-    var wa = make("a", "btn btn--sm " + (light ? "btn--ghost-dark" : "btn--ghost"));
-    wa.href = waLink("Hello, I would like to enquire about " + p.title + ".");
-    wa.target = "_blank"; wa.rel = "noopener noreferrer";
-    wa.setAttribute("aria-label", "Ask about " + p.title + " on WhatsApp (opens in a new tab)");
-    var waIcon = make("span", "icon icon-whatsapp"); waIcon.setAttribute("aria-hidden", "true");
-    wa.appendChild(waIcon); wa.appendChild(document.createTextNode("WhatsApp"));
-    actions.appendChild(enq); actions.appendChild(wa);
-    body.appendChild(actions);
-
-    card.appendChild(body);
-    return card;
-  }
-
-  function renderProjects() {
-    $$("[data-projects]").forEach(function (box) {
-      var key = box.getAttribute("data-projects");
-      var light = box.getAttribute("data-card-style") === "light";
-      var items = PROJECTS.filter(function (p) {
-        return key === "featured" ? p.featured : p.category === key;
-      });
-      box.textContent = "";
-      if (!items.length) { box.appendChild(make("p", "empty", EMPTY[key] || "")); return; }
-      items.forEach(function (p) { box.appendChild(buildCard(p, light)); });
-    });
-    var notice = $("#sample-notice");
-    if (notice) {
-      notice.hidden = !PROJECTS.some(function (p) { return p.placeholder; });
-    }
   }
 
   /* ---------- Enquiry form (email- or WhatsApp-based; no backend) ---------- */
@@ -175,32 +115,44 @@
       interest: form.elements.interest, message: form.elements.message
     };
     var status = $("#form-status");
+    var refUrl = "";   // address of the property / project being enquired about
 
-    // Build the interest list: services + each listed property/project
-    var group = $("#interest-projects");
-    if (group) {
-      PROJECTS.forEach(function (p) {
-        var o = make("option", "", p.title + " (" + (LABELS[p.category] || p.category) + ")");
-        o.value = "project:" + p.id;
+    function addOptions(group, items, prefix, labelFn) {
+      if (!group) return;
+      items.forEach(function (r) {
+        var o = make("option", "", labelFn(r));
+        o.value = prefix + ":" + r.id;
         group.appendChild(o);
       });
-      if (!PROJECTS.length) group.remove();
     }
-
-    // Pre-fill when arriving from a property card: contact.html?enquiry=<id>
-    var wanted = new URLSearchParams(window.location.search).get("enquiry");
-    if (wanted) {
-      var hit = PROJECTS.filter(function (p) { return p.id === wanted; })[0];
-      if (hit) {
-        f.interest.value = "project:" + hit.id;
-        if (!f.message.value) f.message.value = "Hello, I would like to know more about " + hit.title + ".";
-      }
-    }
-
     function interestLabel() {
       var opt = f.interest.options[f.interest.selectedIndex];
       return opt && opt.value ? opt.textContent : "General enquiry";
     }
+
+    // Interest list: services, properties and projects come from the JSON files.
+    // The static service options in the page remain as a fallback if the data cannot load.
+    var wanted = PP.params().get("enquiry");
+    function preselect(props, projs) {
+      if (!wanted) return;
+      var p = PP.findById(props, wanted), j = PP.findById(projs, wanted);
+      var rec = p || j; if (!rec) return;
+      f.interest.value = (p ? "property:" : "project:") + rec.id;
+      refUrl = PP.abs(PP.detailUrl(p ? "property" : "project", rec.id));
+      if (!f.message.value) f.message.value = "Hello, I would like to know more about " + rec.name + ".";
+    }
+    Promise.all([PP.loadData("services"), PP.loadData("properties"), PP.loadData("projects")]).then(function (res) {
+      var services = res[0].sort(function (a, b) { return (a.order || 0) - (b.order || 0); });
+      var svcGroup = $("#interest-services");
+      if (svcGroup && services.length) { PP.clear(svcGroup); addOptions(svcGroup, services, "service", function (s) { return s.title; }); }
+      addOptions($("#interest-properties"), res[1], "property", function (r) { return r.name; });
+      addOptions($("#interest-projects"), res[2], "project", function (r) { return r.name; });
+      ["#interest-properties", "#interest-projects"].forEach(function (id) { var g = $(id); if (g && !g.children.length) g.remove(); });
+      preselect(res[1], res[2]);
+    }).catch(function () {
+      ["#interest-properties", "#interest-projects"].forEach(function (id) { var g = $(id); if (g) g.remove(); });
+    });
+
     function setError(field, msg) {
       var wrap = field.closest(".field");
       var err = $(".field__error", wrap);
@@ -236,24 +188,28 @@
         f.phone.value.trim() ? "Phone: " + f.phone.value.trim() : "",
         f.email.value.trim() ? "Email: " + f.email.value.trim() : "",
         "Interested in: " + interestLabel(),
+        refUrl && /^(property|project):/.test(f.interest.value) ? "Page: " + refUrl : "",
         "",
         f.message.value.trim()
       ];
-      return lines.filter(function (l, i) { return l !== "" || i === 4; }).join("\n");
+      return lines.filter(function (l, i) { return l !== "" || i === 5; }).join("\n");
     }
     function say(msg, ok) {
       status.textContent = msg;
       status.className = "form__status " + (ok ? "is-ok" : "is-err");
     }
+    // keep the reference address in step with the chosen property / project
+    f.interest.addEventListener("change", function () {
+      var m = /^(property|project):(.+)$/.exec(f.interest.value);
+      refUrl = m ? PP.abs(PP.detailUrl(m[1], m[2])) : "";
+    });
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!validate()) { say("Please correct the highlighted fields.", false); return; }
       var subject = "Website enquiry: " + interestLabel() + " — " + f.name.value.trim();
-      var href = "mailto:" + S.email + "?subject=" + encodeURIComponent(subject) +
-        "&body=" + encodeURIComponent(summary());
       say("Opening your email app… If nothing opens, please email us directly at " + S.email + ".", true);
-      window.location.href = href;
+      window.location.href = PP.mailLink(subject, summary());
     });
 
     var waBtn = $("#send-whatsapp");
@@ -261,7 +217,7 @@
       waBtn.addEventListener("click", function () {
         if (!validate()) { say("Please correct the highlighted fields.", false); return; }
         say("Opening WhatsApp…", true);
-        window.open(waLink(summary()), "_blank", "noopener");
+        window.open(PP.waLink(summary()), "_blank", "noopener");
       });
     }
   }
@@ -284,14 +240,12 @@
 
   /* ---------- Placeholder highlighter: add ?placeholders=1 to any URL ---------- */
   function initPlaceholderMode() {
-    if (new URLSearchParams(window.location.search).get("placeholders") === "1") {
-      document.body.classList.add("show-ph");
-    }
+    if (PP.params().get("placeholders") === "1") document.body.classList.add("show-ph");
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
+  PP.ready(function () {
     fillSiteDetails();
-    renderProjects();
+    addOrganisationSchema();
     initNav();
     initForm();
     initPlaceholderMode();

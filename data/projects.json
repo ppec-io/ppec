@@ -1,0 +1,144 @@
+[
+  {
+    "id": "project-001",
+    "status": "published",
+    "featured": true,
+    "placeholder": true,
+    "name": "Sample Development 01",
+    "category": "commercial",
+    "location": "[Town / Area], Ghana",
+    "projectStatus": "ongoing",
+    "description": "Add a short description of this project here.",
+    "images": [
+      {
+        "src": "assets/images/projects/placeholder-commercial.jpg",
+        "alt": "Placeholder photograph of a modern building",
+        "type": "photo"
+      }
+    ],
+    "added": "2026-10-31",
+    "progress": {
+      "note": "[Add construction progress once confirmed]"
+    },
+    "milestones": [
+      {
+        "title": "[Milestone to be confirmed]"
+      },
+      {
+        "title": "[Milestone to be confirmed]"
+      }
+    ],
+    "features": [
+      "[Development feature to be confirmed]"
+    ],
+    "related": [
+      "project-002",
+      "project-004"
+    ]
+  },
+  {
+    "id": "project-002",
+    "status": "published",
+    "featured": true,
+    "placeholder": true,
+    "name": "Sample Development 02",
+    "category": "residential",
+    "location": "[Town / Area], Ghana",
+    "projectStatus": "ongoing",
+    "description": "Add a short description of this project here.",
+    "images": [
+      {
+        "src": "assets/images/projects/placeholder-house.jpg",
+        "alt": "Placeholder photograph of a house with a pool",
+        "type": "photo"
+      },
+      {
+        "src": "assets/images/samples/development-site.jpg",
+        "alt": "Illustrative aerial image of a development site at sunset",
+        "type": "render"
+      }
+    ],
+    "added": "2026-10-31",
+    "progress": {
+      "note": "[Add construction progress once confirmed]"
+    },
+    "related": [
+      "project-001",
+      "project-003"
+    ]
+  },
+  {
+    "id": "project-003",
+    "status": "published",
+    "featured": true,
+    "placeholder": true,
+    "name": "Sample Completed Project 01",
+    "category": "estate",
+    "location": "[Town / Area], Ghana",
+    "projectStatus": "completed",
+    "description": "Add a short description of this project here.",
+    "images": [
+      {
+        "src": "assets/images/projects/placeholder-estate.jpg",
+        "alt": "Placeholder aerial photograph of a residential estate",
+        "type": "photo"
+      },
+      {
+        "src": "assets/images/samples/estate-community.jpg",
+        "alt": "Illustrative aerial image of a gated residential estate",
+        "type": "render"
+      }
+    ],
+    "added": "2026-10-31",
+    "related": [
+      "project-002",
+      "project-004"
+    ]
+  },
+  {
+    "id": "project-004",
+    "status": "published",
+    "featured": false,
+    "placeholder": true,
+    "name": "Sample Completed Project 02",
+    "category": "construction",
+    "location": "[Town / Area], Ghana",
+    "projectStatus": "completed",
+    "description": "Add a short description of this project here.",
+    "images": [
+      {
+        "src": "assets/images/projects/placeholder-interior.jpg",
+        "alt": "Placeholder photograph of a kitchen interior",
+        "type": "photo"
+      },
+      {
+        "src": "assets/images/samples/completed-block.jpg",
+        "alt": "Illustrative image of a completed apartment block at dusk",
+        "type": "render"
+      }
+    ],
+    "added": "2026-10-31",
+    "related": [
+      "project-003"
+    ]
+  },
+  {
+    "id": "project-005",
+    "status": "draft",
+    "featured": false,
+    "placeholder": true,
+    "name": "Draft Record Example (not shown on the website)",
+    "category": "land-development",
+    "location": "[Town / Area], Ghana",
+    "projectStatus": "planning",
+    "description": "This record has status \"draft\", so the website does not display it.",
+    "images": [
+      {
+        "src": "assets/images/samples/plots.jpg",
+        "alt": "Illustrative image of land",
+        "type": "render"
+      }
+    ],
+    "added": "2026-10-31"
+  }
+]
