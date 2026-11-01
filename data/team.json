@@ -1,0 +1,74 @@
+[
+  {
+    "id": "team-001",
+    "status": "published",
+    "placeholder": true,
+    "order": 1,
+    "name": "[Full name]",
+    "role": "[Position title]",
+    "department": "Leadership",
+    "bio": "Add a short biography here: background, qualifications and what this person does at the company.",
+    "email": "",
+    "linkedin": ""
+  },
+  {
+    "id": "team-002",
+    "status": "published",
+    "placeholder": true,
+    "order": 2,
+    "name": "[Full name]",
+    "role": "[Position title]",
+    "department": "Leadership",
+    "bio": "Add a short biography here: background, qualifications and what this person does at the company.",
+    "email": "",
+    "linkedin": ""
+  },
+  {
+    "id": "team-003",
+    "status": "published",
+    "placeholder": true,
+    "order": 3,
+    "name": "[Full name]",
+    "role": "[Position title]",
+    "department": "Sales & Property Advisory",
+    "bio": "Add a short biography here: background, qualifications and what this person does at the company.",
+    "email": "",
+    "linkedin": ""
+  },
+  {
+    "id": "team-004",
+    "status": "published",
+    "placeholder": true,
+    "order": 4,
+    "name": "[Full name]",
+    "role": "[Position title]",
+    "department": "Construction & Engineering",
+    "bio": "Add a short biography here: background, qualifications and what this person does at the company.",
+    "email": "",
+    "linkedin": ""
+  },
+  {
+    "id": "team-005",
+    "status": "published",
+    "placeholder": true,
+    "order": 5,
+    "name": "[Full name]",
+    "role": "[Position title]",
+    "department": "Construction & Engineering",
+    "bio": "Add a short biography here: background, qualifications and what this person does at the company.",
+    "email": "",
+    "linkedin": ""
+  },
+  {
+    "id": "team-006",
+    "status": "published",
+    "placeholder": true,
+    "order": 6,
+    "name": "[Full name]",
+    "role": "[Position title]",
+    "department": "Administration & Client Care",
+    "bio": "Add a short biography here: background, qualifications and what this person does at the company.",
+    "email": "",
+    "linkedin": ""
+  }
+]

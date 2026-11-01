@@ -1,4 +1,4 @@
-# Platinum Properties, Estates & Constructions: Website
+# Platinum Properties Estates & Constructions: Website
 
 A fast, elegant, fully responsive static website for a Ghanaian real estate and construction company, with a searchable property catalogue, a separate project portfolio, detail pages, gallery, news and FAQ.
 
@@ -26,10 +26,10 @@ A fast, elegant, fully responsive static website for a Ghanaian real estate and 
 
 The site contains **sample content** wherever real company information was not supplied. Do not present it as real.
 
-- [ ] **Replace every sample record** in `data/properties.json`, `projects.json`, `news.json`, `gallery.json` and `faqs.json`. Every sample has `"placeholder": true`; remove that line (or set it to `false`) when a record is real. Samples show a "Sample" badge and a notice on the page.
+- [ ] **Replace every sample record** in `data/properties.json`, `projects.json`, `news.json`, `gallery.json`, `faqs.json`, `hero.json`, `team.json` and `careers.json`. Every sample has `"placeholder": true`; remove that line (or set it to `false`) when a record is real. Samples show a "Sample" badge and a notice on the page.
 - [ ] **Replace the sample photographs.** `assets/images/projects/placeholder-*.jpg`, `hero.jpg` and `about-placeholder.jpg` were cropped from design reference images and **may be subject to third-party copyright**. `assets/images/samples/*.jpg` are illustrative renders supplied for layout purposes; they are **not company projects**. Use the company's own photographs and renders.
 - [ ] **Review all draft wording.** Add `?placeholders=1` to any page address (for example `about.html?placeholders=1`) and every draft passage is highlighted in yellow so it can be approved or rewritten. This includes the company profile, vision, mission, philosophy, values, service descriptions, FAQ answers and the **Privacy Policy** (which has not been legally reviewed).
-- [ ] **Confirm the company name.** See section 9.
+- [ ] **Check the company name** is shown as you want it (section 9).
 - [ ] **Verify contact details and the map pin** (section 3).
 - [ ] **Add social links** once real accounts exist (section 3). Until then none are shown.
 - [ ] **Run the checker:** `node tools/validate-data.js --sitemap` (section 8).
@@ -42,11 +42,11 @@ The site contains **sample content** wherever real company information was not s
 ppec/
 ├── index.html  about.html  services.html  gallery.html  news.html  news-details.html
 ├── properties.html  property-details.html  projects.html  project-details.html
-├── contact.html  faq.html  privacy.html  404.html
+├── contact.html  faq.html  team.html  careers.html  privacy.html  404.html
 ├── sitemap.xml  robots.txt
 ├── data/                     ★ all catalogue content (JSON)
 │   ├── properties.json  projects.json  services.json
-│   └── news.json  faqs.json  gallery.json
+│   └── news.json  faqs.json  gallery.json  hero.json  team.json  careers.json
 ├── js/
 │   ├── config.js             ★ contact details, site address, categories, page size
 │   ├── core.js               shared helpers + JSON loading (no edits needed)
@@ -54,12 +54,15 @@ ppec/
 │   ├── main.js               menu, contact details, enquiry form
 │   ├── catalogue.js          search/filter/sort/grid-list for properties and projects
 │   ├── detail.js             property and project detail pages
-│   ├── gallery.js  content.js   gallery, home featured, services, news, FAQ
+│   ├── hero.js               home hero slider (8 transitions) + 3D showcase
+│   ├── gallery.js  content.js   gallery, home featured, services, news, FAQ, team, careers
 ├── css/style.css             all styling; colours are variables at the top
 ├── assets/
 │   ├── images/               logos, hero, about image
 │   │   ├── projects/         original sample photos
-│   │   └── samples/          illustrative sample renders
+│   │   ├── samples/          sample photos/renders (…-sm.jpg = small versions for cards)
+│   │   └── banners/          page-header pictures
+│   ├── video/                sample walkthrough video + poster
 │   ├── icons/  fonts/
 └── tools/validate-data.js    optional content checker + sitemap generator
 ```
@@ -167,7 +170,10 @@ Edit **`data/projects.json`**. Projects are completely separate from properties.
 | `services.json` | Service titles, short summary (home page), longer `description` and an optional `cta` button (Services page). `order` sets the sequence. |
 | `news.json` | Articles: `title`, `date`, `category`, `cover` image, `summary`, and `content`, a list of paragraphs (start a line with `## ` for a heading). |
 | `faqs.json` | `question`, `answer`, `order`. |
-| `gallery.json` | `src`, `alt`, `title`, `category` (`property`, `construction`, `estate`, `render`, `completed`). |
+| `gallery.json` | `src`, `alt`, `title`, `category` (`property`, `construction`, `estate`, `render`, `completed`), optional `thumb`. |
+| `hero.json` | Home hero slides, in `order`. Each: `image {src, alt, position}`, `eyebrow`, `title`, `titleEm` (italic gold part), `text`, `cta` / `cta2` `{label, href}`, and `transition`: `fade`, `slide-left`, `slide-right`, `slide-up`, `zoom`, `wipe`, `cube` (3D) or `flip` (3D). Use `"status": "draft"` to hide a slide. |
+| `team.json` | People shown on `team.html`, grouped by `department`: `name`, `role`, `bio`, `photo {src, alt}`, optional `email`, `linkedin`. Leave `photo` out to show a neutral tile. |
+| `careers.json` | Vacancies on `careers.html`: `title`, `type`, `location`, `summary`, `responsibilities[]`, `requirements[]`, `closing`. Applying opens the visitor's email app or WhatsApp; **the site does not receive or store applications.** |
 
 All of them support `"status": "draft"` to hide a record.
 
@@ -178,7 +184,21 @@ All of them support `"status": "draft"` to hide a record.
 3. Reference the file in the JSON using a path **from the website root**, with no leading slash: `assets/images/properties/house.jpg`.
 4. Always give each image a short `alt` description (used by screen readers and search engines).
 5. Below-the-fold images load lazily by themselves. If an image is missing, the site shows the logo mark instead of a broken picture.
-6. The home hero is `assets/images/hero.jpg` and the About image is `about-placeholder.jpg`; replace the files or edit the `src` in the HTML.
+6. Home hero pictures are listed in `data/hero.json` (aim for **at least 1920 px wide**, under 350 KB each). The About image is `about-placeholder.jpg`.
+7. **Small versions for cards:** give an image an optional `"thumb": "assets/.../name-sm.jpg"` (about 640 px wide). Cards and grids use it; the big picture loads only in the viewer.
+8. **Multiple pictures, floor plans and video on detail pages.** In a property or project record:
+
+```json
+"images":     [ { "src": "assets/images/a.jpg", "alt": "…", "thumb": "assets/images/a-sm.jpg" }, { "src": "…", "alt": "…" } ],
+"floorPlans": [ { "title": "Ground floor", "src": "assets/images/plan-1.jpg", "alt": "…" } ],
+"videos": [
+  { "title": "Walkthrough", "type": "file",    "src": "assets/video/house.mp4", "poster": "assets/video/house.jpg" },
+  { "title": "Tour",        "type": "youtube", "id": "VIDEO_ID_11_CHARS" },
+  { "title": "Tour",        "type": "vimeo",   "id": "123456789" }
+]
+```
+
+   Tabs (Photos / Slideshow / Floor plan / Video) appear only for the views that have content. Local videos should be **MP4 (H.264), under about 15 MB**; use GitHub's 100 MB file limit as the hard ceiling. YouTube and Vimeo load **only after the visitor presses play** (privacy-friendly embeds). Add `"placeholder": true` to a sample video to label it.
 
 Note: the header logo `assets/images/logo-horizontal.png` is about 130 KB. Re-exporting it at roughly twice its display size would make every page lighter.
 
@@ -205,7 +225,7 @@ It reports exactly which record has a problem and exits with an error if anythin
 
 ## 9. Company name
 
-The original brief named the company **Classic Properties and Constructions Company Limited**, but the logo and email domain read **Platinum Properties, Estates & Constructions**. The site uses the **logo name** as the public brand (header, titles, headings) and shows the **Classic Properties and Constructions Company Limited** name as the legal name (footer, Privacy Policy). Both live in `js/config.js` (`brandName`, `legalName`). The page titles and headings also contain the brand name in the HTML. If the public name changes, search the `.html` files for "Platinum" and update them. **This needs a decision from the company before launch.**
+The confirmed company name is **Platinum Properties Estates & Constructions Company Limited**. The short public brand is **Platinum Properties Estates & Constructions** (header, titles, headings); the full name is the legal name (footer, Privacy Policy). Both live in `js/config.js` (`brandName`, `legalName`). Page titles and headings also contain the brand name in the HTML; if it ever changes, search the `.html` files for "Platinum".
 
 ---
 
@@ -245,7 +265,17 @@ No credentials, keys or tokens exist in the code. If a real form service is want
 - Semantic HTML, skip link, keyboard-operable menu, filters, gallery and lightbox (arrow keys, Escape, focus returns to the opener), labelled form fields with error messages, `aria-live` result counts, reduced-motion support.
 - `?placeholders=1` highlights draft wording (see section 1).
 
-## 13. What changed from the previous version
+## 13. Home hero, 3D showcase and design notes
+
+- **Hero slider** (`js/hero.js`, `data/hero.json`): several slides, each with its own picture, words and transition (fade, slide, zoom, wipe, 3D cube, 3D flip). Autoplay 7 s, pause button, arrows, dots, swipe, keyboard. With the visitor's "reduce motion" setting on, autoplay and animations are off. If `hero.json` cannot load, the first slide written in `index.html` stays.
+- **3D showcase** (home page): a coverflow of featured properties, built with CSS 3D only (no library). It reads `"featured": true` records.
+- Off-screen slides are inert (not reachable by keyboard or screen reader).
+- The **About Us** menu has a drop-down (Our Story, Our Team, Careers, FAQ); on phones it is expanded inside the menu.
+- Page-header pictures are in `assets/images/banners/`; they are referenced from the HTML as `../assets/images/banners/…` because CSS resolves paths relative to the stylesheet. Keep the `../`.
+
+## 14. What changed from the previous version
+
+- **Latest update:** luxury visual layer; hero slider and 3D showcase; multi-view property/project pages (mosaic, slideshow, floor plan, video, share buttons, key facts); **new pages** `team.html` and `careers.html`; FAQ search and topic filter; news article side-bar; new data files `hero.json`, `team.json`, `careers.json`; new sample photographs, banners and a sample video; `tools/validate-data.js` extended to check them.
 
 - `properties.html` is now the property catalogue; **projects have their own page** and data. The old combined "Properties & Projects" page and `js/projects-data.js` were replaced by the JSON files (the old six sample entries were migrated into `properties.json` and `projects.json`). The old `?enquiry=available-1` style addresses no longer exist.
 - The menu moved to the button layout below 1100 px wide to fit eight links.

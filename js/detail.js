@@ -29,50 +29,268 @@
     return s;
   }
 
-  /* ---------- Gallery ---------- */
-  function buildGallery(rec) {
-    var images = (rec.images || []).filter(function (i) { return i && i.src; });
-    var wrap = el("div", "gallery");
-    var items = images.map(function (i) {
+  /* ---------- Media: photos (mosaic), slideshow, floor plans, video ---------- */
+  var SAFE_FILE = /^[\w\-./]+\.(mp4|webm|ogv)$/i;
+  var MIME = { mp4: "video/mp4", webm: "video/webm", ogv: "video/ogg" };
+
+  function lightboxItems(images, rec) {
+    return images.map(function (i) {
       var cap = i.caption || i.alt || "";
       if (i.type === "render") cap = (cap ? cap + " — " : "") + "architectural render";
       return { src: i.src, alt: i.alt || rec.name, caption: cap };
     });
-    var current = 0;
+  }
+  function typeLabel(im) { return im.type === "render" ? "Architectural render" : (im.type === "photo" ? "Photograph" : ""); }
 
-    var mainBtn = el("button", "gallery__main", null, { type: "button", "aria-label": items.length ? "Open image viewer" : "No photographs yet" });
-    var mainImg = UI.img(images[0], { width: 1200, height: 750, lazy: false, fallbackAlt: "Photograph to be added" });
+  /* Mosaic: one large picture and up to four smaller ones, like a property portal. */
+  function buildMosaic(images, items, rec) {
+    var n = images.length;
+    var box = el("div", "mosaic mosaic--" + Math.max(1, Math.min(n, 5)));
+    if (!n) {
+      var empty = el("div", "mosaic__tile mosaic__tile--empty");
+      empty.appendChild(UI.img(null, { width: 1200, height: 750, lazy: false, fallbackAlt: "Photograph to be added" }));
+      box.appendChild(empty);
+      return box;
+    }
+    var shown = Math.min(n, 5);
+    for (var i = 0; i < shown; i++) (function (i) {
+      var b = el("button", "mosaic__tile", null, { type: "button", "aria-label": (i === 0 && typeLabel(images[0]) ? typeLabel(images[0]) + ": " : "") + "open photo " + (i + 1) + " of " + n });
+      var im = i === 0 ? images[i] : { src: images[i].thumb || images[i].src, alt: images[i].alt };
+      b.appendChild(UI.img(im, { width: i === 0 ? 1200 : 640, height: i === 0 ? 800 : 480, lazy: i > 0 }));
+      if (i === 0 && typeLabel(images[0])) b.appendChild(el("span", "gallery__type", typeLabel(images[0])));
+      b.addEventListener("click", function () { UI.openLightbox(items, i, b); });
+      box.appendChild(b);
+    })(i);
+    if (n > 1) {
+      var all = el("button", "mosaic__all", "View all " + n + " photos", { type: "button" });
+      all.addEventListener("click", function () { UI.openLightbox(items, 0, all); });
+      box.appendChild(all);
+    }
+    return box;
+  }
+
+  /* Slideshow: large picture with arrows and a thumbnail strip. */
+  function buildSlideshow(images, items, rec) {
+    var wrap = el("div", "gallery");
+    var cur = 0;
+    var stageBox = el("div", "gallery__stage");
+    var mainBtn = el("button", "gallery__main", null, { type: "button", "aria-label": "Open image viewer" });
+    var mainImg = UI.img(images[0], { width: 1200, height: 750, lazy: false });
     mainBtn.appendChild(mainImg);
-    var tag = el("span", "gallery__type");
-    mainBtn.appendChild(tag);
-    wrap.appendChild(mainBtn);
+    var tag = el("span", "gallery__type"); mainBtn.appendChild(tag);
+    stageBox.appendChild(mainBtn);
+    var prev = el("button", "gallery__arrow gallery__arrow--prev", "‹", { type: "button", "aria-label": "Previous image" });
+    var next = el("button", "gallery__arrow gallery__arrow--next", "›", { type: "button", "aria-label": "Next image" });
+    stageBox.appendChild(prev); stageBox.appendChild(next);
+    var count = el("p", "gallery__count", null, { "aria-live": "polite" });
+    stageBox.appendChild(count);
+    wrap.appendChild(stageBox);
 
-    function setCurrent(i) {
-      current = i;
-      var im = images[i];
-      if (!im) return;
-      mainImg.src = im.src; mainImg.alt = im.alt || rec.name;
-      mainImg.className = "";
-      tag.textContent = im.type === "render" ? "Architectural render" : (im.type === "photo" ? "Photograph" : "");
-      tag.hidden = !tag.textContent;
-      mainBtn.setAttribute("aria-label", (tag.textContent ? tag.textContent + ": " : "") + "open image viewer");
-      PP.$$(".gallery__thumb", wrap).forEach(function (b, n) { b.setAttribute("aria-current", n === i ? "true" : "false"); });
-    }
-    mainBtn.addEventListener("click", function () { if (items.length) UI.openLightbox(items, current, mainBtn); });
+    var thumbs = el("div", "gallery__thumbs");
+    images.forEach(function (im, i) {
+      var b = el("button", "gallery__thumb", null, { type: "button", "aria-label": "Show image " + (i + 1) + " of " + images.length });
+      b.appendChild(UI.img({ src: im.thumb || im.src, alt: "" }, { width: 160, height: 110 }));
+      b.addEventListener("click", function () { set(i); });
+      thumbs.appendChild(b);
+    });
+    wrap.appendChild(thumbs);
 
-    if (images.length > 1) {
-      var thumbs = el("div", "gallery__thumbs");
-      images.forEach(function (im, i) {
-        var b = el("button", "gallery__thumb", null, { type: "button", "aria-label": "Show image " + (i + 1) + " of " + images.length });
-        b.appendChild(UI.img(im, { width: 160, height: 110 }));
-        b.addEventListener("click", function () { setCurrent(i); });
-        thumbs.appendChild(b);
-      });
-      wrap.appendChild(thumbs);
+    function set(i) {
+      var n = images.length;
+      cur = (i + n) % n;
+      var im = images[cur];
+      mainImg.src = im.src; mainImg.alt = im.alt || rec.name; mainImg.className = "";
+      tag.textContent = typeLabel(im); tag.hidden = !tag.textContent;
+      count.textContent = (cur + 1) + " / " + n;
+      PP.$$(".gallery__thumb", wrap).forEach(function (b, k) { b.setAttribute("aria-current", k === cur ? "true" : "false"); });
     }
-    setCurrent(0);
-    if (!images.length) tag.hidden = true;
+    prev.addEventListener("click", function () { set(cur - 1); });
+    next.addEventListener("click", function () { set(cur + 1); });
+    mainBtn.addEventListener("click", function () { UI.openLightbox(items, cur, mainBtn); });
+    wrap.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") { e.preventDefault(); set(cur - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); set(cur + 1); }
+    });
+    set(0);
     return wrap;
+  }
+
+  /* Floor plans: one or several levels; click to enlarge. */
+  function buildPlans(plans, rec) {
+    var box = el("div", "plans");
+    var items = plans.map(function (p) { return { src: p.src, alt: p.alt || p.title || "Floor plan", caption: p.title || "Floor plan" }; });
+    var fig = el("figure", "plans__fig");
+    var btn = el("button", "plans__zoom", null, { type: "button" });
+    var img = UI.img(plans[0], { width: 1000, height: 800, lazy: false });
+    btn.appendChild(img);
+    var cap = el("figcaption", "plans__cap");
+    fig.appendChild(btn); fig.appendChild(cap);
+    var cur = 0;
+    function set(i) {
+      cur = i; img.src = plans[i].src; img.alt = plans[i].alt || plans[i].title || "Floor plan";
+      cap.textContent = plans[i].title || "Floor plan";
+      btn.setAttribute("aria-label", "Enlarge: " + (plans[i].title || "floor plan"));
+      PP.$$(".chip-btn", box).forEach(function (b, k) { b.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+    }
+    if (plans.length > 1) {
+      var row = el("div", "chip-row", null, { role: "group", "aria-label": "Choose floor plan" });
+      plans.forEach(function (p, i) {
+        var b = el("button", "chip-btn", p.title || ("Plan " + (i + 1)), { type: "button", "aria-pressed": "false" });
+        b.addEventListener("click", function () { set(i); });
+        row.appendChild(b);
+      });
+      box.appendChild(row);
+    }
+    btn.addEventListener("click", function () { UI.openLightbox(items, cur, btn); });
+    box.appendChild(fig);
+    set(0);
+    return box;
+  }
+
+  /* Video: local MP4/WebM (native, accessible controls) or YouTube/Vimeo that only loads after you press play. */
+  function validVideo(v) {
+    if (!v) return false;
+    if (v.type === "youtube") return /^[\w-]{11}$/.test(v.id || "");
+    if (v.type === "vimeo") return /^\d{5,12}$/.test(v.id || "");
+    return SAFE_FILE.test(v.src || "") && !/^\/\//.test(v.src);
+  }
+  function videoPlayer(v) {
+    var box = el("div", "video");
+    var title = v.title || "Video";
+    if (v.type === "youtube" || v.type === "vimeo") {
+      var f = el("button", "video__facade", null, { type: "button", "aria-label": "Play video: " + title });
+      if (PP.has(v.poster)) f.style.backgroundImage = "url('" + String(v.poster).replace(/['"()\\]/g, "") + "')";
+      f.appendChild(el("span", "video__play", null, { "aria-hidden": "true" }));
+      f.appendChild(el("span", "video__hint", "Plays from " + (v.type === "youtube" ? "YouTube" : "Vimeo") + " once you press play"));
+      f.addEventListener("click", function () {
+        var src = v.type === "youtube"
+          ? "https://www.youtube-nocookie.com/embed/" + v.id + "?autoplay=1&rel=0"
+          : "https://player.vimeo.com/video/" + v.id + "?autoplay=1&dnt=1";
+        var fr = el("iframe", "", null, { src: src, title: title, allow: "autoplay; fullscreen; picture-in-picture", allowfullscreen: "", referrerpolicy: "strict-origin-when-cross-origin" });
+        PP.clear(box); box.appendChild(fr);
+      });
+      box.appendChild(f);
+      return box;
+    }
+    var vid = el("video", "", null, { controls: "", preload: "none", playsinline: "", "aria-label": title });
+    if (PP.has(v.poster)) vid.setAttribute("poster", v.poster);
+    var ext = (v.src.split(".").pop() || "mp4").toLowerCase();
+    vid.appendChild(el("source", "", null, { src: v.src, type: MIME[ext] || "video/mp4" }));
+    if (PP.has(v.captions)) vid.appendChild(el("track", "", null, { kind: "captions", src: v.captions, srclang: "en", label: "English", default: "" }));
+    var fb = el("p", "video__fallback", "Your browser cannot play this video. ");
+    fb.appendChild(UI.link("", "Download the video", v.src));
+    vid.appendChild(fb);
+    box.appendChild(vid);
+    return box;
+  }
+  function buildVideos(videos) {
+    var box = el("div", "videos");
+    var stageBox = el("div", "videos__stage");
+    var cap = el("p", "videos__cap");
+    function show(i) {
+      PP.clear(stageBox); stageBox.appendChild(videoPlayer(videos[i]));
+      var vt = videos[i].title || "Video";
+      cap.textContent = vt + (videos[i].placeholder && !/sample/i.test(vt) ? " (sample video)" : "");
+      PP.$$(".chip-btn", box).forEach(function (b, k) { b.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+    }
+    if (videos.length > 1) {
+      var row = el("div", "chip-row", null, { role: "group", "aria-label": "Choose video" });
+      videos.forEach(function (v, i) {
+        var b = el("button", "chip-btn", v.title || ("Video " + (i + 1)), { type: "button", "aria-pressed": "false" });
+        b.addEventListener("click", function () { show(i); });
+        row.appendChild(b);
+      });
+      box.appendChild(row);
+    }
+    box.appendChild(stageBox); box.appendChild(cap);
+    show(0);
+    return box;
+  }
+
+  /* Tabs container. Only the views that have content are offered. */
+  function buildMedia(rec) {
+    var images = (rec.images || []).filter(function (i) { return i && i.src; });
+    var plans = (rec.floorPlans || []).filter(function (p) { return p && p.src; });
+    var videos = (rec.videos || []).filter(validVideo);
+    var items = lightboxItems(images, rec);
+    var views = [{ id: "photos", label: "Photos", build: function () { return buildMosaic(images, items, rec); } }];
+    if (images.length > 1) views.push({ id: "slideshow", label: "Slideshow", build: function () { return buildSlideshow(images, items, rec); } });
+    if (plans.length) views.push({ id: "plans", label: plans.length > 1 ? "Floor plans" : "Floor plan", build: function () { return buildPlans(plans, rec); } });
+    if (videos.length) views.push({ id: "video", label: "Video", build: function () { return buildVideos(videos); } });
+
+    var wrap = el("div", "media");
+    if (views.length === 1) { wrap.appendChild(views[0].build()); return wrap; }
+
+    var list = el("div", "tabs", null, { role: "tablist", "aria-label": "Media views" });
+    var tabs = [], panels = [];
+    views.forEach(function (v, i) {
+      var t = el("button", "tabs__tab", v.label, { type: "button", role: "tab", id: "tab-" + v.id, "aria-controls": "panel-" + v.id, "aria-selected": i === 0 ? "true" : "false", tabindex: i === 0 ? "0" : "-1" });
+      var p = el("div", "tabs__panel", null, { role: "tabpanel", id: "panel-" + v.id, "aria-labelledby": "tab-" + v.id });
+      if (i !== 0) p.hidden = true;
+      p.appendChild(v.build());
+      t.addEventListener("click", function () { select(i, false); });
+      tabs.push(t); panels.push(p); list.appendChild(t);
+    });
+    function select(i, focus) {
+      tabs.forEach(function (t, k) {
+        t.setAttribute("aria-selected", k === i ? "true" : "false");
+        t.tabIndex = k === i ? 0 : -1;
+        panels[k].hidden = k !== i;
+      });
+      PP.$$("video", wrap).forEach(function (v) { try { v.pause(); } catch (e) { /* ignore */ } });
+      if (focus) tabs[i].focus();
+    }
+    list.addEventListener("keydown", function (e) {
+      var i = tabs.indexOf(document.activeElement);
+      if (i < 0) return;
+      var n = tabs.length, j = null;
+      if (e.key === "ArrowRight") j = (i + 1) % n;
+      else if (e.key === "ArrowLeft") j = (i - 1 + n) % n;
+      else if (e.key === "Home") j = 0;
+      else if (e.key === "End") j = n - 1;
+      if (j !== null) { e.preventDefault(); select(j, true); }
+    });
+    wrap.appendChild(list);
+    panels.forEach(function (p) { wrap.appendChild(p); });
+    return wrap;
+  }
+
+  /* Key facts band (only values that exist) */
+  function keyFacts(rec) {
+    var rows;
+    if (isProp) {
+      var sp = rec.specs || {};
+      rows = [["Bedrooms", sp.bedrooms], ["Bathrooms", sp.bathrooms], ["Floor area", sp.floorArea], ["Land size", sp.landSize]];
+    } else {
+      rows = [["Status", PP.label(T.projectStatuses, rec.projectStatus)], ["Category", UI.categoryLabel("project", rec)], ["Location", rec.location]];
+    }
+    rows = rows.filter(function (r) { return PP.has(r[1]); });
+    if (!rows.length) return null;
+    var dl = el("dl", "keyfacts");
+    rows.forEach(function (r) {
+      var d = el("div", "keyfacts__item");
+      d.appendChild(el("dt", "", r[0])); d.appendChild(el("dd", "", String(r[1])));
+      dl.appendChild(d);
+    });
+    return dl;
+  }
+
+  /* Share + print (no accounts or tracking) */
+  function shareRow(rec) {
+    var row = el("div", "share");
+    var status = el("span", "share__status", null, { role: "status" });
+    var url = PP.abs(PP.detailUrl(type, rec.id));
+    var share = el("button", "share__btn", "Share", { type: "button" });
+    share.addEventListener("click", function () {
+      if (navigator.share) { navigator.share({ title: rec.name, url: url }).catch(function () { /* cancelled */ }); return; }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(url).then(function () { status.textContent = "Link copied"; }, function () { status.textContent = url; });
+      } else { status.textContent = url; }
+    });
+    var print = el("button", "share__btn", "Print", { type: "button" });
+    print.addEventListener("click", function () { window.print(); });
+    row.appendChild(share); row.appendChild(print); row.appendChild(status);
+    return row;
   }
 
   /* ---------- Facts table ---------- */
@@ -265,7 +483,9 @@
     });
     cl.appendChild(el("li", "", rec.name, { "aria-current": "page" }));
     crumbs.appendChild(cl);
-    rootBox.appendChild(crumbs);
+    var topRow = el("div", "detail-top");
+    topRow.appendChild(crumbs); topRow.appendChild(shareRow(rec));
+    rootBox.appendChild(topRow);
 
     if (rec.placeholder) {
       rootBox.appendChild(el("p", "notice", "Sample record. The name, details and photographs on this page are placeholders and will be replaced with verified company information."));
@@ -275,7 +495,8 @@
     var left = el("div", "detail__main");
     var aside = el("div", "detail__aside");
 
-    left.appendChild(buildGallery(rec));
+    left.appendChild(buildMedia(rec));
+    var kf = keyFacts(rec); if (kf) left.appendChild(kf);
 
     if (PP.has(rec.description)) {
       var d = section("About this " + (isProp ? "property" : "project"));

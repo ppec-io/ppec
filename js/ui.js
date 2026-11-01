@@ -64,6 +64,8 @@
     return node;
   };
   UI.firstImage = function (rec) { return rec.images && rec.images.length ? rec.images[0] : null; };
+  // Smaller version of an image for cards and thumbnails: uses "thumb" when the record has one.
+  UI.thumb = function (im) { return im && im.src ? { src: im.thumb || im.src, alt: im.alt } : im; };
 
   /* ---------- Badges and spec chips ---------- */
   UI.statusBadge = function (type, rec) {
@@ -96,7 +98,7 @@
     var card = el("article", "card" + (light ? " card--light" : ""));
 
     var media = el("a", "card__media", null, { href: url, tabindex: "-1", "aria-hidden": "true" });
-    media.appendChild(UI.img(UI.firstImage(rec), { fallbackAlt: "" }));
+    media.appendChild(UI.img(UI.thumb(UI.firstImage(rec)), { fallbackAlt: "" }));
     var sb = UI.statusBadge(type, rec); if (sb) media.appendChild(sb);
     if (rec.placeholder) media.appendChild(el("span", "badge badge--sample", "Sample"));
     card.appendChild(media);

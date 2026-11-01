@@ -26,7 +26,7 @@
     });
     items.forEach(function (g, i) {
       var b = el("button", "gallery-item", null, { type: "button", "aria-label": (g.title || g.alt || "Gallery image") + (g.placeholder ? " (sample)" : "") + ": enlarge image" });
-      b.appendChild(UI.img({ src: g.src, alt: g.alt || g.title || "" }, { width: 600, height: 450 }));
+      b.appendChild(UI.img({ src: g.thumb || g.src, alt: g.alt || g.title || "" }, { width: 600, height: 450 }));
       if (g.title) b.appendChild(el("span", "gallery-item__cap", g.title));
       if (g.placeholder) b.className += " is-sample";
       b.addEventListener("click", function () { UI.openLightbox(lbItems, i, b); });

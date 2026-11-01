@@ -97,5 +97,92 @@
     "src": "assets/images/samples/villa-pool.jpg",
     "alt": "Illustrative image of a modern house with a swimming pool at dusk",
     "placeholder": true
+  },
+  {
+    "id": "gallery-011",
+    "status": "published",
+    "category": "property",
+    "title": "Contemporary residence at dusk",
+    "src": "assets/images/samples/night-villa.jpg",
+    "alt": "Sample photograph of a contemporary two-storey house with glass walls at dusk",
+    "placeholder": true,
+    "related": "property-001",
+    "thumb": "assets/images/samples/night-villa-sm.jpg"
+  },
+  {
+    "id": "gallery-012",
+    "status": "published",
+    "category": "property",
+    "title": "Open-plan living space",
+    "src": "assets/images/samples/interior-lounge.jpg",
+    "alt": "Sample photograph of a spacious open-plan living room",
+    "placeholder": true,
+    "related": "property-001",
+    "thumb": "assets/images/samples/interior-lounge-sm.jpg"
+  },
+  {
+    "id": "gallery-013",
+    "status": "published",
+    "category": "estate",
+    "title": "Estate under development (aerial)",
+    "src": "assets/images/samples/aerial-estate.jpg",
+    "alt": "Sample aerial photograph of a residential estate under development",
+    "placeholder": true,
+    "related": "property-006",
+    "thumb": "assets/images/samples/aerial-estate-sm.jpg"
+  },
+  {
+    "id": "gallery-014",
+    "status": "published",
+    "category": "construction",
+    "title": "Tower under construction",
+    "src": "assets/images/samples/construction-site.jpg",
+    "alt": "Sample photograph of a multi-storey building under construction with a tower crane",
+    "placeholder": true,
+    "related": "project-001",
+    "thumb": "assets/images/samples/construction-site-sm.jpg"
+  },
+  {
+    "id": "gallery-015",
+    "status": "published",
+    "category": "completed",
+    "title": "Apartment tower",
+    "src": "assets/images/samples/apartment-tower.jpg",
+    "alt": "Sample photograph of a modern apartment tower with balconies",
+    "placeholder": true,
+    "related": "property-004",
+    "thumb": "assets/images/samples/apartment-tower-sm.jpg"
+  },
+  {
+    "id": "gallery-016",
+    "status": "published",
+    "category": "render",
+    "title": "Contemporary villa render",
+    "src": "assets/images/samples/villa-render.jpg",
+    "alt": "Sample architectural render of a modern villa with a swimming pool and garden",
+    "placeholder": true,
+    "related": "property-008",
+    "thumb": "assets/images/samples/villa-render-sm.jpg"
+  },
+  {
+    "id": "gallery-017",
+    "status": "published",
+    "category": "property",
+    "title": "Villa with pool and timber balcony",
+    "src": "assets/images/samples/villa-pool-house.jpg",
+    "alt": "Sample photograph of a white two-storey house with a timber balcony and swimming pool",
+    "placeholder": true,
+    "related": "property-002",
+    "thumb": "assets/images/samples/villa-pool-house-sm.jpg"
+  },
+  {
+    "id": "gallery-018",
+    "status": "published",
+    "category": "completed",
+    "title": "Apartments with patterned facade",
+    "src": "assets/images/samples/apartments-patterned.jpg",
+    "alt": "Sample photograph of an apartment building with a patterned screen facade",
+    "placeholder": true,
+    "related": "project-004"
   }
 ]

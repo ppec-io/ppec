@@ -11,23 +11,45 @@
     "description": "Add a short description of this property here.",
     "images": [
       {
-        "src": "assets/images/projects/placeholder-villa.jpg",
-        "alt": "Placeholder photograph of a modern residence"
+        "src": "assets/images/samples/night-villa.jpg",
+        "alt": "Sample photograph of a contemporary two-storey house with glass walls at dusk",
+        "thumb": "assets/images/samples/night-villa-sm.jpg"
       },
       {
-        "src": "assets/images/samples/villa-pool.jpg",
-        "alt": "Illustrative image of a modern house with a swimming pool at dusk",
-        "type": "render"
+        "src": "assets/images/samples/interior-lounge.jpg",
+        "alt": "Sample photograph of a spacious open-plan living room",
+        "thumb": "assets/images/samples/interior-lounge-sm.jpg"
+      },
+      {
+        "src": "assets/images/projects/placeholder-villa.jpg",
+        "alt": "Placeholder photograph of a modern residence"
       }
     ],
     "added": "2026-10-31",
     "related": [
       "property-002",
+      "property-008",
       "property-006"
     ],
     "amenities": [
       "[Amenity to be confirmed]",
       "[Amenity to be confirmed]"
+    ],
+    "videos": [
+      {
+        "title": "Sample walkthrough video",
+        "type": "file",
+        "src": "assets/video/sample-walkthrough.mp4",
+        "poster": "assets/video/sample-walkthrough-poster.jpg",
+        "placeholder": true
+      }
+    ],
+    "floorPlans": [
+      {
+        "title": "Sample floor plan (illustrative)",
+        "src": "assets/images/samples/floor-plan.jpg",
+        "alt": "Illustrative ground and first floor plan of a four-bedroom house"
+      }
     ]
   },
   {
@@ -41,6 +63,11 @@
     "availability": "tbc",
     "description": "Add a short description of this property here.",
     "images": [
+      {
+        "src": "assets/images/samples/villa-pool-house.jpg",
+        "alt": "Sample photograph of a white two-storey house with a timber balcony and swimming pool",
+        "thumb": "assets/images/samples/villa-pool-house-sm.jpg"
+      },
       {
         "src": "assets/images/projects/placeholder-terrace.jpg",
         "alt": "Placeholder photograph of a terrace and living area"
@@ -96,6 +123,15 @@
     "description": "Add a short description of these apartments here.",
     "images": [
       {
+        "src": "assets/images/samples/apartment-tower.jpg",
+        "alt": "Sample photograph of a modern apartment tower with balconies",
+        "thumb": "assets/images/samples/apartment-tower-sm.jpg"
+      },
+      {
+        "src": "assets/images/samples/apartments-patterned.jpg",
+        "alt": "Sample photograph of an apartment building with a patterned screen facade"
+      },
+      {
         "src": "assets/images/samples/apartments.jpg",
         "alt": "Illustrative image of a modern apartment building with balconies",
         "type": "render"
@@ -139,6 +175,11 @@
     "description": "Add a short description of this estate property here.",
     "images": [
       {
+        "src": "assets/images/samples/aerial-estate.jpg",
+        "alt": "Sample aerial photograph of a residential estate under development",
+        "thumb": "assets/images/samples/aerial-estate-sm.jpg"
+      },
+      {
         "src": "assets/images/samples/estate-community.jpg",
         "alt": "Illustrative aerial image of a gated residential estate",
         "type": "render"
@@ -148,6 +189,41 @@
     "related": [
       "property-001",
       "property-002"
+    ]
+  },
+  {
+    "id": "property-008",
+    "status": "published",
+    "featured": true,
+    "placeholder": true,
+    "name": "Sample Contemporary Villa",
+    "category": "residential",
+    "location": "[Town / Area], Ghana",
+    "availability": "tbc",
+    "description": "Add a short description of this property here.",
+    "images": [
+      {
+        "src": "assets/images/samples/villa-render.jpg",
+        "alt": "Sample architectural render of a modern villa with a swimming pool and garden",
+        "thumb": "assets/images/samples/villa-render-sm.jpg",
+        "type": "render"
+      }
+    ],
+    "floorPlans": [
+      {
+        "title": "Sample floor plan (illustrative)",
+        "src": "assets/images/samples/floor-plan.jpg",
+        "alt": "Illustrative ground and first floor plan of a four-bedroom house"
+      }
+    ],
+    "added": "2026-11-01",
+    "related": [
+      "property-001",
+      "property-002"
+    ],
+    "amenities": [
+      "[Amenity to be confirmed]",
+      "[Amenity to be confirmed]"
     ]
   },
   {

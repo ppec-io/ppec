@@ -1,0 +1,35 @@
+[
+  {
+    "id": "job-001",
+    "status": "published",
+    "placeholder": true,
+    "title": "[Open position title]",
+    "department": "[Department]",
+    "location": "Ofinso, Ashanti, Ghana",
+    "type": "Full-time",
+    "posted": "2026-11-01",
+    "closing": "",
+    "summary": "Add a short summary of the role here.",
+    "responsibilities": [
+      "[Responsibility to be confirmed]",
+      "[Responsibility to be confirmed]"
+    ],
+    "requirements": [
+      "[Requirement to be confirmed]",
+      "[Requirement to be confirmed]"
+    ]
+  },
+  {
+    "id": "job-002",
+    "status": "draft",
+    "placeholder": true,
+    "title": "Draft vacancy example (not shown on the website)",
+    "department": "[Department]",
+    "location": "[Location]",
+    "type": "Full-time",
+    "posted": "2026-11-01",
+    "summary": "This record has status \"draft\", so the website does not display it.",
+    "responsibilities": [],
+    "requirements": []
+  }
+]

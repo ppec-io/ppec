@@ -10,6 +10,11 @@
     "cta": {
       "label": "View residential developments",
       "href": "projects.html?category=residential"
+    },
+    "image": {
+      "src": "assets/images/samples/villa-render.jpg",
+      "thumb": "assets/images/samples/villa-render-sm.jpg",
+      "alt": "Sample architectural render of a modern villa with a swimming pool"
     }
   },
   {
@@ -23,6 +28,11 @@
     "cta": {
       "label": "View land and plots",
       "href": "properties.html?category=land"
+    },
+    "image": {
+      "src": "assets/images/samples/aerial-estate.jpg",
+      "thumb": "assets/images/samples/aerial-estate-sm.jpg",
+      "alt": "Sample aerial photograph of a residential estate under development"
     }
   },
   {
@@ -32,7 +42,12 @@
     "title": "Property Investment",
     "summary": "Opportunities and advice for investors looking to build long-term value through real estate.",
     "description": "Opportunities and advice for investors looking to build long-term value through real estate. [Company to add detail on investment opportunities offered.]",
-    "placeholder": true
+    "placeholder": true,
+    "image": {
+      "src": "assets/images/samples/interior-lounge.jpg",
+      "thumb": "assets/images/samples/interior-lounge-sm.jpg",
+      "alt": "Sample photograph of a spacious open-plan living room"
+    }
   },
   {
     "id": "building-construction",
@@ -45,6 +60,11 @@
     "cta": {
       "label": "View construction projects",
       "href": "projects.html?category=construction"
+    },
+    "image": {
+      "src": "assets/images/samples/construction-site.jpg",
+      "thumb": "assets/images/samples/construction-site-sm.jpg",
+      "alt": "Sample photograph of a multi-storey building under construction"
     }
   },
   {
@@ -54,7 +74,12 @@
     "title": "Property Development and Management",
     "summary": "Development oversight and ongoing management support for property owners.",
     "description": "Development oversight and ongoing management support for property owners. [Company to add detail on management services.]",
-    "placeholder": true
+    "placeholder": true,
+    "image": {
+      "src": "assets/images/samples/apartment-tower.jpg",
+      "thumb": "assets/images/samples/apartment-tower-sm.jpg",
+      "alt": "Sample photograph of a modern apartment tower"
+    }
   },
   {
     "id": "consultancy",
@@ -63,6 +88,11 @@
     "title": "Real Estate Consultancy",
     "summary": "Practical advice on property decisions, from choosing a site to planning your project.",
     "description": "Practical advice on property decisions, from choosing a site to planning your project. [Company to add detail on consultancy services.]",
-    "placeholder": true
+    "placeholder": true,
+    "image": {
+      "src": "assets/images/samples/night-villa.jpg",
+      "thumb": "assets/images/samples/night-villa-sm.jpg",
+      "alt": "Sample photograph of a contemporary house with glass walls at dusk"
+    }
   }
 ]

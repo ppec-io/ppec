@@ -7,8 +7,9 @@
     "date": "2026-10-31",
     "category": "Company News",
     "cover": {
-      "src": "assets/images/samples/estate-community.jpg",
-      "alt": "Illustrative aerial image of a gated residential estate"
+      "src": "assets/images/samples/aerial-estate.jpg",
+      "thumb": "assets/images/samples/aerial-estate-sm.jpg",
+      "alt": "Sample aerial photograph of a residential estate under development"
     },
     "summary": "This is a sample news article. Replace it with real company news before publication.",
     "content": [
@@ -25,8 +26,9 @@
     "date": "2026-10-30",
     "category": "Property Insights",
     "cover": {
-      "src": "assets/images/samples/plots.jpg",
-      "alt": "Illustrative image of an open plot of land beside a road"
+      "src": "assets/images/samples/night-villa.jpg",
+      "thumb": "assets/images/samples/night-villa-sm.jpg",
+      "alt": "Sample photograph of a contemporary house at dusk"
     },
     "summary": "A second sample article, showing how insight articles are listed.",
     "content": [

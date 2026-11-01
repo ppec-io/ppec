@@ -59,8 +59,26 @@ function checkImages(where, images) {
   images.forEach((im, i) => {
     if (!im || !isStr(im.src)) { err(where + ": images[" + i + "] needs a src"); return; }
     if (!exists(im.src)) err(where + ": image file not found: " + im.src);
+    if (im.thumb !== undefined && !exists(im.thumb)) err(where + ": thumb file not found: " + im.thumb);
     if (!isStr(im.alt)) warn(where + ": images[" + i + "] has no alt text");
     if (im.type && im.type !== "photo" && im.type !== "render") err(where + ': images[' + i + '].type must be "photo" or "render"');
+  });
+}
+function checkMedia(where, rec) {
+  (rec.floorPlans || []).forEach((p, i) => {
+    if (!p || !isStr(p.src)) err(where + ": floorPlans[" + i + "] needs a src");
+    else if (!exists(p.src)) err(where + ": floor plan file not found: " + p.src);
+  });
+  (rec.videos || []).forEach((v, i) => {
+    const w = where + ": videos[" + i + "]";
+    if (!v || typeof v !== "object") { err(w + " must be an object"); return; }
+    if (v.type === "youtube") { if (!/^[\w-]{11}$/.test(v.id || "")) err(w + ': youtube "id" must be the 11-character video id'); }
+    else if (v.type === "vimeo") { if (!/^\d{5,12}$/.test(v.id || "")) err(w + ': vimeo "id" must be the numeric video id'); }
+    else if (v.type === "file" || v.type === undefined) {
+      if (!isStr(v.src) || !/^[\w\-./]+\.(mp4|webm|ogv)$/i.test(v.src)) err(w + ": src must be a local .mp4, .webm or .ogv path");
+      else if (!exists(v.src)) err(w + ": video file not found: " + v.src);
+      if (v.poster && !exists(v.poster)) err(w + ": poster file not found: " + v.poster);
+    } else err(w + ': type must be "file", "youtube" or "vimeo"');
   });
 }
 function checkRelated(file, where, rec, ids) {
@@ -77,7 +95,7 @@ props.forEach((r, i) => {
   if (r.availability !== undefined && !keys(T.availability).includes(r.availability)) err(w + ": availability must be one of " + keys(T.availability).join(", "));
   if (r.price !== undefined && (typeof r.price !== "number" || r.price < 0)) err(w + ": price must be a number (no currency symbol or commas), e.g. 450000");
   if (r.added !== undefined && !isDate(r.added)) err(w + ": added must be a date like 2026-10-31");
-  checkImages(w, r.images); checkRelated("properties.json", w, r, propIds);
+  checkImages(w, r.images); checkMedia(w, r); checkRelated("properties.json", w, r, propIds);
   if (r.status === "published" && (!r.images || !r.images.length)) warn(w + ": published without any image");
 });
 
@@ -95,12 +113,34 @@ projs.forEach((r, i) => {
     if (!m || !isStr(m.title)) err(w + ": milestones[" + k + "] needs a title");
     else if (m.status && !["done", "current", "upcoming"].includes(m.status)) err(w + ": milestones[" + k + '].status must be "done", "current" or "upcoming"');
   });
-  checkImages(w, r.images); checkRelated("projects.json", w, r, projIds);
+  checkImages(w, r.images); checkMedia(w, r); checkRelated("projects.json", w, r, projIds);
 });
 
 /* ---------- services, faqs, news, gallery ---------- */
 const services = load("services"); uniqueIds("services.json", services);
 services.forEach((r, i) => { const w = common("services.json", r, i); if (!isStr(r.title)) err(w + ": missing title"); if (!isStr(r.summary) && !isStr(r.description)) err(w + ": needs a summary or description"); });
+
+services.forEach((r, i) => { if (r.image) checkImages("services.json #" + (i + 1) + " (" + r.id + ")", [r.image]); });
+
+const HERO_FX = ["fade", "slide-left", "slide-right", "slide-up", "zoom", "wipe", "cube", "flip"];
+const hero = load("hero"); uniqueIds("hero.json", hero);
+hero.forEach((r, i) => {
+  const w = common("hero.json", r, i);
+  if (!isStr(r.title)) err(w + ": missing title");
+  if (!r.image || !isStr(r.image.src)) err(w + ": missing image.src"); else checkImages(w, [r.image]);
+  if (r.transition !== undefined && !HERO_FX.includes(r.transition)) err(w + ": transition must be one of " + HERO_FX.join(", "));
+  [r.cta, r.cta2].forEach((c) => { if (c && !isStr(c.href)) err(w + ": cta needs a href"); });
+});
+
+const team = load("team"); uniqueIds("team.json", team);
+team.forEach((r, i) => { const w = common("team.json", r, i); if (!isStr(r.name)) err(w + ": missing name"); if (r.photo) checkImages(w, [r.photo]); if (r.linkedin && !/^https:\/\//.test(r.linkedin)) err(w + ": linkedin must start with https://"); });
+
+const careers = load("careers"); uniqueIds("careers.json", careers);
+careers.forEach((r, i) => {
+  const w = common("careers.json", r, i);
+  if (!isStr(r.title)) err(w + ": missing title");
+  if (r.closing && !isDate(r.closing)) err(w + ": closing must be a date like 2026-12-31");
+});
 
 const faqs = load("faqs"); uniqueIds("faqs.json", faqs);
 faqs.forEach((r, i) => { const w = common("faqs.json", r, i); if (!isStr(r.question)) err(w + ": missing question"); if (!isStr(r.answer)) err(w + ": missing answer"); });
@@ -160,7 +200,7 @@ if (process.argv.includes("--sitemap")) {
 /* ---------- report ---------- */
 const count = (l) => l.length;
 console.log("Checked: " + count(props) + " properties, " + count(projs) + " projects, " + count(services) + " services, " +
-  count(faqs) + " FAQs, " + count(news) + " news items, " + count(gallery) + " gallery images, " + pages.length + " HTML pages.");
+  count(faqs) + " FAQs, " + count(hero) + " hero slides, " + count(team) + " team profiles, " + count(careers) + " vacancies, " + count(news) + " news items, " + count(gallery) + " gallery images, " + pages.length + " HTML pages.");
 warnings.forEach((w) => console.log("WARNING: " + w));
 errors.forEach((e) => console.log("ERROR:   " + e));
 console.log(errors.length ? "\n" + errors.length + " error(s) found." : "\nNo errors found.");

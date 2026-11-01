@@ -11,6 +11,12 @@
     "description": "Add a short description of this project here.",
     "images": [
       {
+        "src": "assets/images/samples/construction-site.jpg",
+        "alt": "Sample photograph of a multi-storey building under construction with a tower crane",
+        "thumb": "assets/images/samples/construction-site-sm.jpg",
+        "type": "photo"
+      },
+      {
         "src": "assets/images/projects/placeholder-commercial.jpg",
         "alt": "Placeholder photograph of a modern building",
         "type": "photo"
@@ -65,6 +71,15 @@
     "related": [
       "project-001",
       "project-003"
+    ],
+    "videos": [
+      {
+        "title": "Sample site walkthrough video",
+        "type": "file",
+        "src": "assets/video/sample-walkthrough.mp4",
+        "poster": "assets/video/sample-walkthrough-poster.jpg",
+        "placeholder": true
+      }
     ]
   },
   {
@@ -79,14 +94,20 @@
     "description": "Add a short description of this project here.",
     "images": [
       {
-        "src": "assets/images/projects/placeholder-estate.jpg",
-        "alt": "Placeholder aerial photograph of a residential estate",
+        "src": "assets/images/samples/aerial-estate.jpg",
+        "alt": "Sample aerial photograph of a residential estate under development",
+        "thumb": "assets/images/samples/aerial-estate-sm.jpg",
         "type": "photo"
       },
       {
         "src": "assets/images/samples/estate-community.jpg",
         "alt": "Illustrative aerial image of a gated residential estate",
         "type": "render"
+      },
+      {
+        "src": "assets/images/projects/placeholder-estate.jpg",
+        "alt": "Placeholder photograph of an estate",
+        "type": "photo"
       }
     ],
     "added": "2026-10-31",
@@ -107,19 +128,64 @@
     "description": "Add a short description of this project here.",
     "images": [
       {
-        "src": "assets/images/projects/placeholder-interior.jpg",
-        "alt": "Placeholder photograph of a kitchen interior",
+        "src": "assets/images/samples/apartment-tower.jpg",
+        "alt": "Sample photograph of a completed apartment tower",
+        "thumb": "assets/images/samples/apartment-tower-sm.jpg",
         "type": "photo"
       },
       {
         "src": "assets/images/samples/completed-block.jpg",
-        "alt": "Illustrative image of a completed apartment block at dusk",
+        "alt": "Illustrative image of a completed apartment block",
         "type": "render"
+      },
+      {
+        "src": "assets/images/samples/apartments-patterned.jpg",
+        "alt": "Sample photograph of an apartment building with a patterned screen facade",
+        "type": "photo"
       }
     ],
     "added": "2026-10-31",
     "related": [
       "project-003"
+    ]
+  },
+  {
+    "id": "project-006",
+    "status": "published",
+    "featured": false,
+    "placeholder": true,
+    "name": "Sample Upcoming Development",
+    "category": "residential",
+    "location": "[Town / Area], Ghana",
+    "projectStatus": "upcoming",
+    "description": "Add a short description of this upcoming project here.",
+    "images": [
+      {
+        "src": "assets/images/samples/villa-render.jpg",
+        "alt": "Sample architectural render of a modern villa with a swimming pool and garden",
+        "thumb": "assets/images/samples/villa-render-sm.jpg",
+        "type": "render"
+      }
+    ],
+    "floorPlans": [
+      {
+        "title": "Sample floor plan (illustrative)",
+        "src": "assets/images/samples/floor-plan.jpg",
+        "alt": "Illustrative ground and first floor plan of a four-bedroom house"
+      }
+    ],
+    "added": "2026-11-01",
+    "milestones": [
+      {
+        "title": "[Milestone to be confirmed]"
+      }
+    ],
+    "features": [
+      "[Development feature to be confirmed]"
+    ],
+    "related": [
+      "project-002",
+      "project-004"
     ]
   },
   {

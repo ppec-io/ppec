@@ -1,0 +1,165 @@
+[
+  {
+    "id": "hero-1",
+    "status": "published",
+    "order": 1,
+    "transition": "fade",
+    "image": {
+      "src": "assets/images/samples/night-villa.jpg",
+      "alt": "Sample photograph of a contemporary house with glass walls at dusk"
+    },
+    "eyebrow": "Luxury Residences",
+    "title": "A quiet frame",
+    "titleEm": "for the horizon.",
+    "text": "Residences designed for comfortable, elegant living.",
+    "cta": {
+      "label": "Explore Luxury Properties",
+      "href": "properties.html?category=luxury"
+    },
+    "cta2": {
+      "label": "Make an Enquiry",
+      "href": "contact.html#enquiry"
+    },
+    "placeholder": true
+  },
+  {
+    "id": "hero-2",
+    "status": "published",
+    "order": 2,
+    "transition": "slide-left",
+    "image": {
+      "src": "assets/images/samples/aerial-estate.jpg",
+      "alt": "Sample aerial photograph of a residential estate under development"
+    },
+    "eyebrow": "Land & Estates",
+    "title": "Land, plots and",
+    "titleEm": "estate living.",
+    "text": "Guidance for buying, selling and developing land and property.",
+    "cta": {
+      "label": "Browse Land and Plots",
+      "href": "properties.html?category=land"
+    },
+    "cta2": {
+      "label": "Our Services",
+      "href": "services.html"
+    },
+    "placeholder": true
+  },
+  {
+    "id": "hero-3",
+    "status": "published",
+    "order": 3,
+    "transition": "zoom",
+    "image": {
+      "src": "assets/images/samples/villa-render.jpg",
+      "alt": "Sample architectural render of a modern villa with a swimming pool",
+      "position": "50% 40%"
+    },
+    "eyebrow": "Residential Development",
+    "title": "Contemporary homes,",
+    "titleEm": "carefully planned.",
+    "text": "Planning and developing residential properties for practical, comfortable living.",
+    "cta": {
+      "label": "View Residential Projects",
+      "href": "projects.html?category=residential"
+    },
+    "cta2": {
+      "label": "Make an Enquiry",
+      "href": "contact.html#enquiry"
+    },
+    "placeholder": true
+  },
+  {
+    "id": "hero-4",
+    "status": "published",
+    "order": 4,
+    "transition": "slide-right",
+    "image": {
+      "src": "assets/images/samples/construction-site.jpg",
+      "alt": "Sample photograph of a multi-storey building under construction"
+    },
+    "eyebrow": "Building & Construction",
+    "title": "Careful building,",
+    "titleEm": "foundation to finish.",
+    "text": "Construction of residential and commercial buildings with attention to quality and detail.",
+    "cta": {
+      "label": "See Our Projects",
+      "href": "projects.html"
+    },
+    "cta2": {
+      "label": "Building Services",
+      "href": "services.html#building-construction"
+    },
+    "placeholder": true
+  },
+  {
+    "id": "hero-5",
+    "status": "published",
+    "order": 5,
+    "transition": "wipe",
+    "image": {
+      "src": "assets/images/samples/apartment-tower.jpg",
+      "alt": "Sample photograph of a modern apartment tower with balconies",
+      "position": "50% 35%"
+    },
+    "eyebrow": "Apartments",
+    "title": "Modern apartment",
+    "titleEm": "living.",
+    "text": "Explore apartments and multi-unit developments.",
+    "cta": {
+      "label": "Browse Apartments",
+      "href": "properties.html?category=apartments"
+    },
+    "cta2": {
+      "label": "Gallery",
+      "href": "gallery.html"
+    },
+    "placeholder": true
+  },
+  {
+    "id": "hero-6",
+    "status": "published",
+    "order": 6,
+    "transition": "cube",
+    "image": {
+      "src": "assets/images/samples/villa-pool-house.jpg",
+      "alt": "Sample photograph of a white house with a timber balcony and swimming pool"
+    },
+    "eyebrow": "Property Investment",
+    "title": "Build long-term",
+    "titleEm": "value.",
+    "text": "Opportunities and advice for investors looking to grow value through real estate.",
+    "cta": {
+      "label": "Property Investment",
+      "href": "services.html#property-investment"
+    },
+    "cta2": {
+      "label": "Talk to Us",
+      "href": "contact.html#enquiry"
+    },
+    "placeholder": true
+  },
+  {
+    "id": "hero-7",
+    "status": "published",
+    "order": 7,
+    "transition": "flip",
+    "image": {
+      "src": "assets/images/samples/interior-lounge.jpg",
+      "alt": "Sample photograph of a spacious open-plan living room"
+    },
+    "eyebrow": "Real Estate Consultancy",
+    "title": "Practical advice for",
+    "titleEm": "every decision.",
+    "text": "From choosing a site to planning your project, we help you decide with confidence.",
+    "cta": {
+      "label": "Real Estate Consultancy",
+      "href": "services.html#consultancy"
+    },
+    "cta2": {
+      "label": "Contact Us",
+      "href": "contact.html"
+    },
+    "placeholder": true
+  }
+]

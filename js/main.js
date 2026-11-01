@@ -88,6 +88,7 @@
       nav.classList.toggle("is-open", open);
       btn.setAttribute("aria-expanded", open ? "true" : "false");
       btn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      var hd = $(".site-header"); if (hd) hd.classList.toggle("nav-open", open);
       if (!open && returnFocus) btn.focus();
     }
     btn.addEventListener("click", function () {
@@ -103,6 +104,29 @@
     var mq = window.matchMedia("(min-width: 1101px)");
     var onChange = function () { if (mq.matches) setOpen(false); };
     if (mq.addEventListener) mq.addEventListener("change", onChange); else mq.addListener(onChange);
+  }
+
+  /* ---------- Sub-menu under "About Us" (Our Team, Careers, FAQ) ---------- */
+  function initSubmenus() {
+    $$(".nav__item--sub").forEach(function (item) {
+      var btn = $(".nav__subtoggle", item);
+      if (!btn) return;
+      function set(open) { item.classList.toggle("is-open", open); btn.setAttribute("aria-expanded", open ? "true" : "false"); }
+      btn.addEventListener("click", function (e) { e.stopPropagation(); set(!item.classList.contains("is-open")); });
+      document.addEventListener("click", function (e) { if (!item.contains(e.target)) set(false); });
+      item.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && item.classList.contains("is-open")) { set(false); btn.focus(); e.stopPropagation(); }
+      });
+    });
+  }
+
+  /* ---------- Home page: header turns solid after scrolling past the top ---------- */
+  function initHeaderScroll() {
+    var header = $(".site-header");
+    if (!header || !document.body.classList.contains("home")) return;
+    function update() { header.classList.toggle("is-solid", window.scrollY > 40); }
+    update();
+    window.addEventListener("scroll", update, { passive: true });
   }
 
   /* ---------- Enquiry form (email- or WhatsApp-based; no backend) ---------- */
@@ -247,6 +271,8 @@
     fillSiteDetails();
     addOrganisationSchema();
     initNav();
+    initSubmenus();
+    initHeaderScroll();
     initForm();
     initPlaceholderMode();
     initReveal();

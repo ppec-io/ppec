@@ -5,8 +5,8 @@
    ========================================================================== */
 window.SITE = {
   // Names
-  brandName: "Platinum Properties, Estates & Constructions", // name shown in the logo / page titles
-  legalName: "Classic Properties and Constructions Company Limited", // registered company name (footer & About page)
+  brandName: "Platinum Properties Estates & Constructions", // name shown in the logo / page titles
+  legalName: "Platinum Properties Estates & Constructions Company Limited", // registered company name (footer & About page)
 
   // Phone
   phoneDisplay: "+233 59 976 2750", // how the number is shown on screen

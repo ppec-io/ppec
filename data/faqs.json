@@ -5,7 +5,8 @@
     "order": 1,
     "question": "What services does the company offer?",
     "answer": "The company offers residential real estate development, land and property sales, property investment, building and construction, property development and management, and real estate consultancy. See the Services page for details.",
-    "placeholder": true
+    "placeholder": true,
+    "category": "General"
   },
   {
     "id": "faq-002",
@@ -13,7 +14,8 @@
     "order": 2,
     "question": "How do I enquire about a property or project?",
     "answer": "Open the property or project and use the WhatsApp, telephone or email buttons, or use the form on the Contact page. WhatsApp and email enquiries automatically include the name of the property or project.",
-    "placeholder": true
+    "placeholder": true,
+    "category": "Enquiries"
   },
   {
     "id": "faq-003",
@@ -21,7 +23,8 @@
     "order": 3,
     "question": "Are prices shown for every property?",
     "answer": "Prices are shown only where the company has confirmed them. If no price is shown, please make an enquiry.",
-    "placeholder": true
+    "placeholder": true,
+    "category": "Properties"
   },
   {
     "id": "faq-004",
@@ -29,7 +32,8 @@
     "order": 4,
     "question": "Is the availability shown on the website guaranteed?",
     "answer": "Availability can change. Please contact the company to confirm the current position before making any decision.",
-    "placeholder": true
+    "placeholder": true,
+    "category": "Properties"
   },
   {
     "id": "faq-005",
@@ -37,7 +41,8 @@
     "order": 5,
     "question": "Can I visit a property or project site?",
     "answer": "[Company to confirm the site-visit process.] Please contact us to ask about arranging a visit.",
-    "placeholder": true
+    "placeholder": true,
+    "category": "Properties"
   },
   {
     "id": "faq-006",
@@ -45,7 +50,8 @@
     "order": 6,
     "question": "Does this website take payments or store my enquiry?",
     "answer": "No. This website does not process payments and does not store enquiries. The enquiry form and buttons open your email app or WhatsApp with your message ready to send.",
-    "placeholder": true
+    "placeholder": true,
+    "category": "Enquiries"
   },
   {
     "id": "faq-007",
@@ -53,6 +59,25 @@
     "order": 7,
     "question": "How do I contact the company?",
     "answer": "Use the telephone, WhatsApp and email details on the Contact page, or send an enquiry from any property or project page.",
-    "placeholder": true
+    "placeholder": true,
+    "category": "Enquiries"
+  },
+  {
+    "id": "faq-008",
+    "status": "published",
+    "order": 8,
+    "category": "General",
+    "question": "Do you have job vacancies?",
+    "answer": "Open positions, when available, are listed on our Careers page. You can also send your CV to our email address for future opportunities.",
+    "placeholder": false
+  },
+  {
+    "id": "faq-009",
+    "status": "published",
+    "order": 9,
+    "category": "Projects",
+    "question": "What do the project statuses mean?",
+    "answer": "Planning and Upcoming projects have not started on site. Ongoing projects are under construction. Completed projects have been delivered. On Hold projects are paused.",
+    "placeholder": false
   }
 ]
