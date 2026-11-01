@@ -3,50 +3,57 @@
     "id": "news-001",
     "status": "published",
     "placeholder": true,
-    "title": "[Sample article] Company news headline",
-    "date": "2026-10-31",
-    "category": "Company News",
+    "title": "Sample Article 01",
+    "date": "2026-10-03",
+    "category": "company-news",
     "cover": {
-      "src": "assets/images/samples/estate-community.jpg",
-      "alt": "Illustrative aerial image of a gated residential estate"
+      "src": "assets/images/projects/placeholder-commercial.jpg",
+      "thumb": "assets/images/projects/placeholder-commercial-sm.jpg",
+      "alt": "Placeholder photograph of a modern commercial building",
+      "caption": "Sample image, to be replaced with a real photograph."
     },
-    "summary": "This is a sample news article. Replace it with real company news before publication.",
+    "summary": "Add a short summary of this article here.",
     "content": [
-      "This is a sample article. It shows how news appears on the website. Replace this text with real company news.",
-      "## Sample heading",
-      "Use a line starting with two hash signs and a space for a heading, and a plain line for a paragraph. Each item in the content list is one paragraph or heading."
+      "Add the article text here. Each item in this list becomes one paragraph.",
+      "Start a line with ## to create a sub-heading."
     ]
   },
   {
     "id": "news-002",
     "status": "published",
     "placeholder": true,
-    "title": "[Sample article] Property insight headline",
-    "date": "2026-10-30",
-    "category": "Property Insights",
+    "title": "Sample Article 02",
+    "date": "2026-10-02",
+    "category": "market-insights",
     "cover": {
-      "src": "assets/images/samples/plots.jpg",
-      "alt": "Illustrative image of an open plot of land beside a road"
+      "src": "assets/images/projects/placeholder-estate.jpg",
+      "thumb": "assets/images/projects/placeholder-estate-sm.jpg",
+      "alt": "Placeholder aerial photograph of a residential estate",
+      "caption": "Sample image, to be replaced with a real photograph."
     },
-    "summary": "A second sample article, showing how insight articles are listed.",
+    "summary": "Add a short summary of this article here.",
     "content": [
-      "This is a second sample article. Replace it with real content written or approved by the company."
+      "Add the article text here. Each item in this list becomes one paragraph.",
+      "Start a line with ## to create a sub-heading."
     ]
   },
   {
     "id": "news-003",
-    "status": "draft",
+    "status": "published",
     "placeholder": true,
-    "title": "Draft article example (not shown on the website)",
-    "date": "2026-10-29",
-    "category": "Company News",
+    "title": "Sample Article 03",
+    "date": "2026-10-01",
+    "category": "guides",
     "cover": {
-      "src": "assets/images/samples/residential.jpg",
-      "alt": "Illustrative image of a house"
+      "src": "assets/images/projects/placeholder-interior.jpg",
+      "thumb": "assets/images/projects/placeholder-interior-sm.jpg",
+      "alt": "Placeholder photograph of a kitchen interior",
+      "caption": "Sample image, to be replaced with a real photograph."
     },
-    "summary": "Draft articles are hidden from the website.",
+    "summary": "Add a short summary of this article here.",
     "content": [
-      "This record has status \"draft\", so the website does not display it."
+      "Add the article text here. Each item in this list becomes one paragraph.",
+      "Start a line with ## to create a sub-heading."
     ]
   }
 ]

@@ -1,0 +1,157 @@
+{
+  "_note": "Labels shown on the website. Record fields must use the 'id' values below.",
+  "propertyCategories": [
+    {
+      "id": "residential-houses",
+      "label": "Residential Houses"
+    },
+    {
+      "id": "apartments",
+      "label": "Apartments"
+    },
+    {
+      "id": "land-plots",
+      "label": "Land and Plots"
+    },
+    {
+      "id": "commercial",
+      "label": "Commercial Properties"
+    },
+    {
+      "id": "luxury",
+      "label": "Luxury Properties"
+    },
+    {
+      "id": "estate",
+      "label": "Estate Properties"
+    }
+  ],
+  "availability": [
+    {
+      "id": "available",
+      "label": "Available"
+    },
+    {
+      "id": "under-offer",
+      "label": "Under Offer"
+    },
+    {
+      "id": "sold",
+      "label": "Sold"
+    },
+    {
+      "id": "let",
+      "label": "Let"
+    },
+    {
+      "id": "tbc",
+      "label": "To be confirmed"
+    }
+  ],
+  "projectCategories": [
+    {
+      "id": "residential-developments",
+      "label": "Residential Developments"
+    },
+    {
+      "id": "estate-developments",
+      "label": "Estate Developments"
+    },
+    {
+      "id": "commercial-developments",
+      "label": "Commercial Developments"
+    },
+    {
+      "id": "construction-projects",
+      "label": "Construction Projects"
+    },
+    {
+      "id": "infrastructure-projects",
+      "label": "Infrastructure Projects"
+    },
+    {
+      "id": "land-development",
+      "label": "Land Development"
+    }
+  ],
+  "projectStatuses": [
+    {
+      "id": "planning",
+      "label": "Planning"
+    },
+    {
+      "id": "upcoming",
+      "label": "Upcoming"
+    },
+    {
+      "id": "ongoing",
+      "label": "Ongoing"
+    },
+    {
+      "id": "completed",
+      "label": "Completed"
+    },
+    {
+      "id": "on-hold",
+      "label": "On Hold"
+    }
+  ],
+  "galleryCategories": [
+    {
+      "id": "property-photographs",
+      "label": "Property Photographs"
+    },
+    {
+      "id": "construction",
+      "label": "Construction"
+    },
+    {
+      "id": "estate-development",
+      "label": "Estate Development"
+    },
+    {
+      "id": "architectural-renders",
+      "label": "Architectural Renders"
+    },
+    {
+      "id": "completed-projects",
+      "label": "Completed Projects"
+    }
+  ],
+  "newsCategories": [
+    {
+      "id": "company-news",
+      "label": "Company News"
+    },
+    {
+      "id": "market-insights",
+      "label": "Market Insights"
+    },
+    {
+      "id": "project-updates",
+      "label": "Project Updates"
+    },
+    {
+      "id": "guides",
+      "label": "Guides"
+    }
+  ],
+  "faqCategories": [
+    {
+      "id": "general",
+      "label": "General"
+    },
+    {
+      "id": "properties",
+      "label": "Properties"
+    },
+    {
+      "id": "projects",
+      "label": "Projects"
+    },
+    {
+      "id": "enquiries",
+      "label": "Enquiries"
+    }
+  ]
+}

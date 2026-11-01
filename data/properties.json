@@ -4,168 +4,341 @@
     "status": "published",
     "featured": true,
     "placeholder": true,
-    "name": "Sample Residence 01",
-    "category": "luxury",
+    "title": "Sample Residential House 01",
+    "category": "residential-houses",
     "location": "[Town / Area], Ghana",
-    "availability": "tbc",
-    "description": "Add a short description of this property here.",
+    "availability": "available",
+    "dateAdded": "2026-10-08",
+    "price": {
+      "amount": null,
+      "currency": "GHS",
+      "verified": false,
+      "note": ""
+    },
+    "summary": "Add a short summary of this property here.",
+    "description": [
+      "Add the full description of this property here."
+    ],
     "images": [
       {
-        "src": "assets/images/projects/placeholder-villa.jpg",
-        "alt": "Placeholder photograph of a modern residence"
-      },
-      {
-        "src": "assets/images/samples/villa-pool.jpg",
-        "alt": "Illustrative image of a modern house with a swimming pool at dusk",
-        "type": "render"
+        "src": "assets/images/projects/placeholder-house.jpg",
+        "thumb": "assets/images/projects/placeholder-house-sm.jpg",
+        "alt": "Placeholder photograph of a contemporary house with a pool",
+        "caption": "Sample image, to be replaced with a real photograph."
       }
     ],
-    "added": "2026-10-31",
-    "related": [
-      "property-002",
-      "property-006"
-    ],
-    "amenities": [
-      "[Amenity to be confirmed]",
-      "[Amenity to be confirmed]"
-    ]
+    "specs": {
+      "landSize": null,
+      "floorArea": null,
+      "bedrooms": null,
+      "bathrooms": null
+    },
+    "amenities": [],
+    "mapQuery": "",
+    "related": []
   },
   {
     "id": "property-002",
     "status": "published",
     "featured": false,
     "placeholder": true,
-    "name": "Sample Residence 02",
-    "category": "residential",
+    "title": "Sample Residential House 02",
+    "category": "residential-houses",
     "location": "[Town / Area], Ghana",
-    "availability": "tbc",
-    "description": "Add a short description of this property here.",
+    "availability": "under-offer",
+    "dateAdded": "2026-10-07",
+    "price": {
+      "amount": null,
+      "currency": "GHS",
+      "verified": false,
+      "note": ""
+    },
+    "summary": "Add a short summary of this property here.",
+    "description": [
+      "Add the full description of this property here."
+    ],
     "images": [
       {
         "src": "assets/images/projects/placeholder-terrace.jpg",
-        "alt": "Placeholder photograph of a terrace and living area"
-      },
-      {
-        "src": "assets/images/samples/residential.jpg",
-        "alt": "Illustrative image of a two-storey house at sunset",
-        "type": "render"
+        "thumb": "assets/images/projects/placeholder-terrace-sm.jpg",
+        "alt": "Placeholder photograph of a terrace and outdoor living area",
+        "caption": "Sample image, to be replaced with a real photograph."
       }
     ],
-    "added": "2026-10-31",
-    "related": [
-      "property-001",
-      "property-006"
-    ]
+    "specs": {
+      "landSize": null,
+      "floorArea": null,
+      "bedrooms": null,
+      "bathrooms": null
+    },
+    "amenities": [],
+    "mapQuery": "",
+    "related": []
   },
   {
     "id": "property-003",
     "status": "published",
-    "featured": true,
+    "featured": false,
     "placeholder": true,
-    "name": "Sample Land Plots",
-    "category": "land",
+    "title": "Sample Apartment 01",
+    "category": "apartments",
     "location": "[Town / Area], Ghana",
-    "availability": "tbc",
-    "description": "Add a short description of these plots here.",
+    "availability": "available",
+    "dateAdded": "2026-10-06",
+    "price": {
+      "amount": null,
+      "currency": "GHS",
+      "verified": false,
+      "note": ""
+    },
+    "summary": "Add a short summary of this property here.",
+    "description": [
+      "Add the full description of this property here."
+    ],
     "images": [
       {
-        "src": "assets/images/samples/plots.jpg",
-        "alt": "Illustrative image of an open plot of land beside a road",
-        "type": "render"
-      },
-      {
-        "src": "assets/images/samples/land-sales.jpg",
-        "alt": "Illustrative aerial image of a surveyed layout of plots",
-        "type": "render"
+        "src": "assets/images/projects/placeholder-interior.jpg",
+        "thumb": "assets/images/projects/placeholder-interior-sm.jpg",
+        "alt": "Placeholder photograph of a kitchen interior",
+        "caption": "Sample image, to be replaced with a real photograph."
       }
     ],
-    "added": "2026-10-31",
-    "related": [
-      "property-006"
-    ]
+    "specs": {
+      "landSize": null,
+      "floorArea": null,
+      "bedrooms": null,
+      "bathrooms": null
+    },
+    "amenities": [],
+    "mapQuery": "",
+    "related": []
   },
   {
     "id": "property-004",
     "status": "published",
     "featured": true,
     "placeholder": true,
-    "name": "Sample Apartments",
-    "category": "apartments",
+    "title": "Sample Land Plot 01",
+    "category": "land-plots",
     "location": "[Town / Area], Ghana",
-    "availability": "tbc",
-    "description": "Add a short description of these apartments here.",
+    "availability": "available",
+    "dateAdded": "2026-10-05",
+    "price": {
+      "amount": null,
+      "currency": "GHS",
+      "verified": false,
+      "note": ""
+    },
+    "summary": "Add a short summary of this property here.",
+    "description": [
+      "Add the full description of this property here."
+    ],
     "images": [
       {
-        "src": "assets/images/samples/apartments.jpg",
-        "alt": "Illustrative image of a modern apartment building with balconies",
-        "type": "render"
+        "src": "assets/images/projects/placeholder-estate-2.jpg",
+        "thumb": "assets/images/projects/placeholder-estate-2-sm.jpg",
+        "alt": "Placeholder aerial photograph of houses in a residential estate",
+        "caption": "Sample image, to be replaced with a real photograph."
       }
     ],
-    "added": "2026-10-31",
-    "related": [
-      "property-005"
-    ]
+    "specs": {
+      "landSize": null,
+      "floorArea": null,
+      "bedrooms": null,
+      "bathrooms": null
+    },
+    "amenities": [],
+    "mapQuery": "",
+    "related": []
   },
   {
     "id": "property-005",
     "status": "published",
     "featured": false,
     "placeholder": true,
-    "name": "Sample Commercial Property",
+    "title": "Sample Commercial Property 01",
     "category": "commercial",
     "location": "[Town / Area], Ghana",
-    "availability": "tbc",
-    "description": "Add a short description of this commercial property here.",
+    "availability": "available",
+    "dateAdded": "2026-10-04",
+    "price": {
+      "amount": null,
+      "currency": "GHS",
+      "verified": false,
+      "note": ""
+    },
+    "summary": "Add a short summary of this property here.",
+    "description": [
+      "Add the full description of this property here."
+    ],
     "images": [
       {
-        "src": "assets/images/projects/placeholder-commercial.jpg",
-        "alt": "Placeholder photograph of a modern building"
+        "src": "assets/images/projects/placeholder-commercial-2.jpg",
+        "thumb": "assets/images/projects/placeholder-commercial-2-sm.jpg",
+        "alt": "Placeholder photograph of a building entrance and glazed upper floor",
+        "caption": "Sample image, to be replaced with a real photograph."
       }
     ],
-    "added": "2026-10-31",
-    "related": [
-      "property-004"
-    ]
+    "specs": {
+      "landSize": null,
+      "floorArea": null,
+      "bedrooms": null,
+      "bathrooms": null
+    },
+    "amenities": [],
+    "mapQuery": "",
+    "related": []
   },
   {
     "id": "property-006",
     "status": "published",
-    "featured": false,
+    "featured": true,
     "placeholder": true,
-    "name": "Sample Estate Home",
-    "category": "estate",
+    "title": "Sample Luxury Property 01",
+    "category": "luxury",
     "location": "[Town / Area], Ghana",
-    "availability": "tbc",
-    "description": "Add a short description of this estate property here.",
+    "availability": "available",
+    "dateAdded": "2026-10-03",
+    "price": {
+      "amount": null,
+      "currency": "GHS",
+      "verified": false,
+      "note": ""
+    },
+    "summary": "Add a short summary of this property here.",
+    "description": [
+      "Add the full description of this property here."
+    ],
     "images": [
       {
-        "src": "assets/images/samples/estate-community.jpg",
-        "alt": "Illustrative aerial image of a gated residential estate",
-        "type": "render"
+        "src": "assets/images/projects/placeholder-villa.jpg",
+        "thumb": "assets/images/projects/placeholder-villa-sm.jpg",
+        "alt": "Placeholder photograph of a modern white residence with a glass balcony",
+        "caption": "Sample image, to be replaced with a real photograph."
       }
     ],
-    "added": "2026-10-31",
-    "related": [
-      "property-001",
-      "property-002"
-    ]
+    "specs": {
+      "landSize": null,
+      "floorArea": null,
+      "bedrooms": null,
+      "bathrooms": null
+    },
+    "amenities": [],
+    "mapQuery": "",
+    "related": []
   },
   {
     "id": "property-007",
+    "status": "published",
+    "featured": false,
+    "placeholder": true,
+    "title": "Sample Estate Property 01",
+    "category": "estate",
+    "location": "[Town / Area], Ghana",
+    "availability": "sold",
+    "dateAdded": "2026-10-02",
+    "price": {
+      "amount": null,
+      "currency": "GHS",
+      "verified": false,
+      "note": ""
+    },
+    "summary": "Add a short summary of this property here.",
+    "description": [
+      "Add the full description of this property here."
+    ],
+    "images": [
+      {
+        "src": "assets/images/projects/placeholder-estate.jpg",
+        "thumb": "assets/images/projects/placeholder-estate-sm.jpg",
+        "alt": "Placeholder aerial photograph of a residential estate",
+        "caption": "Sample image, to be replaced with a real photograph."
+      }
+    ],
+    "specs": {
+      "landSize": null,
+      "floorArea": null,
+      "bedrooms": null,
+      "bathrooms": null
+    },
+    "amenities": [],
+    "mapQuery": "",
+    "related": []
+  },
+  {
+    "id": "property-008",
+    "status": "published",
+    "featured": false,
+    "placeholder": true,
+    "title": "Sample Estate Property 02",
+    "category": "estate",
+    "location": "[Town / Area], Ghana",
+    "availability": "available",
+    "dateAdded": "2026-10-01",
+    "price": {
+      "amount": null,
+      "currency": "GHS",
+      "verified": false,
+      "note": ""
+    },
+    "summary": "Add a short summary of this property here.",
+    "description": [
+      "Add the full description of this property here."
+    ],
+    "images": [
+      {
+        "src": "assets/images/projects/placeholder-lounge.jpg",
+        "thumb": "assets/images/projects/placeholder-lounge-sm.jpg",
+        "alt": "Placeholder photograph of a curved glass wall overlooking palm trees",
+        "caption": "Sample image, to be replaced with a real photograph."
+      }
+    ],
+    "specs": {
+      "landSize": null,
+      "floorArea": null,
+      "bedrooms": null,
+      "bathrooms": null
+    },
+    "amenities": [],
+    "mapQuery": "",
+    "related": []
+  },
+  {
+    "id": "property-009",
     "status": "draft",
     "featured": false,
     "placeholder": true,
-    "name": "Draft Record Example (not shown on the website)",
-    "category": "residential",
+    "title": "Draft Property (not published)",
+    "category": "residential-houses",
     "location": "[Town / Area], Ghana",
     "availability": "tbc",
-    "description": "This record has status \"draft\", so the website does not display it. Change status to \"published\" to show it.",
+    "dateAdded": "2026-10-01",
+    "price": {
+      "amount": null,
+      "currency": "GHS",
+      "verified": false,
+      "note": ""
+    },
+    "summary": "Add a short summary of this property here.",
+    "description": [
+      "Add the full description of this property here."
+    ],
     "images": [
       {
-        "src": "assets/images/samples/residential.jpg",
-        "alt": "Illustrative image of a house"
+        "src": "assets/images/projects/placeholder-house.jpg",
+        "thumb": "assets/images/projects/placeholder-house-sm.jpg",
+        "alt": "Placeholder photograph of a contemporary house with a pool",
+        "caption": "Sample image, to be replaced with a real photograph."
       }
     ],
-    "added": "2026-10-31"
+    "specs": {
+      "landSize": null,
+      "floorArea": null,
+      "bedrooms": null,
+      "bathrooms": null
+    },
+    "amenities": [],
+    "mapQuery": "",
+    "related": []
   }
 ]

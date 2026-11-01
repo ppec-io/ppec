@@ -2,57 +2,57 @@
   {
     "id": "faq-001",
     "status": "published",
-    "order": 1,
-    "question": "What services does the company offer?",
-    "answer": "The company offers residential real estate development, land and property sales, property investment, building and construction, property development and management, and real estate consultancy. See the Services page for details.",
-    "placeholder": true
+    "category": "general",
+    "question": "How can I contact the company?",
+    "answer": "You can call, message us on WhatsApp or email us using the details on the Contact page, or send an enquiry through the form there.",
+    "placeholder": false
   },
   {
     "id": "faq-002",
     "status": "published",
-    "order": 2,
-    "question": "How do I enquire about a property or project?",
-    "answer": "Open the property or project and use the WhatsApp, telephone or email buttons, or use the form on the Contact page. WhatsApp and email enquiries automatically include the name of the property or project.",
-    "placeholder": true
+    "category": "properties",
+    "question": "How do I enquire about a specific property?",
+    "answer": "Open the property's page and use the WhatsApp, call or email buttons, or the enquiry form. Your message will include the property name.",
+    "placeholder": false
   },
   {
     "id": "faq-003",
     "status": "published",
-    "order": 3,
-    "question": "Are prices shown for every property?",
-    "answer": "Prices are shown only where the company has confirmed them. If no price is shown, please make an enquiry.",
+    "category": "projects",
+    "question": "Where can I see how a project is progressing?",
+    "answer": "Each project page shows progress information once the company has confirmed it. For the latest update, please contact us.",
     "placeholder": true
   },
   {
     "id": "faq-004",
     "status": "published",
-    "order": 4,
-    "question": "Is the availability shown on the website guaranteed?",
-    "answer": "Availability can change. Please contact the company to confirm the current position before making any decision.",
-    "placeholder": true
+    "category": "enquiries",
+    "question": "Does this website take payments or bookings?",
+    "answer": "No. This website does not take payments or bookings. It is an information and enquiry website; please contact the company directly to discuss any transaction.",
+    "placeholder": false
   },
   {
     "id": "faq-005",
     "status": "published",
-    "order": 5,
-    "question": "Can I visit a property or project site?",
-    "answer": "[Company to confirm the site-visit process.] Please contact us to ask about arranging a visit.",
+    "category": "general",
+    "question": "Is the information on this website final?",
+    "answer": "Information about properties and projects is provided for general guidance and may change. Please contact us to confirm current details before making any decision.",
     "placeholder": true
   },
   {
     "id": "faq-006",
-    "status": "published",
-    "order": 6,
-    "question": "Does this website take payments or store my enquiry?",
-    "answer": "No. This website does not process payments and does not store enquiries. The enquiry form and buttons open your email app or WhatsApp with your message ready to send.",
+    "status": "draft",
+    "category": "properties",
+    "question": "Can I arrange a viewing?",
+    "answer": "[To be confirmed by the company.]",
     "placeholder": true
   },
   {
     "id": "faq-007",
-    "status": "published",
-    "order": 7,
-    "question": "How do I contact the company?",
-    "answer": "Use the telephone, WhatsApp and email details on the Contact page, or send an enquiry from any property or project page.",
+    "status": "draft",
+    "category": "enquiries",
+    "question": "What documents and payment terms apply when buying?",
+    "answer": "[To be confirmed by the company.]",
     "placeholder": true
   }
 ]

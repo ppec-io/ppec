@@ -1,29 +1,23 @@
 [
   {
-    "id": "residential-development",
+    "id": "residential-real-estate-development",
     "status": "published",
     "order": 1,
     "title": "Residential Real Estate Development",
     "summary": "Planning and developing residential properties designed for comfortable, practical living.",
-    "description": "Planning and developing residential properties designed for comfortable, practical living. [Company to add detail on the types of residential development offered.]",
-    "placeholder": true,
-    "cta": {
-      "label": "View residential developments",
-      "href": "projects.html?category=residential"
-    }
+    "description": [
+      "From early planning through to completion, we develop residential properties with attention to layout, quality and the needs of the people who will live in them."
+    ]
   },
   {
-    "id": "land-property-sales",
+    "id": "land-and-property-sales",
     "status": "published",
     "order": 2,
     "title": "Land and Property Sales",
     "summary": "Guidance for clients buying or selling land and property, with clear communication at every step.",
-    "description": "Guidance for clients buying or selling land and property, with clear communication at every step. [Company to add detail on how sales are handled.]",
-    "placeholder": true,
-    "cta": {
-      "label": "View land and plots",
-      "href": "properties.html?category=land"
-    }
+    "description": [
+      "Whether you are buying or selling, we aim to explain each step clearly and keep you informed, so you can make decisions with confidence."
+    ]
   },
   {
     "id": "property-investment",
@@ -31,38 +25,38 @@
     "order": 3,
     "title": "Property Investment",
     "summary": "Opportunities and advice for investors looking to build long-term value through real estate.",
-    "description": "Opportunities and advice for investors looking to build long-term value through real estate. [Company to add detail on investment opportunities offered.]",
-    "placeholder": true
+    "description": [
+      "We help investors understand their options and consider property opportunities that fit their goals and budget."
+    ]
   },
   {
-    "id": "building-construction",
+    "id": "building-and-construction",
     "status": "published",
     "order": 4,
     "title": "Building and Construction",
     "summary": "Construction of residential and commercial buildings, delivered with attention to quality and detail.",
-    "description": "Construction of residential and commercial buildings, delivered with attention to quality and detail. [Company to add detail on construction services and project types.]",
-    "placeholder": true,
-    "cta": {
-      "label": "View construction projects",
-      "href": "projects.html?category=construction"
-    }
+    "description": [
+      "We construct residential and commercial buildings with careful planning, sound materials and attention to detail."
+    ]
   },
   {
-    "id": "development-management",
+    "id": "property-development-and-management",
     "status": "published",
     "order": 5,
     "title": "Property Development and Management",
     "summary": "Development oversight and ongoing management support for property owners.",
-    "description": "Development oversight and ongoing management support for property owners. [Company to add detail on management services.]",
-    "placeholder": true
+    "description": [
+      "We support property owners with development oversight and ongoing management, helping protect the value of their investment."
+    ]
   },
   {
-    "id": "consultancy",
+    "id": "real-estate-consultancy",
     "status": "published",
     "order": 6,
     "title": "Real Estate Consultancy",
     "summary": "Practical advice on property decisions, from choosing a site to planning your project.",
-    "description": "Practical advice on property decisions, from choosing a site to planning your project. [Company to add detail on consultancy services.]",
-    "placeholder": true
+    "description": [
+      "We offer practical, independent-minded advice to help you plan a purchase, a build or an investment."
+    ]
   }
 ]

@@ -4,17 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Properties | Platinum Properties, Estates &amp; Constructions</title>
-  <meta name="description" content="Browse properties from Platinum Properties, Estates &amp; Constructions in Ghana: houses, apartments, land and plots, commercial, luxury and estate properties.">
+  <meta name="description" content="Browse available residential houses, apartments, land and plots, commercial, luxury and estate properties from Platinum Properties, Estates &amp; Constructions in Ghana.">
   <meta name="theme-color" content="#111317">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Properties | Platinum Properties, Estates &amp; Constructions">
-  <meta property="og:description" content="Browse properties from Platinum Properties, Estates &amp; Constructions in Ghana: houses, apartments, land and plots, commercial, luxury and estate properties.">
-  <meta property="og:locale" content="en_GH">
   <link rel="canonical" href="https://ppec-io.github.io/ppec/properties.html">
-  <meta property="og:url" content="https://ppec-io.github.io/ppec/properties.html">
+  <meta property="og:type" content="website">
   <meta property="og:site_name" content="Platinum Properties, Estates &amp; Constructions">
-  <meta property="og:image" content="https://ppec-io.github.io/ppec/assets/images/hero.jpg">
+  <meta property="og:title" content="Properties | Platinum Properties, Estates &amp; Constructions">
+  <meta property="og:description" content="Browse available residential houses, apartments, land and plots, commercial, luxury and estate properties from Platinum Properties, Estates &amp; Constructions in Ghana.">
+  <meta property="og:url" content="https://ppec-io.github.io/ppec/properties.html">
+  <meta property="og:image" content="https://ppec-io.github.io/ppec/assets/images/og-default.jpg">
+  <meta property="og:locale" content="en_GH">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Properties | Platinum Properties, Estates &amp; Constructions">
+  <meta name="twitter:description" content="Browse available residential houses, apartments, land and plots, commercial, luxury and estate properties from Platinum Properties, Estates &amp; Constructions in Ghana.">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/icons/favicon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
   <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
@@ -38,9 +40,9 @@
         <ul class="nav__list">
           <li><a class="nav__link" href="index.html">Home</a></li>
           <li><a class="nav__link" href="about.html">About Us</a></li>
+          <li><a class="nav__link" href="services.html">Services</a></li>
           <li><a class="nav__link" href="properties.html" aria-current="page">Properties</a></li>
           <li><a class="nav__link" href="projects.html">Projects</a></li>
-          <li><a class="nav__link" href="services.html">Services</a></li>
           <li><a class="nav__link" href="gallery.html">Gallery</a></li>
           <li><a class="nav__link" href="news.html">News</a></li>
           <li><a class="nav__link" href="contact.html">Contact Us</a></li>
@@ -50,26 +52,69 @@
     </div>
   </header>
 
-    <section class="page-hero">
+    <section class="page-hero" aria-label="Page introduction">
       <div class="container page-hero__inner">
-        <span class="eyebrow">Properties</span>
+        <span class="eyebrow">Catalogue</span>
         <h1>Properties</h1>
-        <p>Search and filter our property listings. Prices and details are shown only where the company has confirmed them.</p>
+        <p>Search and filter our property listings, then enquire about any property that interests you.</p>
       </div>
     </section>
 
-  <main id="main" data-catalogue="properties">
+  <main id="main" data-catalogue="property">
     <section class="section" aria-label="Properties catalogue">
       <div class="container">
-        <p class="notice" id="sample-notice" hidden><strong>Sample content.</strong> The listings below are placeholders. Names, locations, details and photographs will be replaced with the company's verified information.</p>
-        <div class="featured-block" id="catalogue-featured-wrap" hidden>
-          <h2>Featured properties</h2>
-          <div class="grid grid--3" id="catalogue-featured"></div>
+        <noscript><p class="noscript-note">This page needs JavaScript to show the properties. Please turn it on, or <a href="contact.html">contact us</a> on <a href="tel:+233599762750">+233 59 976 2750</a> to hear about current properties.</p></noscript>
+
+        <section class="featured-block" id="featured-section" aria-labelledby="feat-title" hidden>
+          <div class="section-head">
+            <span class="eyebrow">Featured</span>
+            <h2 class="section-title" id="feat-title" style="margin-bottom:0">Featured properties</h2>
+          </div>
+          <div class="results results--grid" id="featured-list"></div>
+        </section>
+
+        <form class="filters" id="filters" role="search" aria-label="Search and filter properties" novalidate>
+          <div class="filters__row">
+            <div class="field field--search">
+              <label for="f-q">Search</label>
+              <input id="f-q" type="search" name="q" autocomplete="off" maxlength="80" placeholder="Search by name, location or keyword">
+            </div>
+            <div class="field"><label for="f-cat">Category</label><select id="f-cat"></select></div>
+            <div class="field"><label for="f-loc">Location</label><select id="f-loc"></select></div>
+            <div class="field"><label for="f-status">Availability</label><select id="f-status"></select></div>
+    <fieldset id="price-filter" hidden>
+      <legend>Price (GHS)</legend>
+      <div class="filters__price">
+        <input class="" id="f-min" type="number" min="0" inputmode="numeric" placeholder="Min" aria-label="Minimum price in GHS">
+        <input id="f-max" type="number" min="0" inputmode="numeric" placeholder="Max" aria-label="Maximum price in GHS">
+      </div>
+    </fieldset>
+            <div class="field">
+              <label for="f-sort">Sort by</label>
+              <select id="f-sort">
+                <option value="newest">Newest first</option>
+        <option value="price-asc" data-needs-price>Price: low to high</option>
+        <option value="price-desc" data-needs-price>Price: high to low</option>
+                <option value="location">Location (A–Z)</option>
+              </select>
+            </div>
+          </div>
+          <div class="filters__bar">
+            <p class="results-count" id="result-count" role="status" aria-live="polite"></p>
+            <div class="filters__tools">
+              <button type="button" class="link-btn" id="f-reset" hidden>Reset filters</button>
+              <div class="view-toggle" role="group" aria-label="Choose layout">
+                <button type="button" data-view="grid" aria-pressed="true"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="1" y="1" width="6" height="6"/><rect x="9" y="1" width="6" height="6"/><rect x="1" y="9" width="6" height="6"/><rect x="9" y="9" width="6" height="6"/></svg>Grid</button>
+                <button type="button" data-view="list" aria-pressed="false"><svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="1" y="2" width="14" height="3"/><rect x="1" y="6.5" width="14" height="3"/><rect x="1" y="11" width="14" height="3"/></svg>List</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="results results--grid" id="results" aria-busy="true"></div>
+        <div class="more-wrap" id="more-wrap" hidden>
+          <button class="btn btn--dark" id="show-more" type="button">Show more</button>
         </div>
-        <h2 class="visually-hidden">All properties</h2>
-        <div id="catalogue-tools"></div>
-        <div id="catalogue-results"></div>
-        <noscript><p class="noscript-note">This page needs JavaScript to load its listings. Please enable JavaScript, or <a href="contact.html">contact us</a> and we will gladly help.</p></noscript>
       </div>
     </section>
 
@@ -91,18 +136,18 @@
       <div class="footer__brand">
         <img src="assets/images/logo-horizontal.png" width="210" height="62" alt="Platinum Properties, Estates &amp; Constructions" loading="lazy">
         <p>Real estate and construction services in Ghana: land and property sales, residential development, investment and building.</p>
-        <div class="social" data-social role="group" aria-label="Social media"></div>
+        <div class="social" data-social aria-label="Social media"></div>
       </div>
       <div>
         <h2 class="footer__title">Quick Links</h2>
         <ul class="footer__list">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Services</a></li>
             <li><a href="properties.html">Properties</a></li>
             <li><a href="projects.html">Projects</a></li>
-            <li><a href="services.html">Services</a></li>
             <li><a href="gallery.html">Gallery</a></li>
-            <li><a href="news.html">News &amp; Insights</a></li>
+            <li><a href="news.html">News</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="contact.html">Contact Us</a></li>
             <li><a href="privacy.html">Privacy Policy</a></li>
@@ -111,12 +156,12 @@
       <div>
         <h2 class="footer__title">Our Services</h2>
         <ul class="footer__list">
-            <li><a href="services.html#residential-development">Residential Real Estate Development</a></li>
-            <li><a href="services.html#land-property-sales">Land and Property Sales</a></li>
+            <li><a href="services.html#residential-real-estate-development">Residential Real Estate Development</a></li>
+            <li><a href="services.html#land-and-property-sales">Land and Property Sales</a></li>
             <li><a href="services.html#property-investment">Property Investment</a></li>
-            <li><a href="services.html#building-construction">Building and Construction</a></li>
-            <li><a href="services.html#development-management">Property Development and Management</a></li>
-            <li><a href="services.html#consultancy">Real Estate Consultancy</a></li>
+            <li><a href="services.html#building-and-construction">Building and Construction</a></li>
+            <li><a href="services.html#property-development-and-management">Property Development and Management</a></li>
+            <li><a href="services.html#real-estate-consultancy">Real Estate Consultancy</a></li>
         </ul>
       </div>
       <div>
@@ -131,19 +176,23 @@ Ghana</span></a></li>
       </div>
     </div>
     <div class="container footer__bottom">
-      <span>&copy; <span data-site="year">2026</span> <span data-site="legal">Classic Properties and Constructions Company Limited</span>. All rights reserved.</span>
-      <span>Platinum Properties, Estates &amp; Constructions</span>
+      <span>&copy; <span data-site="year">2026</span> <span data-site="legal">Platinum Properties Estates and Constructions Company Limited</span>. All rights reserved.</span>
+      <span><a href="privacy.html">Privacy Policy</a></span>
     </div>
   </footer>
 
+  <aside aria-label="Quick contact">
   <a class="wa-float" data-site-href="wa" href="https://wa.me/233599762750" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp (opens in a new tab)">
     <span class="icon icon-whatsapp" aria-hidden="true"></span>
   </a>
+  </aside>
 
-  <script src="js/config.js"></script>
-  <script src="js/core.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/catalogue.js"></script>
+  <script src="js/config.js" defer></script>
+  <script src="js/core/util.js" defer></script>
+  <script src="js/core/data.js" defer></script>
+  <script src="js/core/enquiry.js" defer></script>
+  <script src="js/core/cards.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/pages/catalogue.js" defer></script>
 </body>
 </html>

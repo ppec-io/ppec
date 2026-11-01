@@ -2,100 +2,122 @@
   {
     "id": "gallery-001",
     "status": "published",
-    "category": "property",
-    "title": "Modern residence at sunset",
-    "src": "assets/images/samples/residential.jpg",
-    "alt": "Illustrative image of a two-storey house at sunset",
     "placeholder": true,
-    "related": "property-002"
+    "category": "property-photographs",
+    "title": "Sample property photograph 01",
+    "src": "assets/images/projects/placeholder-villa.jpg",
+    "thumb": "assets/images/projects/placeholder-villa-sm.jpg",
+    "alt": "Placeholder photograph of a modern white residence with a glass balcony",
+    "caption": "Sample image, to be replaced with a real photograph."
   },
   {
     "id": "gallery-002",
     "status": "published",
-    "category": "property",
-    "title": "Residence with swimming pool",
-    "src": "assets/images/samples/villa-pool.jpg",
-    "alt": "Illustrative image of a modern house with a swimming pool at dusk",
     "placeholder": true,
-    "related": "property-001"
+    "category": "property-photographs",
+    "title": "Sample property photograph 02",
+    "src": "assets/images/projects/placeholder-terrace.jpg",
+    "thumb": "assets/images/projects/placeholder-terrace-sm.jpg",
+    "alt": "Placeholder photograph of a terrace and outdoor living area",
+    "caption": "Sample image, to be replaced with a real photograph."
   },
   {
     "id": "gallery-003",
     "status": "published",
-    "category": "property",
-    "title": "Apartment block",
-    "src": "assets/images/samples/apartments.jpg",
-    "alt": "Illustrative image of a modern apartment building with balconies",
     "placeholder": true,
-    "related": "property-004"
+    "category": "property-photographs",
+    "title": "Sample property photograph 03",
+    "src": "assets/images/projects/placeholder-interior.jpg",
+    "thumb": "assets/images/projects/placeholder-interior-sm.jpg",
+    "alt": "Placeholder photograph of a kitchen interior",
+    "caption": "Sample image, to be replaced with a real photograph."
   },
   {
     "id": "gallery-004",
     "status": "published",
-    "category": "estate",
-    "title": "Gated estate community",
-    "src": "assets/images/samples/estate-community.jpg",
-    "alt": "Illustrative aerial image of a gated residential estate",
     "placeholder": true,
-    "related": "property-006"
+    "category": "construction",
+    "title": "Sample construction photograph 01",
+    "src": "assets/images/projects/placeholder-commercial-2.jpg",
+    "thumb": "assets/images/projects/placeholder-commercial-2-sm.jpg",
+    "alt": "Placeholder photograph of a building entrance and glazed upper floor",
+    "caption": "Sample image, to be replaced with a real photograph."
   },
   {
     "id": "gallery-005",
     "status": "published",
-    "category": "estate",
-    "title": "Surveyed plots layout",
-    "src": "assets/images/samples/land-sales.jpg",
-    "alt": "Illustrative aerial image of a surveyed layout of plots",
     "placeholder": true,
-    "related": "property-003"
+    "category": "construction",
+    "title": "Sample construction photograph 02",
+    "src": "assets/images/projects/placeholder-commercial.jpg",
+    "thumb": "assets/images/projects/placeholder-commercial-sm.jpg",
+    "alt": "Placeholder photograph of a modern commercial building",
+    "caption": "Sample image, to be replaced with a real photograph."
   },
   {
     "id": "gallery-006",
     "status": "published",
-    "category": "construction",
-    "title": "Building under construction",
-    "src": "assets/images/samples/construction.jpg",
-    "alt": "Illustrative image of a multi-storey building under construction with a tower crane",
     "placeholder": true,
-    "related": "project-001"
+    "category": "estate-development",
+    "title": "Sample estate development photograph 01",
+    "src": "assets/images/projects/placeholder-estate.jpg",
+    "thumb": "assets/images/projects/placeholder-estate-sm.jpg",
+    "alt": "Placeholder aerial photograph of a residential estate",
+    "caption": "Sample image, to be replaced with a real photograph."
   },
   {
     "id": "gallery-007",
     "status": "published",
-    "category": "construction",
-    "title": "Development site at sunset",
-    "src": "assets/images/samples/development-site.jpg",
-    "alt": "Illustrative aerial image of a development site at sunset",
     "placeholder": true,
-    "related": "project-002"
+    "category": "estate-development",
+    "title": "Sample estate development photograph 02",
+    "src": "assets/images/projects/placeholder-estate-2.jpg",
+    "thumb": "assets/images/projects/placeholder-estate-2-sm.jpg",
+    "alt": "Placeholder aerial photograph of houses in a residential estate",
+    "caption": "Sample image, to be replaced with a real photograph."
   },
   {
     "id": "gallery-008",
     "status": "published",
-    "category": "completed",
-    "title": "Completed apartment block",
-    "src": "assets/images/samples/completed-block.jpg",
-    "alt": "Illustrative image of a completed apartment block at dusk",
     "placeholder": true,
-    "related": "project-004"
+    "category": "architectural-renders",
+    "title": "Sample architectural render 01",
+    "src": "assets/images/projects/placeholder-house.jpg",
+    "thumb": "assets/images/projects/placeholder-house-sm.jpg",
+    "alt": "Placeholder photograph of a contemporary house with a pool",
+    "caption": "Sample image, to be replaced with a real photograph."
   },
   {
     "id": "gallery-009",
     "status": "published",
-    "category": "render",
-    "title": "Open plot beside a road",
-    "src": "assets/images/samples/plots.jpg",
-    "alt": "Illustrative image of an open plot of land beside a road",
     "placeholder": true,
-    "related": "property-003"
+    "category": "architectural-renders",
+    "title": "Sample architectural render 02",
+    "src": "assets/images/projects/placeholder-lounge.jpg",
+    "thumb": "assets/images/projects/placeholder-lounge-sm.jpg",
+    "alt": "Placeholder photograph of a curved glass wall overlooking palm trees",
+    "caption": "Sample image, to be replaced with a real photograph."
   },
   {
     "id": "gallery-010",
     "status": "published",
-    "category": "render",
-    "title": "Residence with pool at dusk",
-    "src": "assets/images/samples/villa-pool.jpg",
-    "alt": "Illustrative image of a modern house with a swimming pool at dusk",
-    "placeholder": true
+    "placeholder": true,
+    "category": "completed-projects",
+    "title": "Sample completed project 01",
+    "src": "assets/images/projects/placeholder-commercial-2.jpg",
+    "thumb": "assets/images/projects/placeholder-commercial-2-sm.jpg",
+    "alt": "Placeholder photograph of a building entrance and glazed upper floor",
+    "caption": "Sample image, to be replaced with a real photograph."
+  },
+  {
+    "id": "gallery-011",
+    "status": "published",
+    "placeholder": true,
+    "category": "completed-projects",
+    "title": "Sample completed project 02",
+    "src": "assets/images/projects/placeholder-estate.jpg",
+    "thumb": "assets/images/projects/placeholder-estate-sm.jpg",
+    "alt": "Placeholder aerial photograph of a residential estate",
+    "caption": "Sample image, to be replaced with a real photograph."
   }
 ]

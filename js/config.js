@@ -1,12 +1,17 @@
 /* ==========================================================================
-   SITE SETTINGS — edit this file to update contact details across ALL pages.
-   Every phone number, email, address, WhatsApp link, map and social link
-   on the website is filled in from the values below.
+   SITE SETTINGS — edit this file to update details across ALL pages.
+   Every phone number, email, address, WhatsApp link, map, web address and
+   social link on the website is filled in from the values below.
    ========================================================================== */
 window.SITE = {
   // Names
   brandName: "Platinum Properties, Estates & Constructions", // name shown in the logo / page titles
-  legalName: "Classic Properties and Constructions Company Limited", // registered company name (footer & About page)
+  legalName: "Platinum Properties Estates and Constructions Company Limited", // company name used in the footer, privacy policy, etc.
+
+  // Public web address of the website, WITH a trailing slash.
+  // Used for links that must be complete web addresses (WhatsApp/email enquiries, share previews).
+  // If the site moves (for example to a custom domain), change it here and see README, "Changing the web address".
+  siteUrl: "https://ppec-io.github.io/ppec/",
 
   // Phone
   phoneDisplay: "+233 59 976 2750", // how the number is shown on screen
@@ -26,64 +31,9 @@ window.SITE = {
   // Tip: replace with a more precise query, the Ghana Post GPS code, or exact place name once verified.
   mapQuery: "EX72 Bissau St, Ofinso, Ashanti, Ghana",
 
-  // ------------------------------------------------------------------
-  // Website settings (added for the property / project catalogue)
-  // ------------------------------------------------------------------
-
-  // Public address of the website, WITH a trailing slash. This is the single place that
-  // defines the base path (GitHub Pages serves this site under /ppec/). It is used for
-  // links inside WhatsApp / email messages, canonical URLs and the sitemap.
-  // If you move to a custom domain, change this one value (and run tools/validate-data.js --sitemap).
-  siteUrl: "https://ppec-io.github.io/ppec/",
-
-  // Folder holding the JSON content files, relative to each page.
-  dataPath: "data/",
-
-  // Currency for all prices in data/properties.json (ISO code). Prices are plain numbers.
-  currency: "GHS",
-
-  // Number of items shown before "Show more" on the catalogue pages.
-  pageSize: 9,
-
-  // Categories and statuses. Keys must match the values used in the JSON files.
-  taxonomy: {
-    propertyCategories: [
-      { key: "residential", label: "Residential Houses" },
-      { key: "apartments",  label: "Apartments" },
-      { key: "land",        label: "Land and Plots" },
-      { key: "commercial",  label: "Commercial Properties" },
-      { key: "luxury",      label: "Luxury Properties" },
-      { key: "estate",      label: "Estate Properties" }
-    ],
-    availability: [
-      { key: "available", label: "Available" },
-      { key: "reserved",  label: "Reserved" },
-      { key: "sold",      label: "Sold" },
-      { key: "tbc",       label: "To be confirmed" }
-    ],
-    projectCategories: [
-      { key: "residential",       label: "Residential Developments" },
-      { key: "estate",            label: "Estate Developments" },
-      { key: "commercial",        label: "Commercial Developments" },
-      { key: "construction",      label: "Construction Projects" },
-      { key: "infrastructure",    label: "Infrastructure Projects" },
-      { key: "land-development",  label: "Land Development" }
-    ],
-    projectStatuses: [
-      { key: "planning",  label: "Planning" },
-      { key: "upcoming",  label: "Upcoming" },
-      { key: "ongoing",   label: "Ongoing" },
-      { key: "completed", label: "Completed" },
-      { key: "on-hold",   label: "On Hold" }
-    ],
-    galleryCategories: [
-      { key: "property",     label: "Properties" },
-      { key: "construction", label: "Construction" },
-      { key: "estate",       label: "Estates" },
-      { key: "render",       label: "Architectural Renders" },
-      { key: "completed",    label: "Completed Projects" }
-    ]
-  },
+  // Catalogue settings
+  pageSize: 6,        // how many properties/projects to show before "Show more"
+  currencyDefault: "GHS",
 
   // Social media — leave "" until real accounts exist. Only non-empty links are shown.
   social: {
@@ -94,3 +44,15 @@ window.SITE = {
     TikTok: ""
   }
 };
+
+/* ---- Automatic: do not edit below this line ---------------------------------
+   SITE.root = the folder this website is actually being served from (for example
+   https://ppec-io.github.io/ppec/ or http://localhost:8000/). All data, image and
+   page links are built from it, so the site works under the /ppec/ sub-path and
+   from any nested address (such as the custom 404 page). */
+(function () {
+  var src = document.currentScript && document.currentScript.src;
+  window.SITE.root = src
+    ? src.replace(/js\/config\.js(\?.*)?$/, "")
+    : new URL("./", window.location.href).href;
+})();
