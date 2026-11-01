@@ -1,301 +1,255 @@
 # Platinum Properties, Estates & Constructions: Website
 
-A static, responsive website for a Ghanaian real estate and construction company, hosted on GitHub Pages.
-Pure HTML, CSS and vanilla JavaScript. **No framework, no backend, no database, no build step, no npm dependencies.**
-Property, project, news, gallery, service and FAQ content lives in plain JSON files in `data/`.
+A fast, elegant, fully responsive static website for a Ghanaian real estate and construction company, with a searchable property catalogue, a separate project portfolio, detail pages, gallery, news and FAQ.
 
-- Live address: <https://ppec-io.github.io/ppec/>
-- Repository: <https://github.com/ppec-io/ppec> (production branch: `main`)
-- Test results and what was *not* verified: see [`TESTING_REPORT.md`](TESTING_REPORT.md)
+**Pure HTML, CSS and vanilla JavaScript. No framework, no backend, no database, no build step.** Fonts and icons are self-hosted. Content lives in plain JSON files. Hosted on GitHub Pages at <https://ppec-io.github.io/ppec/>.
+
+| Page | File | Content comes from |
+|---|---|---|
+| Home | `index.html` | `data/properties.json`, `projects.json`, `services.json` |
+| About Us | `about.html` | the HTML file |
+| Properties (catalogue) | `properties.html` | `data/properties.json` |
+| Property detail | `property-details.html?id=property-001` | `data/properties.json` |
+| Projects (catalogue) | `projects.html` | `data/projects.json` |
+| Project detail | `project-details.html?id=project-001` | `data/projects.json` |
+| Services | `services.html` | `data/services.json` |
+| Gallery | `gallery.html` | `data/gallery.json` |
+| News and Insights | `news.html`, `news-details.html?id=news-001` | `data/news.json` |
+| FAQ | `faq.html` | `data/faqs.json` |
+| Contact Us | `contact.html` | `js/config.js` |
+| Privacy Policy (draft) | `privacy.html` | the HTML file |
+| Not found | `404.html` | the HTML file |
 
 ---
 
-## 1. Read this before you publish
+## 1. Before you publish: checklist
 
-The site was built with **sample content** wherever real company information was not supplied. Sample records are
-marked `"placeholder": true` and show a "Sample" badge on the site. Nothing below has been invented as fact: sample
-records have no prices, no specifications, no dates and no completion percentages.
+The site contains **sample content** wherever real company information was not supplied. Do not present it as real.
 
-- [ ] **Replace the sample photographs.** Every image in `assets/images/projects/`, plus `hero.jpg`,
-      `about-placeholder.jpg` and `og-default.jpg`, is a stand-in cropped from design mock-ups. They may belong to
-      other designers or photographers, so **do not keep them on a live site**. Use your own photographs or renders.
-- [ ] **Replace or delete the sample records** in `data/*.json` (30 records are currently marked sample; run
-      `python3 tools/validate.py` to see the count). Remove `"placeholder": true` from each record you replace.
-- [ ] **Review all draft wording.** The About page, service descriptions, FAQs, news articles and the Privacy Policy
-      are drafts. Do not publish company history, awards, certifications or licences you cannot prove.
-- [ ] **Have the Privacy Policy reviewed by a lawyer.** It is a plain-language draft written with Ghana's Data
-      Protection Act, 2012 (Act 843) in mind. It is not legal advice.
-- [ ] **Confirm the company name.** The original brief used two names (see section 9).
-- [ ] **Verify the office location** on the Contact page map.
-- [ ] **Add social media links** in `js/config.js` once real accounts exist. Until then none are shown.
-- [ ] Run `python3 tools/validate.py` and fix any errors, then `python3 tools/build_sitemap.py`.
+- [ ] **Replace every sample record** in `data/properties.json`, `projects.json`, `news.json`, `gallery.json` and `faqs.json`. Every sample has `"placeholder": true`; remove that line (or set it to `false`) when a record is real. Samples show a "Sample" badge and a notice on the page.
+- [ ] **Replace the sample photographs.** `assets/images/projects/placeholder-*.jpg`, `hero.jpg` and `about-placeholder.jpg` were cropped from design reference images and **may be subject to third-party copyright**. `assets/images/samples/*.jpg` are illustrative renders supplied for layout purposes; they are **not company projects**. Use the company's own photographs and renders.
+- [ ] **Review all draft wording.** Add `?placeholders=1` to any page address (for example `about.html?placeholders=1`) and every draft passage is highlighted in yellow so it can be approved or rewritten. This includes the company profile, vision, mission, philosophy, values, service descriptions, FAQ answers and the **Privacy Policy** (which has not been legally reviewed).
+- [ ] **Confirm the company name.** See section 9.
+- [ ] **Verify contact details and the map pin** (section 3).
+- [ ] **Add social links** once real accounts exist (section 3). Until then none are shown.
+- [ ] **Run the checker:** `node tools/validate-data.js --sitemap` (section 8).
 
 ---
 
 ## 2. Project structure
 
 ```
-index.html  about.html  services.html  properties.html  projects.html  gallery.html
-news.html  faq.html  contact.html  privacy.html            main pages
-property-details.html  project-details.html  news-details.html   detail pages (load a record from ?id=...)
-404.html                                                  custom "not found" page
-sitemap.xml  robots.txt                                   generated by tools/build_sitemap.py
-
-css/style.css                                             all styles; colours and fonts are the variables at the top
-js/config.js                                              ONE place for contact details, web address, page size
-js/main.js                                                menu, contact details fill-in, scroll reveal
-js/core/   util.js  data.js  enquiry.js  cards.js  lightbox.js     shared helpers
-js/pages/  home  catalogue  detail  services  gallery  news  faq  contact .js    one file per kind of page
-
-data/      properties.json  projects.json  services.json  news.json  faqs.json  gallery.json
-           taxonomy.json                                  names of categories / statuses shown on the site
-assets/    images/ (logos, hero, og-default, projects/, properties/, gallery/, news/)   fonts/   icons/
-tools/     validate.py  build_sitemap.py                  checks and generators (Python 3, standard library only)
+ppec/
+├── index.html  about.html  services.html  gallery.html  news.html  news-details.html
+├── properties.html  property-details.html  projects.html  project-details.html
+├── contact.html  faq.html  privacy.html  404.html
+├── sitemap.xml  robots.txt
+├── data/                     ★ all catalogue content (JSON)
+│   ├── properties.json  projects.json  services.json
+│   └── news.json  faqs.json  gallery.json
+├── js/
+│   ├── config.js             ★ contact details, site address, categories, page size
+│   ├── core.js               shared helpers + JSON loading (no edits needed)
+│   ├── ui.js                 cards, loading/empty/error states, lightbox
+│   ├── main.js               menu, contact details, enquiry form
+│   ├── catalogue.js          search/filter/sort/grid-list for properties and projects
+│   ├── detail.js             property and project detail pages
+│   ├── gallery.js  content.js   gallery, home featured, services, news, FAQ
+├── css/style.css             all styling; colours are variables at the top
+├── assets/
+│   ├── images/               logos, hero, about image
+│   │   ├── projects/         original sample photos
+│   │   └── samples/          illustrative sample renders
+│   ├── icons/  fonts/
+└── tools/validate-data.js    optional content checker + sitemap generator
 ```
 
-`properties.html` and `projects.html` use the same script (`js/pages/catalogue.js`); the page decides which data to
-load from `<main data-catalogue="property">` or `"project"`. Detail pages work the same way with `data-detail`.
-
-**The header and footer are repeated in each HTML file.** If you change the navigation or footer, change it in all
-14 pages. Contact details do not have this problem: they come from `js/config.js` (section 4).
+Data (`data/`), presentation (`css/`, HTML) and logic (`js/`) are kept separate. Property and project information is **not** repeated in any HTML file; the JSON files are the single source of truth.
 
 ---
 
-## 3. Running the site on your own computer
+## 3. Contact details, one place for the whole site
 
-Data files are loaded with `fetch`, so **opening an HTML file by double-click will not show properties** (browsers
-block that). Serve the folder instead:
+Edit **`js/config.js`**: telephone, WhatsApp number, email, address, map query, brand and legal names, social links.
 
-```
-cd ppec
-python3 -m http.server 8000
-```
+> The same values are also written in the HTML as a fallback for visitors with JavaScript disabled. If you change a number or email, also search the `.html` files for the old value and replace it.
 
-Then open <http://localhost:8000/>. Pages work from `/` locally and from `/ppec/` on GitHub Pages: the folder the
-site sits in is detected automatically from the location of `js/config.js`.
+- **Map:** the embedded map and "Open in Google Maps" link search for `mapQuery`. The address `EX72 Bissau St, Ofinso, Ashanti, Ghana` was typed from the details supplied and **has not been verified**. Open the Contact page and check the pin; if it is wrong, use the place name or Ghana Post GPS code Google Maps recognises.
+- **Social links:** put full `https://` addresses under `social`. Empty entries are hidden.
+- **`siteUrl`:** the public address of the website **with a trailing slash**. It is the single place that defines the base path (`/ppec/`). It is used inside WhatsApp and email messages, canonical addresses and the sitemap.
+- **Categories and statuses** (`taxonomy`) and **`pageSize`** (items shown before "Show more") are also set here.
 
 ---
 
-## 4. Site settings (`js/config.js`)
+## 4. Adding, editing and removing properties
 
-| Setting | What it controls |
-|---|---|
-| `brandName`, `legalName` | name in titles, footer, privacy page |
-| `siteUrl` | public address **with trailing slash**; used for WhatsApp/email links and the sitemap |
-| `phoneDisplay`, `phoneTel` | how the number is shown, and the tap-to-call number |
-| `whatsappNumber`, `whatsappMessage` | digits only, with country code; the default greeting |
-| `email` | enquiry address |
-| `addressLines`, `mapQuery` | address shown in the footer/contact page, and the text used to find it on Google Maps |
-| `pageSize` | how many cards load at first and on each "Show more" |
-| `currencyDefault` | currency used when a price has none (default `GHS`) |
-| `social` | `Facebook`, `Instagram`, `LinkedIn`, `X`, `TikTok`. A link shows only if it starts with `https://` |
-
-The footer, contact page and buttons are filled in from these values when each page loads. Do not put passwords,
-API keys or tokens in any file in this repository: everything here is public.
-
----
-
-## 5. Managing content (data files)
-
-### The rules that apply to every record
-
-- A record appears on the site **only if** `"status": "published"`. Use `"status": "draft"` to hide a record without
-  deleting it.
-- Every record needs a unique text `id`. The id appears in the address (`property-details.html?id=property-001`), so
-  use lower-case letters, numbers and hyphens, and **never change an id after the site is live** (links and
-  WhatsApp messages already shared would break).
-- `"featured": true` shows the record in the "Featured" section (up to three are shown).
-- `dateAdded` (`"2026-11-01"`, year-month-day) drives the "Newest" sort.
-- Optional fields can be left empty (`null`, `""` or `[]`) or removed. The site never shows an empty label or a
-  made-up value.
-- JSON is strict: double quotes only, no trailing commas, numbers without quotes or commas (`500000`, not `"500,000"`).
-- After any edit run `python3 tools/validate.py`. It reports the file, record and line of each mistake.
-
-### Add a property
-
-1. Copy your photos into `assets/images/properties/` (see "Images" below).
-2. Open `data/properties.json`, copy an existing record, paste it at the end of the list (remember the comma between
-   records) and edit it:
+Edit **`data/properties.json`**. It is a list of records; each record is one `{ ... }` block. Copy a block to add a property. **Keep a comma between blocks, no comma after the last one**, and keep every quote. If you break the syntax the page shows an error message, and `node tools/validate-data.js` will tell you which line.
 
 ```json
 {
-  "id": "property-010",
+  "id": "property-008",
   "status": "published",
   "featured": false,
-  "title": "Three-bedroom house, East Legon",
-  "category": "residential-houses",
+  "name": "Four-bedroom house, East Legon",
+  "category": "residential",
   "location": "East Legon, Accra",
   "availability": "available",
-  "dateAdded": "2026-11-01",
-  "price": { "amount": 850000, "currency": "GHS", "verified": true, "note": "Price confirmed by sales team" },
-  "summary": "One or two sentences shown on the listing card.",
-  "description": ["First paragraph.", "Second paragraph."],
+  "price": 950000,
+  "priceNote": "negotiable",
+  "description": "One or two sentences.",
+  "specs": { "bedrooms": 4, "bathrooms": 3, "landSize": "600 m²", "floorArea": "320 m²",
+             "extra": { "Parking": "2 cars" } },
+  "amenities": ["Borehole", "Gated compound"],
   "images": [
-    { "src": "assets/images/properties/east-legon-1.jpg",
-      "thumb": "assets/images/properties/east-legon-1-sm.jpg",
-      "alt": "Front of the three-bedroom house with a driveway",
-      "caption": "Front elevation" }
+    { "src": "assets/images/properties/property-008-front.jpg", "alt": "Front of the house" },
+    { "src": "assets/images/properties/property-008-garden.jpg", "alt": "Garden and pool", "type": "render" }
   ],
-  "specs": { "bedrooms": 3, "bathrooms": 3,
-             "landSize":  { "value": 0.25, "unit": "acre" },
-             "floorArea": { "value": 180,  "unit": "sqm" } },
-  "amenities": ["Gated community", "Parking for two cars"],
   "mapQuery": "East Legon, Accra, Ghana",
-  "related": ["property-003"]
+  "related": ["property-002"],
+  "added": "2026-11-05"
 }
 ```
 
-| Field | Notes |
-|---|---|
-| `category` | one of `residential-houses`, `apartments`, `land-plots`, `commercial`, `luxury`, `estate` |
-| `availability` | `available`, `under-offer`, `sold`, `let`, `tbc` |
-| `price` | **Shown only if `amount` is a number and `verified` is `true`.** Otherwise the site says "Price not listed. Please enquire." Never set `verified` to `true` for a price you have not confirmed. |
-| `images` | first image is the cover. `alt` is required (describes the picture for people using screen readers). `thumb` is optional (a small copy, about 480 px wide, used on listing cards) |
-| `specs` | each item optional. `landSize` / `floorArea` are `{ "value": number, "unit": "text" }` (for example `sqm`, `acre`, `plot`; the unit is shown exactly as typed); leave a spec out or `null` if unknown |
-| `mapQuery` | optional. Adds a "Show map" button on the detail page. The map loads only when the visitor clicks it |
-| `related` | ids of other properties. Unknown ids are ignored on the site but flagged by the validator. If left empty, the site suggests properties of the same category |
+| Field | Required | Notes |
+|---|---|---|
+| `id` | yes | Unique. Lowercase letters, numbers, hyphens. It becomes the page address (`property-details.html?id=property-008`). **Do not change an id once published**; links to it would break. |
+| `status` | yes | `"published"` shows it; `"draft"` hides it everywhere (including search and related lists). |
+| `name`, `category` | yes | `category` is one of: `residential`, `apartments`, `land`, `commercial`, `luxury`, `estate`. |
+| `featured` | no | `true` shows it in "Featured" on the Home and Properties pages (the newest 3 are used). |
+| `location` | no | Used for the location filter (which appears once there are two or more locations). |
+| `availability` | no | `available`, `reserved`, `sold` or `tbc`. |
+| `price` | no | A plain number in the currency set in `config.js` (default GHS): `950000`, **not** `"950,000"`. **Leave it out unless the company has confirmed the price**; the page then says "Price on enquiry". The price filter and price sorting only appear once at least one property has a price. |
+| `specs`, `amenities` | no | Anything you leave out is simply not shown; there are no empty labels. |
+| `images` | no | The first image is the main photo. Always write an `alt` description. `"type": "render"` labels an architectural render. |
+| `mapQuery` | no | The map on the detail page appears only when this is set. Otherwise a note says it will be added. |
+| `related` | no | Ids of related properties. If fewer than 3, same-category properties fill the gap. |
+| `added` | no | `YYYY-MM-DD`; used by "Newest" sorting. |
+| `placeholder` | no | `true` marks a sample record. |
 
-### Add a project
+**To remove a property** either delete its block or set `"status": "draft"` (safer; you can bring it back).
 
-Same process in `data/projects.json`. Differences:
+## 5. Adding, editing and removing projects
 
-- `category`: `residential-developments`, `estate-developments`, `commercial-developments`, `construction-projects`,
-  `infrastructure-projects`, `land-development`
-- `projectStatus` (not `availability`): `planning`, `upcoming`, `ongoing`, `completed`, `on-hold`
-- No price. Instead:
-  - `"progress": { "percent": 40, "note": "Roofing under way" }`. **Leave `percent` as `null` until the company
-    has a confirmed figure.** The page then says progress will be shared once confirmed. Never estimate.
-  - `"milestones": [ { "title": "Foundation", "date": "2026-05-01", "status": "done", "note": "" } ]`.
-    `date`, `status` (`done`, `in-progress`, `upcoming`) and `note` are optional. Do not invent dates.
-  - `"features": ["..."]`, a list of key features.
-- Each image may have `"type": "photo"` or `"render"`; renders are labelled "Architectural render".
+Edit **`data/projects.json`**. Projects are completely separate from properties.
 
-### Edit or remove a record
-
-- **Edit:** change the fields in place and validate.
-- **Hide temporarily:** set `"status": "draft"`.
-- **Remove permanently:** delete the whole `{ ... }` block (and the comma next to it). Also delete the record's id
-  from any `related` lists. The validator will tell you if one was missed. If the page was shared before, consider
-  a draft instead, so the link shows a friendly "not found" message.
-
-### Other data files
-
-| File | Record fields |
-|---|---|
-| `services.json` | `id`, `status`, `order`, `title`, `summary`, `description` (list of paragraphs) |
-| `news.json` | `id`, `status`, `title`, `date`, `category` (`company-news`, `market-insights`, `project-updates`, `guides`), `summary`, `content` (list of paragraphs; **start a paragraph with `## ` to make it a sub-heading**), `cover` (image) |
-| `faqs.json` | `id`, `status`, `category` (`general`, `properties`, `projects`, `enquiries`), `question`, `answer` |
-| `gallery.json` | `id`, `status`, `category` (`property-photographs`, `construction`, `estate-development`, `architectural-renders`, `completed-projects`), `title`, `src`, `thumb`, `alt`, `caption` |
-| `taxonomy.json` | the display names for every category and status. To add a category, add it here first, then use its `id` in records |
-
-Sample news articles show no date. A real article (without `"placeholder": true`) shows its `date`.
-
-### Images
-
-- Put photos in `assets/images/properties/`, `projects/`, `gallery/` or `news/` and refer to them with a path
-  *relative to the site root*, e.g. `assets/images/properties/east-legon-1.jpg` (no leading slash).
-- Use JPEG (or WebP) photos, about **1600 px wide**, compressed to roughly **150–400 KB**. The validator warns above 600 KB.
-- Optional small copy for listing cards: same name with `-sm` (about 480 px wide), referenced in `thumb`.
-- Every image needs `alt` text describing what is in the picture ("Aerial view of the estate roads and houses"),
-  not "image1.jpg".
-- Use your own photographs, or ones you have written permission to use.
-
----
-
-## 6. How the pages behave
-
-- **Properties / Projects:** search, category, location, availability/status and (properties only, and only when at
-  least one verified price exists) price filters; sorting; grid/list toggle that does not reload the page and is
-  remembered for the browser session; "Show more" paging; a featured section; enquiry buttons.
-- **Detail pages:** photo gallery with a viewer (keyboard arrows and Escape work), specifications, amenities, a
-  click-to-load map, enquiry buttons (WhatsApp, call, email), related items. A missing, unpublished or mistyped id
-  shows a friendly "not found" page with links onward.
-- **Enquiries:** every WhatsApp message and email names the property or project **and includes the full web address
-  of its page**. The contact form builds an email or a WhatsApp message on the visitor's own device. **Nothing is
-  submitted to a server and nothing is stored**, and the page says "Opening your email app…", never "sent".
-  If you later want a form that really submits, connect a service you control (for example Formspree or Web3Forms
-  with their own public form id) and update the privacy page; do not put secret keys in this repository.
-- **Loading, empty and error states** are built in: skeleton cards while loading, a message when nothing is
-  listed, and an error with "Try again" if a data file cannot be read.
-- **Without JavaScript** the navigation and static pages work; listing pages explain that JavaScript is needed
-  and offer phone and email.
-
----
-
-## 7. Publishing on GitHub Pages
-
-1. Copy the files into the repository (keeping the folder structure), review them, then commit and push to `main`.
-2. In the repository: **Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: `main`,
-   folder `/ (root)` → Save.** (This is the existing setup; check it still says this.)
-3. Wait a minute or two, then open <https://ppec-io.github.io/ppec/>. Check `…/ppec/properties.html` and
-   `…/ppec/nonexistent` (it should show the custom 404 page).
-4. After every change to data, run the checks first:
-
-```
-python3 tools/validate.py            # must report 0 errors
-python3 tools/build_sitemap.py       # rewrites sitemap.xml and robots.txt
+```json
+{
+  "id": "project-006",
+  "status": "published",
+  "featured": true,
+  "name": "Estate name",
+  "category": "estate",
+  "location": "Ofinso, Ashanti",
+  "projectStatus": "ongoing",
+  "description": "One or two sentences.",
+  "features": ["Paved roads", "Gated entrance"],
+  "progress": { "percent": 40, "note": "Foundations complete." },
+  "milestones": [
+    { "title": "Site clearing", "date": "2026-03-01", "status": "done" },
+    { "title": "Roofing", "date": "Q1 2027", "status": "current" },
+    { "title": "Handover", "status": "upcoming" }
+  ],
+  "images": [ { "src": "assets/images/projects/estate-aerial.jpg", "alt": "Aerial view of the site", "type": "photo" } ],
+  "related": ["project-002"],
+  "added": "2026-11-05"
+}
 ```
 
-`python3 tools/validate.py --strict` also treats warnings (unverified prices, oversized images) as failures.
-Both tools use only the Python standard library; there is nothing to install.
+- `category`: `residential`, `estate`, `commercial`, `construction`, `infrastructure`, `land-development`.
+- `projectStatus` (required): `planning`, `upcoming`, `ongoing`, `completed`, `on-hold`.
+- `progress.percent` is optional: **only enter it when the company has confirmed it.** Without it the page shows only the note. Milestone `date` can be `YYYY-MM-DD` or free text such as `"Q1 2027"`; `status` is `done`, `current` or `upcoming`.
+- `images[].type` is `"photo"` or `"render"`, shown as a label on the detail page.
 
-### Changing the web address (custom domain, or a different repository name)
+## 6. Other content files
 
-1. In `js/config.js` change `siteUrl` (keep the trailing slash).
-2. The 14 HTML pages contain the old address in `canonical`, `og:url`, `og:image` and structured-data tags. Replace
-   it everywhere, e.g. `sed -i 's|https://ppec-io.github.io/ppec/|https://www.example.com/|g' *.html`
-   (and check with `grep -rn "ppec-io.github.io" .`).
-3. In `404.html` change `var BASE = "/ppec/";` to `"/"` if the site now sits at the root of a domain.
-4. Run `python3 tools/build_sitemap.py`.
-5. For a custom domain also add the domain under Settings → Pages.
-
-### Search engines
-
-- `sitemap.xml` lists the main pages and every **real** (non-sample) published property, project and article.
-  Sample records are excluded and their detail pages are marked `noindex`.
-- `robots.txt` only works at the root of a domain. On `github.io/ppec/` search engines ignore it; it will start to
-  work if you move to a custom domain.
-- Detail pages are filled in by JavaScript. Google runs JavaScript, but some other crawlers and link-preview tools
-  will only see the generic title and description of the template page.
-- Structured data (JSON-LD) appears only on the home page and describes the organisation and its real contact
-  details. There is no invented review, rating or listing markup.
-
----
-
-## 8. Design notes
-
-- Palette (variables at the top of `css/style.css`): matte `#111317`, gold `#CFB269` / `#E0CD91` / `#AF9252`,
-  cream `#FBFBF3`. Gold text on light backgrounds uses the darker `#7A6529` so it stays readable; the lighter
-  golds are used for lines and decoration only.
-- Fonts (Cormorant Garamond, Inter) are stored in `assets/fonts/`. There are no requests to Google Fonts or any CDN.
-- The only third-party request the site can make is Google Maps (contact page, and detail pages after a click).
-  The Privacy Policy says so.
-- Mobile menu breakpoint: 1100 px, set in both `css/style.css` and `js/main.js`; keep them in step.
-- Add `?placeholders=1` to any page address to highlight every placeholder on the page.
-
----
-
-## 9. Decisions you should confirm
-
-- **Company name.** The first request named "Classic Properties and Constructions Company Limited"; the later
-  specification is titled "Platinum Properties Estates and Constructions Company Limited" and the contact email uses
-  `platinumestatesconstructions.com`. The site uses **Platinum Properties, Estates & Constructions** (legal name:
-  *Platinum Properties Estates and Constructions Company Limited*). Change `brandName` / `legalName` in `js/config.js`
-  if that is wrong; the names are also in the page titles and the logo alt text, so search for the old name.
-- **Sample availability and status values.** Sample records carry illustrative "Available / Under offer / Ongoing…"
-  values only so the filters have something to show. They are labelled Sample. Remove them with the sample records.
-- **Removed file.** `js/projects-data.js` (old 4-page site) was removed; its six sample projects were moved into
-  `data/projects.json` and nothing else referenced it. `js/main.js` and `properties.html` were rewritten.
-
----
-
-## 10. Troubleshooting
-
-| Problem | Likely cause |
+| File | What it controls |
 |---|---|
-| Listing pages show "We could not load…" | a JSON mistake (run `tools/validate.py`), or the file was opened with a double-click instead of through a web server |
-| A record does not appear | `status` is not exactly `"published"`, or `id` is missing / not text |
-| Price not shown | `amount` must be a number **and** `verified` must be `true` |
-| Images missing | wrong path (it is relative to the site root, case-sensitive on GitHub Pages: `Photo.JPG` ≠ `photo.jpg`) |
-| Changes not visible after pushing | wait a couple of minutes for Pages, then hard-refresh (Ctrl/Cmd + Shift + R) |
-| Detail page says "not found" | the `?id=` does not match a published record |
+| `services.json` | Service titles, short summary (home page), longer `description` and an optional `cta` button (Services page). `order` sets the sequence. |
+| `news.json` | Articles: `title`, `date`, `category`, `cover` image, `summary`, and `content`, a list of paragraphs (start a line with `## ` for a heading). |
+| `faqs.json` | `question`, `answer`, `order`. |
+| `gallery.json` | `src`, `alt`, `title`, `category` (`property`, `construction`, `estate`, `render`, `completed`). |
+
+All of them support `"status": "draft"` to hide a record.
+
+## 7. Managing images
+
+1. Put photos in `assets/images/` (for example `assets/images/properties/`). Use lowercase names without spaces.
+2. Use **JPG**, about **1200 px wide**, ideally **under 200 KB** (compress with squoosh.app or similar). Cards are shown at roughly 400 px, detail pages up to about 900 px.
+3. Reference the file in the JSON using a path **from the website root**, with no leading slash: `assets/images/properties/house.jpg`.
+4. Always give each image a short `alt` description (used by screen readers and search engines).
+5. Below-the-fold images load lazily by themselves. If an image is missing, the site shows the logo mark instead of a broken picture.
+6. The home hero is `assets/images/hero.jpg` and the About image is `about-placeholder.jpg`; replace the files or edit the `src` in the HTML.
+
+Note: the header logo `assets/images/logo-horizontal.png` is about 130 KB. Re-exporting it at roughly twice its display size would make every page lighter.
+
+---
+
+## 8. Checking your changes
+
+**Viewing the site on your own computer.** The catalogue pages read their JSON files with `fetch`, which browsers block for pages opened straight from a folder (`file://`). They then show a message explaining this. Static pages (About, Contact, Privacy) work either way. To preview everything:
+
+```bash
+python3 -m http.server 8000      # run inside this folder, then open http://localhost:8000
+```
+
+**Content checker (optional).** With Node.js 16+ installed:
+
+```bash
+node tools/validate-data.js            # checks JSON, required fields, categories, images, links
+node tools/validate-data.js --sitemap  # also rewrites sitemap.xml from the published records
+```
+
+It reports exactly which record has a problem and exits with an error if anything is wrong. Run it before every upload. There is no Node dependency in the website itself.
+
+---
+
+## 9. Company name
+
+The original brief named the company **Classic Properties and Constructions Company Limited**, but the logo and email domain read **Platinum Properties, Estates & Constructions**. The site uses the **logo name** as the public brand (header, titles, headings) and shows the **Classic Properties and Constructions Company Limited** name as the legal name (footer, Privacy Policy). Both live in `js/config.js` (`brandName`, `legalName`). The page titles and headings also contain the brand name in the HTML. If the public name changes, search the `.html` files for "Platinum" and update them. **This needs a decision from the company before launch.**
+
+---
+
+## 10. Publishing on GitHub Pages
+
+The site is already published from the `main` branch, root folder, at <https://ppec-io.github.io/ppec/>. To update it:
+
+1. Edit or replace files (on GitHub: **Add file → Upload files**, or with Git: `git add`, `git commit`, `git push`).
+2. In **Settings → Pages** the source should remain **Deploy from a branch → `main` → `/ (root)`**.
+3. The site refreshes within a couple of minutes (hard-refresh the browser to see changes).
+
+**Base path.** The site is served under `/ppec/`, not at the domain root. Every page uses **relative links** (`properties.html`, `assets/...`, `data/...`), so it works under any base path. The only places that need the full address are `siteUrl` in `js/config.js` and the `<link rel="canonical">` / `og:url` tags in each page's `<head>`. The checker reports a mismatch.
+
+**404 page.** GitHub Pages serves `404.html` for unknown addresses. Because the missing address can be several folders deep, `404.html` sets a `<base>` tag (a small inline script) so its stylesheet and logo still load. On `*.github.io` it uses the first path segment (`/ppec/`); on a custom domain it uses `/`.
+
+**Custom domain.** Settings → Pages → Custom domain, then add the DNS records GitHub shows and tick **Enforce HTTPS**. Afterwards change `siteUrl` in `js/config.js`, the canonical/`og:url` tags, and `robots.txt`, then run `node tools/validate-data.js --sitemap`.
+
+---
+
+## 11. How enquiries work
+
+There is no server, so **the site never stores or "submits" an enquiry itself**.
+
+- **WhatsApp** buttons open a chat to the company number with a message that names the property or project, its reference and its web address.
+- **Telephone** and **Email** buttons use `tel:` and `mailto:` links; email links include the same details.
+- The **enquiry form** checks the fields, then opens the visitor's email app or WhatsApp with the message ready to send. It says so plainly and never reports "sent".
+- Property and project cards and pages link to the form with the item pre-selected (`contact.html?enquiry=property-003`).
+
+No credentials, keys or tokens exist in the code. If a real form service is wanted later, it must be chosen and configured by the company.
+
+---
+
+## 12. SEO and accessibility
+
+- Unique `<title>` and meta description per page; canonical and Open Graph tags; `sitemap.xml` and `robots.txt`; a custom 404. Detail pages update their title, description and canonical address from the record they show, and "not found" pages are marked `noindex`.
+- Organisation structured data (JSON-LD) is generated on the Home and Contact pages **only from the details in `config.js`**. No ratings, awards, certifications or property data are published as structured data.
+- Semantic HTML, skip link, keyboard-operable menu, filters, gallery and lightbox (arrow keys, Escape, focus returns to the opener), labelled form fields with error messages, `aria-live` result counts, reduced-motion support.
+- `?placeholders=1` highlights draft wording (see section 1).
+
+## 13. What changed from the previous version
+
+- `properties.html` is now the property catalogue; **projects have their own page** and data. The old combined "Properties & Projects" page and `js/projects-data.js` were replaced by the JSON files (the old six sample entries were migrated into `properties.json` and `projects.json`). The old `?enquiry=available-1` style addresses no longer exist.
+- The menu moved to the button layout below 1100 px wide to fit eight links.
+- Existing branding, fonts, logos, icons, colours, the placeholder highlighter, the contact details file and the contact form behaviour are unchanged.
+- Small accessibility fixes were made to existing markup (social-links group role, gold text contrast on dark backgrounds).
+
+See `TESTING.md` for what was tested, how, and what was not.

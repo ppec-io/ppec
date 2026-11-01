@@ -4,412 +4,141 @@
     "status": "published",
     "featured": true,
     "placeholder": true,
-    "title": "Sample Residential Development 01",
-    "category": "residential-developments",
+    "name": "Sample Development 01",
+    "category": "commercial",
     "location": "[Town / Area], Ghana",
     "projectStatus": "ongoing",
-    "dateAdded": "2026-10-06",
-    "summary": "Add a short summary of this project here.",
-    "description": [
-      "Add the full description of this project here."
-    ],
+    "description": "Add a short description of this project here.",
     "images": [
       {
-        "src": "assets/images/projects/placeholder-house.jpg",
-        "thumb": "assets/images/projects/placeholder-house-sm.jpg",
-        "alt": "Placeholder photograph of a contemporary house with a pool",
-        "caption": "Sample image, to be replaced with a real photograph.",
+        "src": "assets/images/projects/placeholder-commercial.jpg",
+        "alt": "Placeholder photograph of a modern building",
         "type": "photo"
-      },
-      {
-        "src": "assets/images/projects/placeholder-villa.jpg",
-        "thumb": "assets/images/projects/placeholder-villa-sm.jpg",
-        "alt": "Placeholder photograph of a modern white residence with a glass balcony",
-        "caption": "Sample image, to be replaced with a real photograph.",
-        "type": "render"
       }
     ],
+    "added": "2026-10-31",
     "progress": {
-      "percent": null,
-      "note": ""
+      "note": "[Add construction progress once confirmed]"
     },
     "milestones": [
       {
-        "title": "Planning and design",
-        "date": null,
-        "status": null,
-        "note": ""
+        "title": "[Milestone to be confirmed]"
       },
       {
-        "title": "Site preparation",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Construction",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Completion and handover",
-        "date": null,
-        "status": null,
-        "note": ""
+        "title": "[Milestone to be confirmed]"
       }
     ],
-    "features": [],
-    "mapQuery": "",
-    "related": []
+    "features": [
+      "[Development feature to be confirmed]"
+    ],
+    "related": [
+      "project-002",
+      "project-004"
+    ]
   },
   {
     "id": "project-002",
     "status": "published",
     "featured": true,
     "placeholder": true,
-    "title": "Sample Estate Development 01",
-    "category": "estate-developments",
+    "name": "Sample Development 02",
+    "category": "residential",
     "location": "[Town / Area], Ghana",
-    "projectStatus": "planning",
-    "dateAdded": "2026-10-05",
-    "summary": "Add a short summary of this project here.",
-    "description": [
-      "Add the full description of this project here."
-    ],
+    "projectStatus": "ongoing",
+    "description": "Add a short description of this project here.",
     "images": [
       {
-        "src": "assets/images/projects/placeholder-estate.jpg",
-        "thumb": "assets/images/projects/placeholder-estate-sm.jpg",
-        "alt": "Placeholder aerial photograph of a residential estate",
-        "caption": "Sample image, to be replaced with a real photograph.",
+        "src": "assets/images/projects/placeholder-house.jpg",
+        "alt": "Placeholder photograph of a house with a pool",
         "type": "photo"
       },
       {
-        "src": "assets/images/projects/placeholder-estate-2.jpg",
-        "thumb": "assets/images/projects/placeholder-estate-2-sm.jpg",
-        "alt": "Placeholder aerial photograph of houses in a residential estate",
-        "caption": "Sample image, to be replaced with a real photograph.",
+        "src": "assets/images/samples/development-site.jpg",
+        "alt": "Illustrative aerial image of a development site at sunset",
         "type": "render"
       }
     ],
+    "added": "2026-10-31",
     "progress": {
-      "percent": null,
-      "note": ""
+      "note": "[Add construction progress once confirmed]"
     },
-    "milestones": [
-      {
-        "title": "Planning and design",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Site preparation",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Construction",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Completion and handover",
-        "date": null,
-        "status": null,
-        "note": ""
-      }
-    ],
-    "features": [],
-    "mapQuery": "",
-    "related": []
+    "related": [
+      "project-001",
+      "project-003"
+    ]
   },
   {
     "id": "project-003",
     "status": "published",
-    "featured": false,
+    "featured": true,
     "placeholder": true,
-    "title": "Sample Commercial Development 01",
-    "category": "commercial-developments",
+    "name": "Sample Completed Project 01",
+    "category": "estate",
     "location": "[Town / Area], Ghana",
-    "projectStatus": "upcoming",
-    "dateAdded": "2026-10-04",
-    "summary": "Add a short summary of this project here.",
-    "description": [
-      "Add the full description of this project here."
-    ],
+    "projectStatus": "completed",
+    "description": "Add a short description of this project here.",
     "images": [
       {
-        "src": "assets/images/projects/placeholder-commercial.jpg",
-        "thumb": "assets/images/projects/placeholder-commercial-sm.jpg",
-        "alt": "Placeholder photograph of a modern commercial building",
-        "caption": "Sample image, to be replaced with a real photograph.",
+        "src": "assets/images/projects/placeholder-estate.jpg",
+        "alt": "Placeholder aerial photograph of a residential estate",
         "type": "photo"
+      },
+      {
+        "src": "assets/images/samples/estate-community.jpg",
+        "alt": "Illustrative aerial image of a gated residential estate",
+        "type": "render"
       }
     ],
-    "progress": {
-      "percent": null,
-      "note": ""
-    },
-    "milestones": [
-      {
-        "title": "Planning and design",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Site preparation",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Construction",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Completion and handover",
-        "date": null,
-        "status": null,
-        "note": ""
-      }
-    ],
-    "features": [],
-    "mapQuery": "",
-    "related": []
+    "added": "2026-10-31",
+    "related": [
+      "project-002",
+      "project-004"
+    ]
   },
   {
     "id": "project-004",
     "status": "published",
-    "featured": true,
+    "featured": false,
     "placeholder": true,
-    "title": "Sample Construction Project 01",
-    "category": "construction-projects",
+    "name": "Sample Completed Project 02",
+    "category": "construction",
     "location": "[Town / Area], Ghana",
     "projectStatus": "completed",
-    "dateAdded": "2026-10-03",
-    "summary": "Add a short summary of this project here.",
-    "description": [
-      "Add the full description of this project here."
-    ],
+    "description": "Add a short description of this project here.",
     "images": [
       {
-        "src": "assets/images/projects/placeholder-commercial-2.jpg",
-        "thumb": "assets/images/projects/placeholder-commercial-2-sm.jpg",
-        "alt": "Placeholder photograph of a building entrance and glazed upper floor",
-        "caption": "Sample image, to be replaced with a real photograph.",
+        "src": "assets/images/projects/placeholder-interior.jpg",
+        "alt": "Placeholder photograph of a kitchen interior",
         "type": "photo"
+      },
+      {
+        "src": "assets/images/samples/completed-block.jpg",
+        "alt": "Illustrative image of a completed apartment block at dusk",
+        "type": "render"
       }
     ],
-    "progress": {
-      "percent": null,
-      "note": ""
-    },
-    "milestones": [
-      {
-        "title": "Planning and design",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Site preparation",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Construction",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Completion and handover",
-        "date": null,
-        "status": null,
-        "note": ""
-      }
-    ],
-    "features": [],
-    "mapQuery": "",
-    "related": []
+    "added": "2026-10-31",
+    "related": [
+      "project-003"
+    ]
   },
   {
     "id": "project-005",
-    "status": "published",
-    "featured": false,
-    "placeholder": true,
-    "title": "Sample Infrastructure Project 01",
-    "category": "infrastructure-projects",
-    "location": "[Town / Area], Ghana",
-    "projectStatus": "on-hold",
-    "dateAdded": "2026-10-02",
-    "summary": "Add a short summary of this project here.",
-    "description": [
-      "Add the full description of this project here."
-    ],
-    "images": [
-      {
-        "src": "assets/images/projects/placeholder-estate-2.jpg",
-        "thumb": "assets/images/projects/placeholder-estate-2-sm.jpg",
-        "alt": "Placeholder aerial photograph of houses in a residential estate",
-        "caption": "Sample image, to be replaced with a real photograph.",
-        "type": "photo"
-      }
-    ],
-    "progress": {
-      "percent": null,
-      "note": ""
-    },
-    "milestones": [
-      {
-        "title": "Planning and design",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Site preparation",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Construction",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Completion and handover",
-        "date": null,
-        "status": null,
-        "note": ""
-      }
-    ],
-    "features": [],
-    "mapQuery": "",
-    "related": []
-  },
-  {
-    "id": "project-006",
-    "status": "published",
-    "featured": false,
-    "placeholder": true,
-    "title": "Sample Land Development 01",
-    "category": "land-development",
-    "location": "[Town / Area], Ghana",
-    "projectStatus": "completed",
-    "dateAdded": "2026-10-01",
-    "summary": "Add a short summary of this project here.",
-    "description": [
-      "Add the full description of this project here."
-    ],
-    "images": [
-      {
-        "src": "assets/images/projects/placeholder-terrace.jpg",
-        "thumb": "assets/images/projects/placeholder-terrace-sm.jpg",
-        "alt": "Placeholder photograph of a terrace and outdoor living area",
-        "caption": "Sample image, to be replaced with a real photograph.",
-        "type": "photo"
-      }
-    ],
-    "progress": {
-      "percent": null,
-      "note": ""
-    },
-    "milestones": [
-      {
-        "title": "Planning and design",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Site preparation",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Construction",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Completion and handover",
-        "date": null,
-        "status": null,
-        "note": ""
-      }
-    ],
-    "features": [],
-    "mapQuery": "",
-    "related": []
-  },
-  {
-    "id": "project-007",
     "status": "draft",
     "featured": false,
     "placeholder": true,
-    "title": "Draft Project (not published)",
-    "category": "residential-developments",
+    "name": "Draft Record Example (not shown on the website)",
+    "category": "land-development",
     "location": "[Town / Area], Ghana",
     "projectStatus": "planning",
-    "dateAdded": "2026-10-01",
-    "summary": "Add a short summary of this project here.",
-    "description": [
-      "Add the full description of this project here."
-    ],
+    "description": "This record has status \"draft\", so the website does not display it.",
     "images": [
       {
-        "src": "assets/images/projects/placeholder-house.jpg",
-        "thumb": "assets/images/projects/placeholder-house-sm.jpg",
-        "alt": "Placeholder photograph of a contemporary house with a pool",
-        "caption": "Sample image, to be replaced with a real photograph.",
-        "type": "photo"
+        "src": "assets/images/samples/plots.jpg",
+        "alt": "Illustrative image of land",
+        "type": "render"
       }
     ],
-    "progress": {
-      "percent": null,
-      "note": ""
-    },
-    "milestones": [
-      {
-        "title": "Planning and design",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Site preparation",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Construction",
-        "date": null,
-        "status": null,
-        "note": ""
-      },
-      {
-        "title": "Completion and handover",
-        "date": null,
-        "status": null,
-        "note": ""
-      }
-    ],
-    "features": [],
-    "mapQuery": "",
-    "related": []
+    "added": "2026-10-31"
   }
 ]
