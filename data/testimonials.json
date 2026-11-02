@@ -1,0 +1,13 @@
+[
+  {
+    "id": "testimonial-001",
+    "status": "draft",
+    "placeholder": true,
+    "order": 1,
+    "quote": "Replace this with a client's own words. Only use a quote you have written permission to publish.",
+    "name": "[Client name]",
+    "relationship": "[e.g. Home buyer]",
+    "project": "[Project or property name]",
+    "permission": ""
+  }
+]

@@ -81,6 +81,16 @@ function checkMedia(where, rec) {
     } else err(w + ': type must be "file", "youtube" or "vimeo"');
   });
 }
+function checkTours(where, rec) {
+  const rules = { matterport: /^[A-Za-z0-9]{11}$/, kuula: /^[A-Za-z0-9]{4,12}$/ };
+  (rec.tours || []).forEach((t, i) => {
+    const w = where + ": tours[" + i + "]";
+    if (!t || typeof t !== "object") { err(w + " must be an object"); return; }
+    if (!rules[t.provider]) err(w + ': provider must be "matterport" or "kuula"');
+    else if (!rules[t.provider].test(t.id || "")) err(w + ": id looks wrong for " + t.provider + " (matterport: 11 letters/numbers after ?m=; kuula: the code at the end of the share link)");
+    if (t.poster && !exists(t.poster)) err(w + ": poster file not found: " + t.poster);
+  });
+}
 function checkRelated(file, where, rec, ids) {
   (rec.related || []).forEach((r) => { if (!ids[r]) err(where + ": related id not found: " + r); });
 }
@@ -95,7 +105,7 @@ props.forEach((r, i) => {
   if (r.availability !== undefined && !keys(T.availability).includes(r.availability)) err(w + ": availability must be one of " + keys(T.availability).join(", "));
   if (r.price !== undefined && (typeof r.price !== "number" || r.price < 0)) err(w + ": price must be a number (no currency symbol or commas), e.g. 450000");
   if (r.added !== undefined && !isDate(r.added)) err(w + ": added must be a date like 2026-10-31");
-  checkImages(w, r.images); checkMedia(w, r); checkRelated("properties.json", w, r, propIds);
+  checkImages(w, r.images); checkMedia(w, r); checkTours(w, r); checkRelated("properties.json", w, r, propIds);
   if (r.status === "published" && (!r.images || !r.images.length)) warn(w + ": published without any image");
 });
 
@@ -113,7 +123,7 @@ projs.forEach((r, i) => {
     if (!m || !isStr(m.title)) err(w + ": milestones[" + k + "] needs a title");
     else if (m.status && !["done", "current", "upcoming"].includes(m.status)) err(w + ": milestones[" + k + '].status must be "done", "current" or "upcoming"');
   });
-  checkImages(w, r.images); checkMedia(w, r); checkRelated("projects.json", w, r, projIds);
+  checkImages(w, r.images); checkMedia(w, r); checkTours(w, r); checkRelated("projects.json", w, r, projIds);
 });
 
 /* ---------- services, faqs, news, gallery ---------- */
@@ -140,6 +150,15 @@ careers.forEach((r, i) => {
   const w = common("careers.json", r, i);
   if (!isStr(r.title)) err(w + ": missing title");
   if (r.closing && !isDate(r.closing)) err(w + ": closing must be a date like 2026-12-31");
+});
+
+const testimonials = load("testimonials"); uniqueIds("testimonials.json", testimonials);
+testimonials.forEach((r, i) => {
+  const w = common("testimonials.json", r, i);
+  if (!isStr(r.quote)) err(w + ": missing quote");
+  if (!isStr(r.name)) err(w + ": missing name");
+  if (r.status === "published" && !r.placeholder && !isStr(r.permission)) err(w + ': a published testimonial needs "permission" (note where the client\'s written permission is kept, e.g. "Email 2026-11-20")');
+  if (r.status === "published" && r.placeholder) warn(w + ": a sample testimonial is published; it will show with a \"Sample\" label");
 });
 
 const faqs = load("faqs"); uniqueIds("faqs.json", faqs);
@@ -186,7 +205,7 @@ pages.forEach((f) => {
 
 /* ---------- sitemap ---------- */
 if (process.argv.includes("--sitemap")) {
-  const urls = pages.filter((f) => f !== "404.html" && f !== "property-details.html" && f !== "project-details.html" && f !== "news-details.html")
+  const urls = pages.filter((f) => f !== "404.html" && f !== "property-details.html" && f !== "project-details.html" && f !== "news-details.html" && f !== "shortlist.html")
     .map((f) => SITE.siteUrl + (f === "index.html" ? "" : f));
   props.filter((r) => r.status === "published").forEach((r) => urls.push(SITE.siteUrl + "property-details.html?id=" + encodeURIComponent(r.id)));
   projs.filter((r) => r.status === "published").forEach((r) => urls.push(SITE.siteUrl + "project-details.html?id=" + encodeURIComponent(r.id)));
@@ -200,7 +219,7 @@ if (process.argv.includes("--sitemap")) {
 /* ---------- report ---------- */
 const count = (l) => l.length;
 console.log("Checked: " + count(props) + " properties, " + count(projs) + " projects, " + count(services) + " services, " +
-  count(faqs) + " FAQs, " + count(hero) + " hero slides, " + count(team) + " team profiles, " + count(careers) + " vacancies, " + count(news) + " news items, " + count(gallery) + " gallery images, " + pages.length + " HTML pages.");
+  count(faqs) + " FAQs, " + count(hero) + " hero slides, " + count(team) + " team profiles, " + count(careers) + " vacancies, " + count(testimonials) + " testimonials, " + count(news) + " news items, " + count(gallery) + " gallery images, " + pages.length + " HTML pages.");
 warnings.forEach((w) => console.log("WARNING: " + w));
 errors.forEach((e) => console.log("ERROR:   " + e));
 console.log(errors.length ? "\n" + errors.length + " error(s) found." : "\nNo errors found.");

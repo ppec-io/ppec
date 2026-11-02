@@ -228,12 +228,49 @@
       refUrl = m ? PP.abs(PP.detailUrl(m[1], m[2])) : "";
     });
 
+    /* Online mode: only when SITE.forms.endpoint is set. Otherwise the original email / WhatsApp flow is used. */
+    var online = PP.forms.enabled();
+    var sendBtn = $("button[type=submit]", form);
+    if (online) {
+      var hint = $(".form__hint", form);
+      if (hint) hint.textContent = "Your message is sent to our team through " + PP.forms.provider() + ". This website does not store it. You can also use WhatsApp or email below.";
+      if (sendBtn) sendBtn.textContent = "Send enquiry";
+      var mailBtn = make("button", "btn btn--ghost-dark", "Send by Email", { type: "button", id: "send-email" });
+      if (sendBtn && sendBtn.parentNode) sendBtn.parentNode.insertBefore(mailBtn, sendBtn.nextSibling);
+      mailBtn.addEventListener("click", function () {
+        if (!validate()) { say("Please correct the highlighted fields.", false); return; }
+        say("Opening your email app… If nothing opens, please email us directly at " + S.email + ".", true);
+        window.location.href = PP.mailLink("Website enquiry: " + interestLabel() + " — " + f.name.value.trim(), summary());
+      });
+      // hidden trap field for automated spam; people never see or fill it
+      var trap = make("input", "", null, { type: "text", name: "_gotcha", tabindex: "-1", autocomplete: "off", "aria-hidden": "true" });
+      trap.style.cssText = "position:absolute;left:-9999px;width:1px;height:1px;opacity:0";
+      form.appendChild(trap);
+    }
+    var busy = false;
+
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (!validate()) { say("Please correct the highlighted fields.", false); return; }
       var subject = "Website enquiry: " + interestLabel() + " — " + f.name.value.trim();
-      say("Opening your email app… If nothing opens, please email us directly at " + S.email + ".", true);
-      window.location.href = PP.mailLink(subject, summary());
+      if (!online) {
+        say("Opening your email app… If nothing opens, please email us directly at " + S.email + ".", true);
+        window.location.href = PP.mailLink(subject, summary());
+        return;
+      }
+      if (busy) return;
+      if (form.elements._gotcha && form.elements._gotcha.value) { say("Thank you. We will be in touch.", true); return; }   // bot: pretend, send nothing
+      busy = true; sendBtn.disabled = true; say("Sending…", true);
+      PP.forms.send({
+        name: f.name.value.trim(), phone: f.phone.value.trim(), email: f.email.value.trim(),
+        interest: interestLabel(), page: /^(property|project):/.test(f.interest.value) ? refUrl : "",
+        message: f.message.value.trim(), _subject: subject, _gotcha: ""
+      }).then(function () {
+        form.reset(); refUrl = "";
+        say("Thank you. Your enquiry has been sent. We will reply as soon as we can.", true);
+      }, function () {
+        say("Sorry, your message could not be sent. Please try again, or use WhatsApp or email at " + S.email + ".", false);
+      }).then(function () { busy = false; sendBtn.disabled = false; });
     });
 
     var waBtn = $("#send-whatsapp");

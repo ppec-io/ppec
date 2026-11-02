@@ -207,16 +207,58 @@
     return box;
   }
 
+  /* Virtual tours (Matterport / Kuula). The third-party page loads only after the visitor presses the button. */
+  var TOUR_HOSTS = {
+    matterport: { name: "Matterport", id: /^[A-Za-z0-9]{11}$/, url: function (id) { return "https://my.matterport.com/show/?m=" + id + "&play=1"; } },
+    kuula:      { name: "Kuula",      id: /^[A-Za-z0-9]{4,12}$/, url: function (id) { return "https://kuula.co/share/" + id + "?logo=0&info=0&fs=1&vr=0&sd=1&thumbs=1"; } }
+  };
+  function validTour(t) { return !!(t && TOUR_HOSTS[t.provider] && TOUR_HOSTS[t.provider].id.test(String(t.id || ""))); }
+  function buildTours(tours) {
+    var box = el("div", "videos");
+    var stageBox = el("div", "videos__stage");
+    var cap = el("p", "videos__cap");
+    function show(i) {
+      var t = tours[i], host = TOUR_HOSTS[t.provider], title = t.title || "Virtual tour";
+      PP.clear(stageBox);
+      var wrap = el("div", "video");
+      var f = el("button", "video__facade", null, { type: "button", "aria-label": "Start virtual tour: " + title });
+      if (PP.has(t.poster)) f.style.backgroundImage = "url('" + String(t.poster).replace(/['"()\\]/g, "") + "')";
+      f.appendChild(el("span", "video__play video__play--tour", null, { "aria-hidden": "true" }));
+      f.appendChild(el("span", "video__hint", "Start the 3D tour. It opens a page hosted by " + host.name + "."));
+      f.addEventListener("click", function () {
+        var fr = el("iframe", "", null, { src: host.url(t.id), title: title, allow: "fullscreen; xr-spatial-tracking; gyroscope; accelerometer", allowfullscreen: "", referrerpolicy: "strict-origin-when-cross-origin" });
+        PP.clear(wrap); wrap.appendChild(fr);
+      });
+      wrap.appendChild(f); stageBox.appendChild(wrap);
+      cap.textContent = title + (t.placeholder ? " (sample tour)" : "");
+      PP.$$(".chip-btn", box).forEach(function (b, k) { b.setAttribute("aria-pressed", k === i ? "true" : "false"); });
+    }
+    if (tours.length > 1) {
+      var row = el("div", "chip-row", null, { role: "group", "aria-label": "Choose virtual tour" });
+      tours.forEach(function (t, i) {
+        var b = el("button", "chip-btn", t.title || ("Tour " + (i + 1)), { type: "button", "aria-pressed": "false" });
+        b.addEventListener("click", function () { show(i); });
+        row.appendChild(b);
+      });
+      box.appendChild(row);
+    }
+    box.appendChild(stageBox); box.appendChild(cap);
+    show(0);
+    return box;
+  }
+
   /* Tabs container. Only the views that have content are offered. */
   function buildMedia(rec) {
     var images = (rec.images || []).filter(function (i) { return i && i.src; });
     var plans = (rec.floorPlans || []).filter(function (p) { return p && p.src; });
     var videos = (rec.videos || []).filter(validVideo);
+    var tours = (rec.tours || []).filter(validTour);
     var items = lightboxItems(images, rec);
     var views = [{ id: "photos", label: "Photos", build: function () { return buildMosaic(images, items, rec); } }];
     if (images.length > 1) views.push({ id: "slideshow", label: "Slideshow", build: function () { return buildSlideshow(images, items, rec); } });
     if (plans.length) views.push({ id: "plans", label: plans.length > 1 ? "Floor plans" : "Floor plan", build: function () { return buildPlans(plans, rec); } });
     if (videos.length) views.push({ id: "video", label: "Video", build: function () { return buildVideos(videos); } });
+    if (tours.length) views.push({ id: "tour", label: "Virtual tour", build: function () { return buildTours(tours); } });
 
     var wrap = el("div", "media");
     if (views.length === 1) { wrap.appendChild(views[0].build()); return wrap; }
@@ -289,6 +331,20 @@
     });
     var print = el("button", "share__btn", "Print", { type: "button" });
     print.addEventListener("click", function () { window.print(); });
+    var save = el("button", "share__btn share__save", "Save", { type: "button" });
+    save.appendChild(el("span", "visually-hidden", " " + rec.name + " to shortlist"));
+    function syncSave() {
+      save.setAttribute("aria-pressed", PP.shortlist && PP.shortlist.has(type, rec.id) ? "true" : "false");
+    }
+    if (PP.shortlist) {
+      save.addEventListener("click", function () {
+        var r = PP.shortlist.toggle(type, rec.id);
+        if (r === null) status.textContent = "Your shortlist is full. Remove an item first.";
+        else status.textContent = r ? "Saved to your shortlist" : "Removed from your shortlist";
+      });
+      document.addEventListener("pp:shortlist", syncSave); syncSave();
+      row.appendChild(save);
+    }
     row.appendChild(share); row.appendChild(print); row.appendChild(status);
     return row;
   }
@@ -430,6 +486,7 @@
       mail.appendChild(document.createTextNode("Email us"));
       card.appendChild(mail);
     }
+    if (isProp) card.appendChild(UI.link("enquiry-card__form", "Estimate monthly payments", "calculator.html?id=" + encodeURIComponent(rec.id)));
     card.appendChild(UI.link("enquiry-card__form", "Or use the enquiry form", "contact.html?enquiry=" + encodeURIComponent(rec.id) + "#enquiry"));
     if (rec.placeholder) card.appendChild(el("p", "enquiry-card__note", "Sample record. Details will be replaced with verified company information."));
     return card;
@@ -461,7 +518,37 @@
     ]);
   }
 
+  /* Structured data for search engines. Built only from the record; sample records get no listing data. */
+  function addSchema(rec) {
+    var old = PP.$("script[data-schema='detail']"); if (old) old.remove();
+    var graph = [{
+      "@context": "https://schema.org", "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": PP.abs("index.html") },
+        { "@type": "ListItem", "position": 2, "name": listName, "item": PP.abs(listPage) },
+        { "@type": "ListItem", "position": 3, "name": rec.name, "item": PP.abs(PP.detailUrl(type, rec.id)) }
+      ]
+    }];
+    if (isProp && !rec.placeholder) {
+      var item = { "@context": "https://schema.org", "@type": "RealEstateListing", "name": rec.name, "url": PP.abs(PP.detailUrl(type, rec.id)) };
+      if (PP.has(rec.description)) item.description = rec.description;
+      var imgs = (rec.images || []).filter(function (i) { return i && i.src; }).map(function (i) { return PP.abs(i.src); });
+      if (imgs.length) item.image = imgs;
+      if (/^\d{4}-\d{2}-\d{2}$/.test(rec.added || "")) item.datePosted = rec.added;
+      if (typeof rec.price === "number" && S.currency) {
+        item.offers = { "@type": "Offer", "price": rec.price, "priceCurrency": S.currency };
+        if (rec.availability === "available") item.offers.availability = "https://schema.org/InStock";
+        if (rec.availability === "sold") item.offers.availability = "https://schema.org/SoldOut";
+      }
+      graph.push(item);
+    }
+    graph.forEach(function (g) {
+      document.head.appendChild(el("script", "", JSON.stringify(g), { type: "application/ld+json", "data-schema": "detail" }));
+    });
+  }
+
   function build(rec, all) {
+    addSchema(rec);
     if (titleEl) titleEl.textContent = rec.name;
     if (eyebrowEl) eyebrowEl.textContent = UI.categoryLabel(type, rec) || (isProp ? "Property" : "Project");
     if (subEl) subEl.textContent = PP.has(rec.location) ? rec.location : "";

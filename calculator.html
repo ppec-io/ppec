@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mortgage and Affordability Calculator | Platinum Properties Estates &amp; Constructions</title>
+  <meta name="description" content="Estimate monthly repayments or what you could afford. Example figures only; not a lender's offer.">
+  <meta name="theme-color" content="#111317">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mortgage and Affordability Calculator | Platinum Properties Estates &amp; Constructions">
+  <meta property="og:description" content="Estimate monthly repayments or what you could afford. Example figures only; not a lender's offer.">
+  <meta property="og:locale" content="en_GH">
+  <link rel="canonical" href="https://ppec-io.github.io/ppec/calculator.html">
+  <meta property="og:url" content="https://ppec-io.github.io/ppec/calculator.html">
+  <meta property="og:site_name" content="Platinum Properties Estates &amp; Constructions">
+  <meta property="og:image" content="https://ppec-io.github.io/ppec/assets/images/hero.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/icons/favicon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/style.css">
+  <script>document.documentElement.className = "js";</script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Platinum Properties Estates &amp; Constructions – home">
+        <img src="assets/images/logo-horizontal.png" width="155" height="46" alt="Platinum Properties Estates &amp; Constructions">
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open menu">
+        <span class="nav-toggle__bars"></span>
+      </button>
+      <nav class="nav" id="primary-nav" aria-label="Primary">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="index.html">Home</a></li>
+          <li class="nav__item nav__item--sub">
+            <a class="nav__link" href="about.html">About Us</a>
+            <button class="nav__subtoggle" type="button" aria-expanded="false" aria-controls="sub-about" aria-label="About Us submenu"><span class="nav__chev" aria-hidden="true"></span></button>
+            <ul class="nav__sub" id="sub-about">
+              <li><a class="nav__sublink" href="about.html">Our Story</a></li>
+              <li><a class="nav__sublink" href="team.html">Our Team</a></li>
+              <li><a class="nav__sublink" href="careers.html">Careers</a></li>
+              <li><a class="nav__sublink" href="faq.html">FAQ</a></li>
+            </ul>
+          </li>
+          <li class="nav__item"><a class="nav__link" href="properties.html">Properties</a></li>
+          <li class="nav__item"><a class="nav__link" href="projects.html">Projects</a></li>
+          <li class="nav__item"><a class="nav__link" href="services.html">Services</a></li>
+          <li class="nav__item"><a class="nav__link" href="gallery.html">Gallery</a></li>
+          <li class="nav__item"><a class="nav__link" href="news.html">News</a></li>
+          <li class="nav__item"><a class="nav__link" href="contact.html">Contact Us</a></li>
+        </ul>
+        <a class="btn btn--gold btn--sm" href="contact.html#enquiry">Make an Enquiry</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <main id="main">
+    <section class="page-hero page-hero--img" style="--banner:url('../assets/images/banners/services.jpg')">
+      <div class="container page-hero__inner">
+        <span class="eyebrow">Tools</span>
+        <h1>Mortgage and affordability calculator</h1>
+        <p>Estimate a monthly repayment, or see roughly what you could afford.</p>
+      </div>
+    </section>
+
+    <section class="section" aria-label="Mortgage and affordability calculator">
+      <div class="container" data-calculator>
+        <p class="notice" id="calc-example"><strong>Example figures.</strong> The interest rate, term and income limit pre-filled below are examples chosen by the website team. They are not a lender's rates. Enter the figures your lender gives you.</p>
+        <p class="calc__using" id="o-using" hidden></p>
+
+        <form class="calc" id="calc-form" novalidate>
+          <div class="calc__inputs">
+            <fieldset class="calc__group">
+              <legend>Loan terms</legend>
+              <div class="field-row">
+                <div class="field">
+                  <label for="c-rate">Interest rate (% a year)</label>
+                  <input id="c-rate" type="text" inputmode="decimal" autocomplete="off" aria-describedby="e-rate">
+                  <p class="field__error" id="e-rate"></p>
+                </div>
+                <div class="field">
+                  <label for="c-term">Repayment period (years)</label>
+                  <input id="c-term" type="text" inputmode="numeric" autocomplete="off" aria-describedby="e-term">
+                  <p class="field__error" id="e-term"></p>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset class="calc__group">
+              <legend>I know the price</legend>
+              <div class="field">
+                <label for="c-price">Property price (GHS)</label>
+                <input id="c-price" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 850000" aria-describedby="e-price">
+                <p class="field__error" id="e-price"></p>
+              </div>
+              <div class="field">
+                <label for="c-deposit">Deposit (% of the price)</label>
+                <input id="c-deposit" type="text" inputmode="decimal" autocomplete="off" aria-describedby="e-deposit">
+                <p class="field__error" id="e-deposit"></p>
+              </div>
+            </fieldset>
+
+            <fieldset class="calc__group">
+              <legend>What can I afford?</legend>
+              <div class="field">
+                <label for="c-income">Monthly income before tax (GHS)</label>
+                <input id="c-income" type="text" inputmode="decimal" autocomplete="off" aria-describedby="e-income">
+                <p class="field__error" id="e-income"></p>
+              </div>
+              <div class="field-row">
+                <div class="field">
+                  <label for="c-debts">Other monthly repayments (GHS)</label>
+                  <input id="c-debts" type="text" inputmode="decimal" autocomplete="off" aria-describedby="e-debts">
+                  <p class="field__error" id="e-debts"></p>
+                </div>
+                <div class="field">
+                  <label for="c-saved">Deposit saved (GHS)</label>
+                  <input id="c-saved" type="text" inputmode="decimal" autocomplete="off" aria-describedby="e-saved">
+                  <p class="field__error" id="e-saved"></p>
+                </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="calc__results" aria-live="polite">
+            <div class="result">
+              <h2>Monthly repayment</h2>
+              <p class="result__note" id="o-note">Enter a property price to see the monthly repayment.</p>
+              <div id="o-main" hidden>
+                <p class="result__big"><span id="o-monthly"></span><small> a month</small></p>
+                <dl class="result__list">
+                  <div><dt>Loan amount</dt><dd id="o-loan"></dd></div>
+                  <div><dt>Deposit</dt><dd id="o-depamt"></dd></div>
+                  <div><dt>Total interest</dt><dd id="o-interest"></dd></div>
+                  <div><dt>Total repaid</dt><dd id="o-total"></dd></div>
+                </dl>
+                <div class="result__bar" id="o-bar" role="img"><span id="o-barp"></span><span id="o-bari"></span></div>
+                <p class="result__legend"><span class="key key--p"></span>Loan <span class="key key--i"></span>Interest</p>
+                <details class="result__sched">
+                  <summary>Year by year</summary>
+                  <div class="compare-wrap" role="region" aria-label="Year by year repayments" tabindex="0">
+                    <table class="compare compare--sched" id="o-sched">
+                      <thead><tr><th scope="col">Year</th><th scope="col">Loan repaid</th><th scope="col">Interest paid</th><th scope="col">Balance left</th></tr></thead>
+                      <tbody id="o-schedbody"></tbody>
+                    </table>
+                  </div>
+                </details>
+              </div>
+            </div>
+
+            <div class="result">
+              <h2>What you could afford</h2>
+              <p class="result__note" id="o-anote">Enter your monthly income to see an estimate.</p>
+              <div id="o-amax" hidden>
+                <p class="result__big"><span id="o-aprice"></span><small> property price</small></p>
+                <dl class="result__list">
+                  <div><dt>Largest monthly repayment</dt><dd id="o-apay"></dd></div>
+                  <div><dt>Largest loan</dt><dd id="o-aloan"></dd></div>
+                </dl>
+                <p class="result__fine">Based on repayments of no more than <span id="o-ashare"></span> of monthly income (an example limit), plus your saved deposit.</p>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <p class="calc__disclaimer"><strong>Please note.</strong> This is a simple estimate for planning only. It is not an offer, a quotation or financial advice. Lenders set their own rates, fees, insurance and approval rules, and your real repayments may differ. Nothing you type here is stored or sent.</p>
+        <div class="btn-row">
+          <a class="btn btn--dark" href="contact.html#enquiry">Talk to us</a>
+          <a class="btn btn--ghost-dark" href="properties.html">Browse properties</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <img src="assets/images/logo-horizontal.png" width="210" height="62" alt="Platinum Properties Estates &amp; Constructions" loading="lazy">
+        <p>Real estate and construction services in Ghana: land and property sales, residential development, investment and building.</p>
+        <div class="social" data-social role="group" aria-label="Social media"></div>
+      </div>
+      <div>
+        <h2 class="footer__title">Explore</h2>
+        <ul class="footer__list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="properties.html">Properties</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="news.html">News &amp; Insights</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="calculator.html">Mortgage Calculator</a></li>
+            <li><a href="shortlist.html">My Shortlist</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer__title">Company</h2>
+        <ul class="footer__list">
+            <li><a href="about.html">Our Story</a></li>
+            <li><a href="team.html">Our Team</a></li>
+            <li><a href="careers.html">Careers</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Use</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer__title">Our Services</h2>
+        <ul class="footer__list">
+            <li><a href="services.html#residential-development">Residential Real Estate Development</a></li>
+            <li><a href="services.html#land-property-sales">Land and Property Sales</a></li>
+            <li><a href="services.html#property-investment">Property Investment</a></li>
+            <li><a href="services.html#building-construction">Building and Construction</a></li>
+            <li><a href="services.html#development-management">Property Development and Management</a></li>
+            <li><a href="services.html#consultancy">Real Estate Consultancy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="footer__title">Contact</h2>
+        <ul class="footer__list footer__contact">
+          <li><span class="icon icon-phone" aria-hidden="true"></span><a data-site="phone" data-site-href="tel" href="tel:+233599762750">+233 59 976 2750</a></li>
+          <li><span class="icon icon-mail" aria-hidden="true"></span><a data-site="email" data-site-href="mail" href="mailto:info@platinumestatesconstructions.com">info@platinumestatesconstructions.com</a></li>
+          <li><span class="icon icon-pin" aria-hidden="true"></span><a data-site-href="map" href="https://www.google.com/maps/search/?api=1&amp;query=EX72%20Bissau%20St%2C%20Ofinso%2C%20Ashanti%2C%20Ghana" target="_blank" rel="noopener noreferrer"><span data-site="address">EX72 Bissau St
+Ofinso, Ashanti
+Ghana</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer__bottom">
+      <span>&copy; <span data-site="year">2026</span> <span data-site="legal">Platinum Properties Estates &amp; Constructions Company Limited</span>. All rights reserved.</span>
+      <span>Ofinso, Ashanti Region, Ghana</span>
+    </div>
+  </footer>
+
+  <a class="wa-float" data-site-href="wa" href="https://wa.me/233599762750" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp (opens in a new tab)">
+    <span class="icon icon-whatsapp" aria-hidden="true"></span>
+  </a>
+
+  <script src="js/config.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/shortlist.js"></script>
+  <script src="js/calculator.js"></script>
+</body>
+</html>

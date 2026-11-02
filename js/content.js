@@ -394,5 +394,32 @@
     go();
   }
 
-  PP.ready(function () { featured(); services(); newsList(); newsArticle(); faq(); team(); careers(); });
+  /* ---------- Testimonials: shown only when real, published, permissioned records exist ---------- */
+  function testimonials() {
+    var box = PP.$("[data-testimonials]");
+    if (!box) return;
+    var section = box.closest("section") || box;
+    PP.loadData("testimonials").then(function (items) {
+      // A record needs written permission on file ("permission") unless it is a labelled sample.
+      items = items.filter(function (t) { return PP.has(t.quote) && PP.has(t.name) && (t.placeholder || PP.has(t.permission)); })
+                   .sort(function (a, b) { return (a.order || 0) - (b.order || 0); }).slice(0, 3);
+      if (!items.length) return;                       // stays hidden
+      PP.clear(box);
+      items.forEach(function (t) {
+        var fig = el("figure", "quote");
+        var bq = el("blockquote", "quote__text"); bq.appendChild(el("p", "", t.quote));
+        fig.appendChild(bq);
+        var cap = el("figcaption", "quote__by");
+        cap.appendChild(el("strong", "", t.name));
+        var who = [t.relationship, t.project].filter(PP.has).join(" · ");
+        if (who) cap.appendChild(el("span", "", who));
+        if (t.placeholder) cap.appendChild(el("span", "badge badge--sample badge--inline", "Sample"));
+        fig.appendChild(cap);
+        box.appendChild(fig);
+      });
+      section.hidden = false;
+    }).catch(function () { /* no testimonials file or it could not load: the section simply stays hidden */ });
+  }
+
+  PP.ready(function () { featured(); services(); newsList(); newsArticle(); faq(); team(); careers(); testimonials(); });
 })();

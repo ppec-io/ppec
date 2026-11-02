@@ -1,6 +1,6 @@
 # Testing and Verification Report
 
-Date: 1 November 2026. Only checks that were actually run are listed as passed. Section 5 lists what was **not** tested.
+Date: 2 November 2026 (round 2 added at the end of section 2). Only checks that were actually run are listed as passed. Section 5 lists what was **not** tested.
 
 ## 1. How the site was tested
 
@@ -13,7 +13,7 @@ Date: 1 November 2026. Only checks that were actually run are listed as passed. 
 
 | Check | Result |
 |---|---|
-| Automated browser suite (566 assertions) | **566 passed, 0 failed** (final run; the only edit after it was a one-line caption wording change, whose test was updated but not re-run in full) |
+| Automated browser suite (original 566 assertions, now 635 with round 2) | **635 passed, 0 failed** (final run on the delivered files) |
 | Accessibility scan, axe-core (WCAG 2.0/2.1 A + AA, best-practice rules, "region" rule excluded), 16 pages × desktop and mobile | **0 violations** after fixes (see section 4) |
 | `node tools/validate-data.js` on the delivered data and HTML | **No errors** |
 | Validator on deliberately broken data (bad price, unknown category, duplicate id, missing image, unknown related id, bad status, invalid JSON) | **Every fault reported; exit code 1** |
@@ -46,6 +46,18 @@ Date: 1 November 2026. Only checks that were actually run are listed as passed. 
 
 Measured again after the update: Home about 1.3 MB (mostly the first hero picture and logos), Properties 560 KB, a property detail page 820 KB. JavaScript is about 69 KB on the home page; CSS is 65 KB. Later hero pictures and the video load only when needed. GitHub Pages compresses text files, so transferred sizes will be smaller. The largest asset is the existing header logo PNG (about 130 KB).
 
+### Round 2 (shortlist, calculator, form, tours, testimonials, terms, schema)
+
+Full regression suite: **635 passed, 0 failed**. New-feature suite: **112 passed, 0 failed**. axe-core: **0 violations** on 19 pages (desktop and mobile) plus the shortlist, property, home and calculator pages again with saved items and results open. Validator: no errors.
+
+What the new checks cover:
+- **Shortlist:** hearts on every card; count in the header; survives reload and appears on other pages; detail-page Save; shortlist page lists items, compare table for 2–3 properties with dashes for missing values and no invented price, limit of 3 enforced, Remove, WhatsApp/email text with links, Clear all (cancel and confirm), empty state; unknown/draft ids and malformed entries removed; corrupt stored value and blocked storage cause no errors.
+- **Calculator:** defaults from config; monthly payment, interest, total and the 15-row yearly table checked against the formula computed independently in the test; 0% rate; invalid inputs; affordability maximum; `?price=` and `?id=` prefill; no invented price for a record without one; mobile overflow.
+- **Online form** (tested with the endpoint injected and the form service **mocked**; no real service was contacted): default behaviour unchanged; invalid input sends nothing; JSON body contents; success clears the form; server error and network failure both show an honest failure and keep the text; honeypot sends nothing; non-https endpoint ignored.
+- **Tours** (mock record): tab appears, nothing third-party loads before the visitor starts it, iframe address correct, invalid provider and invalid id ignored. **Schema** (mock records): breadcrumb always; listing data with price only for a non-sample record; none for samples or not-found pages.
+- **Testimonials** (mock data): hidden by default; only permissioned or labelled-sample records show; drafts and unpermissioned never; missing file keeps the section hidden.
+- **Terms/privacy/footer/sitemap**, and the header at 1101–1440 px with the heart link (one row, no wrapping), and the mobile menu.
+
 ## 3. Verification of specific requirements
 
 | Requirement | How verified |
@@ -75,6 +87,7 @@ Measured again after the update: Home about 1.3 MB (mostly the first hero pictur
 - **Performance tooling** (Lighthouse / WebPageTest) and slow-network behaviour.
 - **The Privacy Policy** is a draft describing how the site technically works; it has had no legal review.
 - Whether **sample photographs** are free of third-party copyright (the README flags this for the company to resolve).
+- **Round 2, not tested:** a real form service (only a mock was used); real Matterport or Kuula pages (the embed address is checked, the tour itself was not loaded); the calculator against any real lender's figures (its maths matches the standard formula only); the shortlist across Safari/Firefox or in private-browsing modes that block storage on real devices; the effect of structured data in Google (no search-engine testing).
 - **Video playback.** The sample MP4 is H.264. The test Chromium reported it can play it and the player renders with poster and controls, but playback itself was not watched; other browsers were not tried.
 - **Visual quality on real devices:** screenshots were reviewed at emulated sizes only. On a phone the home hero text sits over a bright part of the first picture; check legibility on a real phone.
 - **Image licence of the new sample photographs** (see README, section 1).

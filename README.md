@@ -32,6 +32,8 @@ The site contains **sample content** wherever real company information was not s
 - [ ] **Check the company name** is shown as you want it (section 9).
 - [ ] **Verify contact details and the map pin** (section 3).
 - [ ] **Add social links** once real accounts exist (section 3). Until then none are shown.
+- [ ] **Decide the online form** (section 14) and the **calculator figures** (section 15).
+- [ ] **Have a lawyer review** `privacy.html` and `terms.html` (both are drafts).
 - [ ] **Run the checker:** `node tools/validate-data.js --sitemap` (section 8).
 
 ---
@@ -42,11 +44,12 @@ The site contains **sample content** wherever real company information was not s
 ppec/
 ├── index.html  about.html  services.html  gallery.html  news.html  news-details.html
 ├── properties.html  property-details.html  projects.html  project-details.html
-├── contact.html  faq.html  team.html  careers.html  privacy.html  404.html
+├── contact.html  faq.html  team.html  careers.html  privacy.html  terms.html  404.html
+├── calculator.html  shortlist.html
 ├── sitemap.xml  robots.txt
 ├── data/                     ★ all catalogue content (JSON)
 │   ├── properties.json  projects.json  services.json
-│   └── news.json  faqs.json  gallery.json  hero.json  team.json  careers.json
+│   └── news.json  faqs.json  gallery.json  hero.json  team.json  careers.json  testimonials.json
 ├── js/
 │   ├── config.js             ★ contact details, site address, categories, page size
 │   ├── core.js               shared helpers + JSON loading (no edits needed)
@@ -55,6 +58,8 @@ ppec/
 │   ├── catalogue.js          search/filter/sort/grid-list for properties and projects
 │   ├── detail.js             property and project detail pages
 │   ├── hero.js               home hero slider (8 transitions) + 3D showcase
+│   ├── shortlist.js  shortlist-page.js   saved items (this browser only), compare table
+│   ├── calculator.js         mortgage / affordability calculator
 │   ├── gallery.js  content.js   gallery, home featured, services, news, FAQ, team, careers
 ├── css/style.css             all styling; colours are variables at the top
 ├── assets/
@@ -64,7 +69,8 @@ ppec/
 │   │   └── banners/          page-header pictures
 │   ├── video/                sample walkthrough video + poster
 │   ├── icons/  fonts/
-└── tools/validate-data.js    optional content checker + sitemap generator
+├── tools/validate-data.js    optional content checker + sitemap generator
+└── tools/set-domain.js       moves the site to a new web address (custom domain)
 ```
 
 Data (`data/`), presentation (`css/`, HTML) and logic (`js/`) are kept separate. Property and project information is **not** repeated in any HTML file; the JSON files are the single source of truth.
@@ -273,9 +279,45 @@ No credentials, keys or tokens exist in the code. If a real form service is want
 - The **About Us** menu has a drop-down (Our Story, Our Team, Careers, FAQ); on phones it is expanded inside the menu.
 - Page-header pictures are in `assets/images/banners/`; they are referenced from the HTML as `../assets/images/banners/…` because CSS resolves paths relative to the stylesheet. Keep the `../`.
 
-## 14. What changed from the previous version
+## 14. Online enquiry form (optional, no server of your own)
 
-- **Latest update:** luxury visual layer; hero slider and 3D showcase; multi-view property/project pages (mosaic, slideshow, floor plan, video, share buttons, key facts); **new pages** `team.html` and `careers.html`; FAQ search and topic filter; news article side-bar; new data files `hero.json`, `team.json`, `careers.json`; new sample photographs, banners and a sample video; `tools/validate-data.js` extended to check them.
+By default the contact form opens the visitor's email app or WhatsApp (nothing is stored). To send enquiries straight to the company's inbox instead:
+
+1. Create a free account at a form service such as **Formspree** (formspree.io), create a form, and copy its address (for example `https://formspree.io/f/abcdwxyz`). Set it to deliver to the company email.
+2. Put it in `js/config.js`: `forms: { endpoint: "https://formspree.io/f/abcdwxyz", providerName: "Formspree" }`.
+3. Open the contact page: the button now says **Send enquiry**, with "Send by Email" as a fallback. A hidden trap field catches simple spam bots.
+
+Notes: **Netlify Forms does not work on GitHub Pages** (it needs Netlify hosting). The endpoint must start with `https://`. The page says "sent" only when the service answers with success; otherwise it says it could not be sent and keeps the visitor's text. Free plans have monthly limits and **cannot take file attachments**, so job applications still use email or WhatsApp. The form service stores the messages, so update `privacy.html` with its name, and confirm it fits the company's data-protection duties. Once the ERP is ready, point `endpoint` at the ERP's form address instead.
+
+## 15. Mortgage and affordability calculator
+
+`calculator.html` runs in the browser only. Its starting figures are in `js/config.js` under `calculator`: interest rate, repayment period, deposit %, the share of income a lender may allow for repayments, and the longest period. **They are examples, not lender rates.** Replace them with figures the company has confirmed (for example from a partner bank), then set `rateIsExample: false` to remove the "example figures" notice. Property pages link to the calculator; if a record has a numeric `price`, it is pre-filled.
+
+## 16. Shortlist and compare
+
+Visitors tap the heart on any card or detail page. The list is kept in that browser's local storage (reference numbers only), never sent anywhere, and shown at `shortlist.html` (not listed in the sitemap, marked `noindex`). Up to 3 saved properties can be compared side by side. The page offers "Ask us about these" (WhatsApp / email) with the list pasted in. Items that are unpublished or removed from the data are dropped automatically.
+
+## 17. Virtual tours and testimonials
+
+- **Virtual tour tab.** Add to a property or project: `"tours": [ { "title": "3D walkthrough", "provider": "matterport", "id": "XXXXXXXXXXX" } ]`. Providers: `matterport` (the 11 characters after `?m=` in the share link) and `kuula` (the code at the end of the share link). Nothing from the provider loads until the visitor presses the button. Other providers need a small code change (they are allow-listed on purpose).
+- **Testimonials** (`data/testimonials.json`, shown on the home page). The section is **hidden until a real testimonial is published**. A published record needs `quote`, `name` and a `permission` note (where the written permission is kept, e.g. `"Email 2026-11-20"`); the checker rejects it otherwise. Never write testimonials yourselves. No star ratings are shown or put in search data.
+
+## 18. Search-engine data, Google Business Profile
+
+- Detail pages add **breadcrumb** data, and **RealEstateListing** data (name, address of the page, images, date, price) **only for records that are not samples** (`placeholder` not true). Prices appear only if the record has a numeric `price`.
+- **Google Business Profile** (free, the biggest local-search win): create or claim the profile at business.google.com, verify the office address, add the website address, phone, opening hours and photos, then keep the name, address and phone **identical** to the website footer.
+- Submit `sitemap.xml` in Google Search Console after launch (and after a domain change).
+
+## 19. Custom domain
+
+1. Buy the domain. In GitHub: **Settings → Pages → Custom domain**, enter it, add the DNS records GitHub shows, tick **Enforce HTTPS** when offered. GitHub then creates a `CNAME` file in the repo.
+2. Update every address in the site in one step: `node tools/set-domain.js https://www.example.com/` (preview) then `node tools/set-domain.js https://www.example.com/ --apply`, then `node tools/validate-data.js --sitemap`.
+3. Commit and push. Check the 404 page, a property page and the sitemap on the new address. Keep the old `github.io` address working for a while; GitHub redirects it automatically once a custom domain is set.
+
+## 20. What changed from the previous version
+
+- **Round 2:** shortlist and compare, calculator, optional online form, virtual-tour tab, testimonials component (hidden until real ones exist), Terms page, privacy update, breadcrumb and listing data, `tools/set-domain.js`. Heading order on the contact page's option cards was corrected (h3 → h2, same look).
+- **Previous update:** luxury visual layer; hero slider and 3D showcase; multi-view property/project pages (mosaic, slideshow, floor plan, video, share buttons, key facts); **new pages** `team.html` and `careers.html`; FAQ search and topic filter; news article side-bar; new data files `hero.json`, `team.json`, `careers.json`; new sample photographs, banners and a sample video; `tools/validate-data.js` extended to check them.
 
 - `properties.html` is now the property catalogue; **projects have their own page** and data. The old combined "Properties & Projects" page and `js/projects-data.js` were replaced by the JSON files (the old six sample entries were migrated into `properties.json` and `projects.json`). The old `?enquiry=available-1` style addresses no longer exist.
 - The menu moved to the button layout below 1100 px wide to fit eight links.

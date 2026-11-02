@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://ppec-io.github.io/ppec/about.html</loc></url>
+  <url><loc>https://ppec-io.github.io/ppec/calculator.html</loc></url>
   <url><loc>https://ppec-io.github.io/ppec/careers.html</loc></url>
   <url><loc>https://ppec-io.github.io/ppec/contact.html</loc></url>
   <url><loc>https://ppec-io.github.io/ppec/faq.html</loc></url>
@@ -12,6 +13,7 @@
   <url><loc>https://ppec-io.github.io/ppec/properties.html</loc></url>
   <url><loc>https://ppec-io.github.io/ppec/services.html</loc></url>
   <url><loc>https://ppec-io.github.io/ppec/team.html</loc></url>
+  <url><loc>https://ppec-io.github.io/ppec/terms.html</loc></url>
   <url><loc>https://ppec-io.github.io/ppec/property-details.html?id=property-001</loc></url>
   <url><loc>https://ppec-io.github.io/ppec/property-details.html?id=property-002</loc></url>
   <url><loc>https://ppec-io.github.io/ppec/property-details.html?id=property-003</loc></url>

@@ -31,6 +31,34 @@
     set: function (k, v) { try { window.sessionStorage.setItem(k, v); } catch (e) { /* ignore */ } }
   };
 
+  /* ---------- Local (per-device) storage, always wrapped ---------- */
+  PP.local = {
+    get: function (k) { try { return window.localStorage.getItem(k); } catch (e) { return null; } },
+    set: function (k, v) { try { window.localStorage.setItem(k, v); return true; } catch (e) { return false; } }
+  };
+
+  /* ---------- Online forms (optional). Disabled until SITE.forms.endpoint is an https address. ---------- */
+  PP.forms = {
+    enabled: function () { var f = S.forms || {}; return /^https:\/\/[^\s]+$/i.test(f.endpoint || ""); },
+    provider: function () { return (S.forms && S.forms.providerName) || "our form provider"; },
+    // Resolves only when the service answers with a success status. Never reports success otherwise.
+    send: function (fields) {
+      if (!PP.forms.enabled()) return Promise.reject(new Error("not-configured"));
+      var ctl = typeof AbortController === "function" ? new AbortController() : null;
+      var timer = ctl ? setTimeout(function () { ctl.abort(); }, 15000) : null;
+      return fetch(S.forms.endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(fields),
+        signal: ctl ? ctl.signal : undefined
+      }).then(function (r) {
+        if (timer) clearTimeout(timer);
+        if (!r.ok) throw new Error("http-" + r.status);
+        return true;
+      }, function (e) { if (timer) clearTimeout(timer); throw e; });
+    }
+  };
+
   /* ---------- URLs and contact links ---------- */
   // Absolute public URL for a site-relative path, built from SITE.siteUrl (base path lives in config.js).
   PP.abs = function (rel) {

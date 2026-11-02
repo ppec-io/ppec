@@ -102,6 +102,7 @@
     var sb = UI.statusBadge(type, rec); if (sb) media.appendChild(sb);
     if (rec.placeholder) media.appendChild(el("span", "badge badge--sample", "Sample"));
     card.appendChild(media);
+    if (PP.shortlist) card.appendChild(PP.shortlist.button(type, rec, "save save--card"));
 
     var body = el("div", "card__body");
     var cat = UI.categoryLabel(type, rec);

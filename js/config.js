@@ -85,6 +85,32 @@ window.SITE = {
     ]
   },
 
+  // ------------------------------------------------------------------
+  // Online enquiry form (optional, no server of your own needed)
+  // ------------------------------------------------------------------
+  // Paste the HTTPS address given by a form service such as Formspree
+  // (looks like https://formspree.io/f/xxxxxxxx). While this is "", the enquiry form
+  // opens the visitor's email app / WhatsApp instead, exactly as before.
+  // Do NOT use Netlify Forms here: it only works when the site is hosted on Netlify.
+  forms: {
+    endpoint: "",
+    providerName: "our form provider"   // shown to visitors, e.g. "Formspree"
+  },
+
+  // ------------------------------------------------------------------
+  // Mortgage / affordability calculator (calculator.html)
+  // ------------------------------------------------------------------
+  // These numbers are EXAMPLES chosen by the website team, not lender rates.
+  // Replace them with figures the company has confirmed, then set rateIsExample to false.
+  calculator: {
+    defaultRate: 20,            // example interest rate, % per year
+    defaultTermYears: 15,
+    defaultDepositPct: 20,
+    maxPaymentSharePct: 35,     // example share of monthly income a lender may allow for repayments
+    maxTermYears: 30,
+    rateIsExample: true
+  },
+
   // Social media — leave "" until real accounts exist. Only non-empty links are shown.
   social: {
     Facebook: "",
