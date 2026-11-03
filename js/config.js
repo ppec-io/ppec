@@ -93,8 +93,8 @@ window.SITE = {
   // opens the visitor's email app / WhatsApp instead, exactly as before.
   // Do NOT use Netlify Forms here: it only works when the site is hosted on Netlify.
   forms: {
-    endpoint: "",
-    providerName: "our form provider"   // shown to visitors, e.g. "Formspree"
+    endpoint: "https://formspree.io/f/mpppogdp",
+    providerName: "Formspree"   // shown to visitors, e.g. "Formspree"
   },
 
   // ------------------------------------------------------------------
