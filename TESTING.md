@@ -46,6 +46,10 @@ Date: 2 November 2026 (round 2 added at the end of section 2). Only checks that 
 
 Measured again after the update: Home about 1.3 MB (mostly the first hero picture and logos), Properties 560 KB, a property detail page 820 KB. JavaScript is about 69 KB on the home page; CSS is 65 KB. Later hero pictures and the video load only when needed. GitHub Pages compresses text files, so transferred sizes will be smaller. The largest asset is the existing header logo PNG (about 130 KB).
 
+### Live form test (3 November 2026)
+
+One real enquiry was sent from the deployed contact page. It appeared in the Formspree inbox with status "delivered" and every field (name, phone, email, interest, message, subject) present. This was done by the site owner. Not yet live-tested: a property-specific enquiry (the "page" link field), an enquiry from a phone, and behaviour when the monthly submission limit is reached.
+
 ### Round 2 (shortlist, calculator, form, tours, testimonials, terms, schema)
 
 Full regression suite: **635 passed, 0 failed**. New-feature suite: **112 passed, 0 failed**. axe-core: **0 violations** on 19 pages (desktop and mobile) plus the shortlist, property, home and calculator pages again with saved items and results open. Validator: no errors.
@@ -87,7 +91,7 @@ What the new checks cover:
 - **Performance tooling** (Lighthouse / WebPageTest) and slow-network behaviour.
 - **The Privacy Policy** is a draft describing how the site technically works; it has had no legal review.
 - Whether **sample photographs** are free of third-party copyright (the README flags this for the company to resolve).
-- **Round 2, not tested:** a real form service (only a mock was used); real Matterport or Kuula pages (the embed address is checked, the tour itself was not loaded); the calculator against any real lender's figures (its maths matches the standard formula only); the shortlist across Safari/Firefox or in private-browsing modes that block storage on real devices; the effect of structured data in Google (no search-engine testing).
+- **Round 2, not tested:** real Matterport or Kuula pages (the embed address is checked, the tour itself was not loaded); the calculator against any real lender's figures (its maths matches the standard formula only); the shortlist across Safari/Firefox or in private-browsing modes that block storage on real devices; the effect of structured data in Google (no search-engine testing).
 - **Video playback.** The sample MP4 is H.264. The test Chromium reported it can play it and the player renders with poster and controls, but playback itself was not watched; other browsers were not tried.
 - **Visual quality on real devices:** screenshots were reviewed at emulated sizes only. On a phone the home hero text sits over a bright part of the first picture; check legibility on a real phone.
 - **Image licence of the new sample photographs** (see README, section 1).
